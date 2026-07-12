@@ -59,10 +59,19 @@ export default function App() {
             </div>
           </div>
 
-          <div className="scroll-cue" onClick={scrollToSpecs}>
+          <button
+            type="button"
+            className="scroll-cue"
+            onClick={scrollToSpecs}
+            aria-label="Scroll to specifications"
+          >
             <span>SCROLL TO SPECS</span>
-            <div className="line"></div>
-          </div>
+            <div className="scroll-cue-btn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </button>
         </div>
       </section>
 

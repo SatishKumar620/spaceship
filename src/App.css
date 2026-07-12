@@ -187,22 +187,39 @@
     position:absolute;
     bottom:6vh; left:50%;
     transform:translateX(-50%);
-    display:flex; flex-direction:column; align-items:center; gap:10px;
+    display:flex; flex-direction:column; align-items:center; gap:12px;
     font-family:'JetBrains Mono', monospace;
     font-size:10px;
     letter-spacing:0.3em;
     color:var(--fog);
     text-transform:uppercase;
+    background:none;
+    border:none;
+    padding:8px;
+    pointer-events:auto;
+    cursor:pointer;
+    z-index:6;
+    transition:color 0.25s ease;
   }
-  .scroll-cue .line{
-    width:1px; height:34px;
-    background:linear-gradient(180deg, var(--cyan), transparent);
-    animation:scrolldrop 1.8s ease-in-out infinite;
+  .scroll-cue:hover{ color:var(--cyan); }
+  .scroll-cue-btn{
+    width:36px; height:36px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--cyan);
+    animation:scrollbounce 1.8s ease-in-out infinite;
+    transition:border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
   }
-  @keyframes scrolldrop{
-    0%{ opacity:0; transform:scaleY(0.3); transform-origin:top; }
-    50%{ opacity:1; transform:scaleY(1); }
-    100%{ opacity:0; transform:scaleY(0.3); transform-origin:bottom; }
+  .scroll-cue:hover .scroll-cue-btn{
+    border-color:var(--cyan);
+    background:rgba(110,231,255,0.1);
+    transform:scale(1.08);
+  }
+  .scroll-cue:active .scroll-cue-btn{ transform:scale(0.94); }
+  @keyframes scrollbounce{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(5px); }
   }
 
   /* ============================================================
