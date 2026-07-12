@@ -43,7 +43,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
        0. CONFIG & DEVICE DETECTION
        ================================================================ */
     const isMobile = window.innerWidth < 820 || /Android|iPhone|iPad/i.test(navigator.userAgent);
-    const PIXEL_RATIO = Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2);
+    const PIXEL_RATIO = Math.min(window.devicePixelRatio, isMobile ? 1.15 : 1.75);
 
     const initialWidth = heroEl.clientWidth || window.innerWidth || 800;
     const initialHeight = heroEl.clientHeight || window.innerHeight || 600;
@@ -948,16 +948,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           const stationSun = new THREE.DirectionalLight(0xfff4e0, 1.8);
           stationSun.position.copy(sunLightPos);
           stationSun.target = stationSunTarget;
-          stationSun.castShadow = true;
-          stationSun.shadow.mapSize.set(isMobile ? 1024 : 2048, isMobile ? 1024 : 2048);
-          stationSun.shadow.camera.left = -22;
-          stationSun.shadow.camera.right = 22;
-          stationSun.shadow.camera.top = 22;
-          stationSun.shadow.camera.bottom = -22;
-          stationSun.shadow.camera.near = 1;
-          stationSun.shadow.camera.far = 70;
-          stationSun.shadow.bias = -0.0006;
-          stationSun.shadow.normalBias = 0.03;
+          stationSun.castShadow = false; // saved: avoid a second full shadow map alongside keyLight
           scene.add(stationSun);
 
           const stationFill = new THREE.DirectionalLight(0xbadaff, 1.55);
@@ -1061,17 +1052,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     if (isMobile) bloomPass.resolution.set(initialWidth * 0.6, initialHeight * 0.6);
     composer.addPass(bloomPass);
 
-    let bokehPass = null;
-    if (!isMobile) {
-      bokehPass = new BokehPass(scene, camera, {
-        focus: 7.2,
-        aperture: 0.00028,
-        maxblur: 0.006,
-        width: initialWidth,
-        height: initialHeight,
-      });
-      composer.addPass(bokehPass);
-    }
+    const bokehPass = null; // removed: DoF pass was too expensive for smooth playback
 
     const vignetteShader = {
       uniforms: { tDiffuse: { value: null }, offset: { value: 1.15 }, darkness: { value: 1.15 } },
@@ -1235,8 +1216,12 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       }
     };
 
+    let lastPointerMoveTime = 0;
     const onPointerMove = (e) => {
       if (isMobile || e.buttons !== 0) return;
+      const now = performance.now();
+      if (now - lastPointerMoveTime < 33) return; // ~30fps throttle
+      lastPointerMoveTime = now;
       setHoveredGroup(getIntersectedCategoryGroup(e.clientX, e.clientY));
     };
 
@@ -1258,6 +1243,18 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     canvas.addEventListener('pointermove', onPointerMove);
     canvas.addEventListener('pointerleave', onPointerLeave);
     canvas.addEventListener('touchstart', onTouchStart, { passive: true });
+
+    const onContextLost = (e) => {
+      e.preventDefault();
+      cancelAnimationFrame(animateId);
+      console.warn('WebGL context lost — pausing render loop.');
+    };
+    const onContextRestored = () => {
+      console.warn('WebGL context restored — resuming render loop.');
+      animate();
+    };
+    canvas.addEventListener('webglcontextlost', onContextLost, false);
+    canvas.addEventListener('webglcontextrestored', onContextRestored, false);
 
     /* ================================================================
        11. RESIZE HANDLING
