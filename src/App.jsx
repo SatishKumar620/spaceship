@@ -17,6 +17,7 @@ import ScheduleSection from "./components/ScheduleSection";
 export default function App() {
   const [isExploded, setIsExploded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showRegModal, setShowRegModal] = useState(false);
 
   const scrollToAbout = () => {
     const el = document.getElementById('about');
@@ -63,13 +64,18 @@ export default function App() {
             </p>
             <div id="introCta" className="cta-row">
               <button
+                type="button"
                 className="btn btn-primary"
-                onClick={() => setIsExploded(!isExploded)}
+                onClick={() => setShowRegModal(true)}
               >
-                {isExploded ? 'REASSEMBLE HULL' : 'EXPLODE HULL'}
+                REGISTRATION
               </button>
-              <button className="btn btn-ghost" onClick={scrollToAbout}>
-                MISSION BRIEF
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={scrollToAbout}
+              >
+                LEARN MORE
               </button>
             </div>
           </div>
@@ -98,6 +104,57 @@ export default function App() {
       <EventsSection />
       <SponsorsSection />
       <FaqSection />
+
+      {showRegModal && (
+        <div className="modal-overlay" onClick={() => setShowRegModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="modal-close"
+              onClick={() => setShowRegModal(false)}
+              aria-label="Close modal"
+            >
+              &times;
+            </button>
+            <h3>SECURE YOUR PORT</h3>
+            <p className="modal-subtitle">Register your crew for HackQubit V2</p>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              alert("Registration successful! Crew credentials dispatched to warp coordinate.");
+              setShowRegModal(false);
+            }}>
+              <div className="form-group">
+                <label htmlFor="teamName">CREW NAME (TEAM)</label>
+                <input id="teamName" type="text" placeholder="e.g. Apollo 11" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="leaderEmail">COMMANDER EMAIL</label>
+                <input id="leaderEmail" type="email" placeholder="commander@galaxy.com" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="crewSize">CREW SIZE</label>
+                <select id="crewSize">
+                  <option>1 Specialist (Solo)</option>
+                  <option>2 Specialists</option>
+                  <option>3 Specialists</option>
+                  <option>4 Specialists (Full Crew)</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="missionTrack">MISSION TRACK</label>
+                <select id="missionTrack">
+                  <option>AI & Machine Learning</option>
+                  <option>Cybersecurity</option>
+                  <option>IoT & Robotics</option>
+                  <option>Bio & Social Impact</option>
+                  <option>Open Innovation</option>
+                </select>
+              </div>
+              <button type="submit" className="btn btn-primary btn-block">LAUNCH MISSION</button>
+            </form>
+          </div>
+        </div>
+      )}
 </>
   );
 }
