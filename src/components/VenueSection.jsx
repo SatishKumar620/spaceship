@@ -1,201 +1,125 @@
-import "./VenueSection.css";
+import React from 'react';
+import './VenueSection.css';
 
-const info = [
-  {
-    title:"Location",
-    value1:"RVSCET Jamshedpur",
-    value2:"Jharkhand, India",
-    color:"red",
-    icon:(
-<svg viewBox="0 0 64 64">
-<path d="M32 58C32 58 48 41 48 26C48 17.2 40.8 10 32 10S16 17.2 16 26C16 41 32 58 32 58Z"/>
-<circle cx="32" cy="26" r="6"/>
-</svg>
-)
-  },
+export default function VenueSection() {
+  return (
+    <section id="venue" className="venue-section">
+      <div className="venue-bg-grid" />
+      <div className="venue-glow-overlay" />
 
-  {
-    title:"Mission Date",
-    value1:"October 7-8",
-    value2:"2025",
-    color:"blue",
-    icon:(
-<svg viewBox="0 0 64 64">
-<rect x="10" y="14" width="44" height="40" rx="5"/>
-<line x1="10" y1="24" x2="54" y2="24"/>
-<line x1="22" y1="8" x2="22" y2="20"/>
-<line x1="42" y1="8" x2="42" y2="20"/>
-</svg>
-)
-  },
+      <div className="venue-inner">
+        {/* Section Header */}
+        <div className="venue-header" data-reveal="true">
+          <div className="venue-eyebrow">
+            <span className="site-hud-line"></span> DOCKING PROTOCOLS <span className="site-hud-line"></span>
+          </div>
+          <h2 className="venue-title">
+            MISSION <span className="venue-title-accent">CONTROL</span>
+          </h2>
+          <p className="venue-desc">
+            Establish connection with coordinates. Review docking bay details, timelines, and transit coordinates below.
+          </p>
+        </div>
 
-  {
-    title:"Duration",
-    value1:"24 Hours",
-    value2:"09:00 AM Start",
-    color:"silver",
-    icon:(
-<svg viewBox="0 0 64 64">
-<circle cx="32" cy="32" r="20"/>
-<line x1="32" y1="32" x2="32" y2="20"/>
-<line x1="32" y1="32" x2="42" y2="38"/>
-</svg>
-)
-  },
+        {/* Telemetry Dashboard Grid */}
+        <div className="venue-dashboard">
+          
+          {/* Left Panel: Telemetry HUD */}
+          <div className="telemetry-panel" data-reveal="true">
+            <div className="panel-header">
+              <div className="panel-dot"></div>
+              <h3>SYS_TELEMETRY_LOG</h3>
+              <div className="panel-code">ID: RVSCET-JSR</div>
+            </div>
+            
+            <div className="telemetry-grid">
+              <div className="telemetry-item">
+                <div className="item-label">SECTOR / DESTINATION</div>
+                <div className="item-value">RVS College of Engineering & Technology</div>
+                <div className="item-sub">Jamshedpur, Jharkhand, India</div>
+              </div>
 
-  {
-    title:"Crew Capacity",
-    value1:"200+ Participants",
-    value2:"Teams of 2-4",
-    color:"green",
-    icon:(
-<svg viewBox="0 0 64 64">
-<circle cx="22" cy="22" r="6"/>
-<circle cx="42" cy="22" r="6"/>
-<circle cx="32" cy="18" r="7"/>
-<path d="M16 46c2-7 8-10 16-10s14 3 16 10"/>
-</svg>
-)
-  }
+              <div className="telemetry-item">
+                <div className="item-label">TEMPORAL WINDOW</div>
+                <div className="item-value">October 7 - 8, 2025</div>
+                <div className="item-sub">Sol 01 (09:00 AM) - Sol 02 (09:00 AM)</div>
+              </div>
 
-];
+              <div className="telemetry-row-split">
+                <div className="telemetry-item">
+                  <div className="item-label">MISSION DURATION</div>
+                  <div className="item-value">24 Hours</div>
+                  <div className="item-sub">Non-stop sprint</div>
+                </div>
 
-export default function VenueSection(){
+                <div className="telemetry-item">
+                  <div className="item-label">CREW CAPACITY</div>
+                  <div className="item-value">200+ Hackers</div>
+                  <div className="item-sub">Teams of 2-4</div>
+                </div>
+              </div>
 
-return(
+              <div className="telemetry-row-split">
+                <div className="telemetry-item">
+                  <div className="item-label">LATITUDE</div>
+                  <div className="item-value">22.7844° N</div>
+                </div>
+                <div className="telemetry-item">
+                  <div className="item-label">LONGITUDE</div>
+                  <div className="item-value">86.2028° E</div>
+                </div>
+              </div>
+            </div>
 
-<section id="venue" className="venueSection">
+            <div className="telemetry-footer">
+              <div className="status-indicator">
+                <span className="status-glow"></span>
+                <span>DOCKING AUTOLOCK: ENGAGED</span>
+              </div>
+            </div>
+          </div>
 
-<div className="spaceGrid"></div>
-<div className="nebula red"></div>
-<div className="nebula blue"></div>
-<div className="scanBeam"></div>
+          {/* Right Panel: Radar/Map */}
+          <div className="radar-map-panel" data-reveal="true">
+            <div className="panel-header">
+              <div className="panel-dot yellow"></div>
+              <h3>COORDINATES_VISUALIZER</h3>
+              <div className="panel-code">MODE: ACTIVE_RADAR</div>
+            </div>
 
-<div className="heading">
+            <div className="map-wrapper">
+              <iframe
+                title="RVSCET Jamshedpur Map"
+                src="https://www.google.com/maps?q=RVS+College+of+Engineering+and+Technology+Jamshedpur&output=embed"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <div className="map-overlay-scanline" />
+              <div className="map-hud-marker top-left"></div>
+              <div className="map-hud-marker top-right"></div>
+              <div className="map-hud-marker bottom-left"></div>
+              <div className="map-hud-marker bottom-right"></div>
+            </div>
 
-<p>GALACTIC DOCKING BAY</p>
+            <div className="map-actions">
+              <a
+                href="https://maps.google.com/?q=RVS+College+of+Engineering+and+Technology+Jamshedpur"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="map-nav-btn"
+              >
+                <span>PLOT VECTOR IN GOOGLE MAPS</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="12" cy="10" r="3" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
 
-<h2>
-
-Race <span>Location</span>
-
-</h2>
-
-<p className="desc">
-
-Mission coordinates locked.
-Prepare your crew for launch.
-
-</p>
-
-</div>
-
-<div className="terminal">
-
-<div className="cards">
-
-
-{
-
-info.map((item,index)=>(
-
-<div
-className={`infoCard ${item.color}`}
-key={index}
->
-
-<div className="icon">
-
-{item.icon}
-
-</div>
-
-<div>
-
-<h3>
-
-{item.title}
-
-</h3>
-
-<h4>
-
-{item.value1}
-
-</h4>
-
-<p>
-
-{item.value2}
-
-</p>
-
-</div>
-
-</div>
-
-))
-
-}
-
-</div>
-
-</div>
-
-<div className="stars">
-
-{
-
-Array.from({length:80}).map((_,i)=>
-
-<span
-key={i}
-style={{
-left:`${Math.random()*100}%`,
-animationDelay:`${Math.random()*6}s`,
-animationDuration:`${5+Math.random()*6}s`
-}}
-></span>
-
-)
-
-}
-
-</div>
-
-
-<div className="mapSection">
-
-  <div className="mapHud">
-    <span></span>
-    <h3>MISSION COORDINATES</h3>
-    <span></span>
-  </div>
-
-  <div className="mapFrame">
-    <iframe
-      title="RVSCET Jamshedpur"
-      src="https://www.google.com/maps?q=RVS+College+of+Engineering+and+Technology+Jamshedpur&output=embed"
-      loading="lazy"
-      allowFullScreen
-      referrerPolicy="no-referrer-when-downgrade"
-    />
-    <div className="mapScan"></div>
-  </div>
-
-  <a
-    className="mapButton"
-    href="https://maps.google.com/?q=RVS+College+of+Engineering+and+Technology+Jamshedpur"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    OPEN IN GOOGLE MAPS
-  </a>
-
-</div>
-
-</section>
-
-)
-
+        </div>
+      </div>
+    </section>
+  );
 }
