@@ -135,26 +135,124 @@ export function ScheduleSection() {
    PROBLEM STATEMENTS / TRACKS
    ============================================================ */
 const TRACKS = [
-  { code: 'TRK-01', title: 'AI / Machine Learning', desc: 'Applied ML systems solving real, messy problems.' },
-  { code: 'TRK-02', title: 'Web3 & Blockchain', desc: 'Decentralized tooling, on-chain infra, trust systems.' },
-  { code: 'TRK-03', title: 'FinTech', desc: 'Payments, credit access, and financial tooling at scale.' },
-  { code: 'TRK-04', title: 'HealthTech', desc: 'Tools that improve access, diagnosis, or care delivery.' },
-  { code: 'TRK-05', title: 'Sustainability', desc: 'Climate, energy, and resource-efficiency solutions.' },
-  { code: 'TRK-06', title: 'Open Innovation', desc: 'Anything else worth building — your call.' },
+  {
+    code: 'TH-01',
+    title: 'Artificial Intelligence & Machine Learning',
+    desc: 'Develop intelligent systems using machine learning, deep learning, NLP and generative AI.'
+  },
+  {
+    code: 'TH-02',
+    title: 'Cybersecurity',
+    desc: 'Build secure applications for authentication, privacy, digital forensics and cyber defence.'
+  },
+  {
+    code: 'TH-03',
+    title: 'Computer Vision',
+    desc: 'Create image and video understanding solutions using modern vision techniques.'
+  },
+  {
+    code: 'TH-04',
+    title: 'Healthcare & MedTech',
+    desc: 'Improve diagnosis, patient care, accessibility and healthcare management.'
+  },
+  {
+    code: 'TH-05',
+    title: 'FinTech',
+    desc: 'Innovate in digital payments, banking, investment and financial inclusion.'
+  },
+  {
+    code: 'TH-06',
+    title: 'Education & EdTech',
+    desc: 'Design technology that enhances learning and skill development.'
+  },
+  {
+    code: 'TH-07',
+    title: 'Agriculture & FoodTech',
+    desc: 'Create smart farming, irrigation and food supply chain solutions.'
+  },
+  {
+    code: 'TH-08',
+    title: 'Smart Cities & IoT',
+    desc: 'Develop connected infrastructure, sensors and intelligent urban systems.'
+  },
+  {
+    code: 'TH-09',
+    title: 'Sustainability & Climate Tech',
+    desc: 'Build solutions for renewable energy, conservation and climate resilience.'
+  },
+  {
+    code: 'TH-10',
+    title: 'Data Science & Analytics',
+    desc: 'Transform complex data into actionable insights using analytics.'
+  },
+  {
+    code: 'TH-11',
+    title: 'AR / VR & Immersive Experiences',
+    desc: 'Create immersive augmented and virtual reality experiences.'
+  },
+  {
+    code: 'TH-12',
+    title: 'Industry 4.0 & Automation',
+    desc: 'Develop robotics, manufacturing and industrial automation solutions.'
+  },
+  {
+    code: 'TH-13',
+    title: 'Accessibility & Inclusive Technology',
+    desc: 'Design technology that is accessible and inclusive for everyone.'
+  },
+  {
+    code: 'TH-14',
+    title: 'Space Technology',
+    desc: 'Build innovative software inspired by satellites, astronomy and exploration.'
+  },
+  {
+    code: 'TH-15',
+    title: 'Open Innovation',
+    desc: 'Solve any real-world challenge with your own original idea.'
+  },
 ];
+
 
 export function ProblemsSection() {
   return (
-    <section className="site-section problems-section" id="problems">
+    
+<section className="site-section problems-section" id="problems">
+
+<div className="problem-space-bg">
+
+<div className="problem-stars"></div>
+
+<div className="problem-nebula"></div>
+
+<div className="problem-galaxy"></div>
+
+<div className="problem-blackhole"></div>
+
+<div className="problem-planet problem-planet-a"></div>
+
+<div className="problem-planet problem-planet-b"></div>
+
+<div className="problem-orbit orbit-a"></div>
+
+<div className="problem-orbit orbit-b"></div>
+
+<div className="problem-ship">
+<svg viewBox="0 0 64 64" width="44" height="44">
+<path fill="currentColor" d="M32 4L42 26L58 32L42 38L32 60L22 38L6 32L22 26z"/>
+</svg>
+</div>
+
+</div>
+
       <div className="site-section-inner">
         <div className="site-eyebrow" data-reveal="true">
           <span className="site-hud-line"></span> TRACKS <span className="site-hud-line"></span>
         </div>
         <h2 className="site-title" data-reveal="true">
-          PROBLEM <span className="site-title-accent">STATEMENTS</span>
+          PROBLEM <span className="site-title-accent">THEMES</span>
         </h2>
         <p className="site-desc" data-reveal="true">
-          Detailed problem statements drop at opening ceremony. Pick a track, or pitch your own under Open Innovation.
+          Choose one innovation theme for your project. Teams are free to solve any real-world problem within their selected domain.
         </p>
         <div className="tracks-grid">
           {TRACKS.map((t, i) => (

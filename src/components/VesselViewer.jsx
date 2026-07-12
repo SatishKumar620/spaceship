@@ -1409,12 +1409,13 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           const dockedScale = THREE.MathUtils.lerp(1, 0.22, eased);
           modelGroup.scale.setScalar(dockedScale);
         } else {
-          modelGroup.position.y = modelBaseY + Math.sin(t * 0.55) * 0.12;
-          modelGroup.rotation.z = Math.sin(t * 0.35) * 0.01;
-          modelGroup.rotation.x = 0;
-          modelGroup.position.x = 0;
-          modelGroup.position.z = 0;
-          modelGroup.scale.setScalar(1);
+modelGroup.position.x = Math.sin(t * 0.28) * 0.8;
+modelGroup.position.y = modelBaseY + Math.sin(t * 0.55) * 0.12;
+modelGroup.position.z = Math.cos(t * 0.28) * 0.5;
+modelGroup.rotation.y += dt * 0.18;
+modelGroup.rotation.z = Math.sin(t * 0.45) * 0.03;
+modelGroup.rotation.x = Math.cos(t * 0.35) * 0.02;
+modelGroup.scale.setScalar(1);
         }
 
         const et = explodeStateRef.current.t;
@@ -1456,6 +1457,14 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       }
 
       earthMesh.rotation.y = t * 0.015;
+earthMesh.position.x = Math.cos(t * 0.05) * 6;
+earthMesh.position.z = 210 + Math.sin(t * 0.05) * 5;
+starfield.rotation.y += dt * 0.002;
+starfield.rotation.x = Math.sin(t * 0.02) * 0.03;
+nebulaMesh.rotation.y += dt * 0.006;
+nebulaMesh.rotation.z = Math.sin(t * 0.04) * 0.08;
+sunSprite.scale.setScalar(46 + Math.sin(t * 2.5) * 1.2);
+sunCoreSprite.scale.setScalar(14 + Math.sin(t * 5.0) * 0.4);
 
       if (stationGroup) {
         stationGroup.rotation.y += dt * 0.12;
