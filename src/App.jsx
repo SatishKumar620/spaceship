@@ -54,7 +54,8 @@ export default function App() {
           <div className="hero-copy">
             <div id="introEyebrow" className="eyebrow">INTERACTIVE MANUAL</div>
             <h1 id="introHeading">
-              VANGUARD-CLASS<br />EXPLORATION VESSEL
+              <span className="h1-line">VANGUARD-CLASS</span>
+              <span className="h1-line h1-accent" data-text="EXPLORATION VESSEL">EXPLORATION VESSEL</span>
             </h1>
             <p id="introSub" className="sub">
               Designed for long-range deep space transit, visualised here in orbit around Kepler-186f. Explore components, subsystem details, and engine arrays interactively.
