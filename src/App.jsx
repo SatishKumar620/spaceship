@@ -18,6 +18,24 @@ export default function App() {
   const [isExploded, setIsExploded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showRegModal, setShowRegModal] = useState(false);
+  const [loadingPercent, setLoadingPercent] = useState(0);
+
+  React.useEffect(() => {
+    if (!isLoaded) {
+      const interval = setInterval(() => {
+        setLoadingPercent((prev) => {
+          if (prev >= 99) {
+            clearInterval(interval);
+            return 99;
+          }
+          return prev + Math.floor(Math.random() * 8) + 1;
+        });
+      }, 150);
+      return () => clearInterval(interval);
+    } else {
+      setLoadingPercent(100);
+    }
+  }, [isLoaded]);
 
   const scrollToAbout = () => {
     const el = document.getElementById('about');
@@ -27,10 +45,27 @@ export default function App() {
   return (
     <>
       {/* Loading screen overlay */}
-      <div id="loadingScreen" className={isLoaded ? 'hidden' : ''}>
-        <div className="load-mark">VANGUARD</div>
-        <div className="load-bar"></div>
-      </div>
+      {!isLoaded && (
+        <div id="loadingScreen" className="loading-screen">
+          <div className="loading-content">
+            <div className="loader-scanner">
+              <div className="scanner-circle"></div>
+              <div className="scanner-line"></div>
+              <div className="scanner-pct">{loadingPercent}%</div>
+            </div>
+            <h1 className="loading-logo glow-text">HACKQUBIT <span className="logo-v2">// V2</span></h1>
+            <div className="loading-status-bar">
+              <div className="loading-status-fill" style={{ width: `${loadingPercent}%` }}></div>
+            </div>
+            <div className="loading-log">
+              {loadingPercent < 30 && "INITIALIZING QUANTUM ENGINES..."}
+              {loadingPercent >= 30 && loadingPercent < 60 && "STABILIZING WARP FOLD CORE..."}
+              {loadingPercent >= 60 && loadingPercent < 90 && "SYNCING ORBITAL TELEMETRY..."}
+              {loadingPercent >= 90 && "READY FOR DOCKING..."}
+            </div>
+          </div>
+        </div>
+      )}
 
       <Navbar />
 
