@@ -42,7 +42,12 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     /* ================================================================
        0. CONFIG & DEVICE DETECTION
        ================================================================ */
-    const isMobile = window.innerWidth < 820 || /Android|iPhone|iPad/i.test(navigator.userAgent);
+    // "Request Desktop Site" spoofs the UA string and can widen window.innerWidth,
+    // but it can't fake touch support or the device's real physical screen size —
+    // so we detect on those instead to avoid rendering full desktop quality on mobile GPUs.
+    const hasTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const smallPhysicalScreen = Math.min(window.screen.width, window.screen.height) < 900;
+    const isMobile = (hasTouch && smallPhysicalScreen) || window.innerWidth < 820 || /Android|iPhone|iPad/i.test(navigator.userAgent);
     const PIXEL_RATIO = Math.min(window.devicePixelRatio, isMobile ? 1.15 : 1.75);
 
     const initialWidth = heroEl.clientWidth || window.innerWidth || 800;
