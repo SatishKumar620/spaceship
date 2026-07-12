@@ -44,6 +44,17 @@ export default function App() {
   }, [isLoaded]);
 
   React.useEffect(() => {
+    // Safety timeout fallback: if WebGL canvas load takes too long on phone, force load landing page
+    const timer = setTimeout(() => {
+      if (!isLoaded) {
+        console.warn("WebGL safety fallback triggered.");
+        setIsLoaded(true);
+      }
+    }, 4500);
+    return () => clearTimeout(timer);
+  }, [isLoaded]);
+
+  React.useEffect(() => {
     // Initialize Lenis smooth scroll
     const lenis = new Lenis({
       duration: 1.1,

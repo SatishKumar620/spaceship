@@ -417,15 +417,33 @@
     .part-label{ font-size:10px; }
     .part-label .chip{ padding:4px 8px; }
     .hud-readout{ display:none; }
-    .cta-row{ flex-direction:column; max-width:220px; }
+    .cta-row{ flex-direction:column; max-width:220px; gap: 10px; }
     .hero-ui {
-      position: relative !important;
-      height: auto !important;
-      min-height: 100vh;
+      position: absolute !important;
+      inset: 0 !important;
+      height: 100% !important;
       display: flex !important;
-      flex-direction: column;
-      justify-content: center !important;
-      padding: 100px 24px 60px !important;
+      flex-direction: column !important;
+      justify-content: flex-end !important;
+      padding: 60px 20px 100px !important;
+    }
+    .top-row {
+      display: none !important;
+    }
+    .hero-copy {
+      max-width: 100%;
+    }
+    h1 {
+      font-size: clamp(32px, 8vw, 48px);
+      margin-bottom: 12px;
+    }
+    .sub {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .scroll-cue {
+      bottom: 2vh !important;
     }
   }
 
