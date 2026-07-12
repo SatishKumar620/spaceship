@@ -13,6 +13,7 @@ import {
 } from "./components/Sections";
 
 import ScheduleSection from "./components/ScheduleSection";
+import Footer from './components/Footer';
 
 export default function App() {
   const [isExploded, setIsExploded] = useState(false);
@@ -139,6 +140,7 @@ export default function App() {
       <EventsSection />
       <SponsorsSection />
       <FaqSection />
+      <Footer />
 
       {showRegModal && (
         <div className="modal-overlay" onClick={() => setShowRegModal(false)}>

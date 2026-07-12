@@ -275,33 +275,180 @@ export function EventsSection() {
 }
 
 /* ============================================================
-   SPONSORS
+   SPONSORS & PARTNERSHIPS
    ============================================================ */
 const SPONSOR_TIERS = [
   { tier: 'Platform Partners', names: ['GitHub', 'MongoDB', 'Postman', 'Google Cloud'] },
   { tier: 'Regional Partners', names: ['Tata Steel', 'TCS'] },
 ];
 
+const SPONSOR_PERKS = [
+  {
+    title: 'Brand Visibility',
+    desc: 'Features across digital banners, merchandise, shirts, and stage placement seen by hundreds of developers.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    )
+  },
+  {
+    title: 'Direct Engagement',
+    desc: 'Host customized tech-talk sessions, workshops, API-specific tracks, or mentor desks on the hack floor.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="9" cy="7" r="4" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    )
+  },
+  {
+    title: 'Talent Acquisition',
+    desc: 'Access resumes database and run fast-tracked interviews to recruit elite engineering students.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="9" cy="7" r="4" strokeLinecap="round" strokeLinejoin="round"/>
+        <line x1="19" y1="8" x2="19" y2="14" strokeLinecap="round" strokeLinejoin="round"/>
+        <line x1="22" y1="11" x2="16" y2="11" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    )
+  },
+  {
+    title: 'Post-Event Marketing',
+    desc: 'Post-hack summary articles, demo-day video showcases, and targeted sponsor newsletter dispatches.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" strokeLinecap="round" strokeLinejoin="round"/>
+        <polyline points="22,6 12,13 2,6" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    )
+  }
+];
+
+const PACKAGES = [
+  {
+    tier: 'SILVER',
+    price: '₹20,000',
+    accent: 'var(--sx-fog)',
+    benefits: [
+      'Medium logo placement on site & banners',
+      'Option to place custom swag in registers kit',
+      '1 crew representative pass',
+      'General Discord server mentions'
+    ]
+  },
+  {
+    tier: 'TITLE',
+    price: 'From ₹40,000',
+    accent: 'var(--sx-red-2)',
+    popular: true,
+    benefits: [
+      'Top-tier branding: "HackQubit V2 presented by [You]"',
+      '10-minute keynote/opening slot',
+      'Premium physical booth space',
+      '4 crew representative passes',
+      'Resumes database & custom evaluation track API access'
+    ]
+  },
+  {
+    tier: 'GOLD',
+    price: '₹30,000',
+    accent: 'var(--sx-amber)',
+    benefits: [
+      'Large logo placement on site & official shirts',
+      'Standard physical booth space',
+      '2 crew representative passes',
+      'Fast-track interviews slot'
+    ]
+  }
+];
+
 export function SponsorsSection() {
   return (
     <section className="site-section sponsors-section" id="sponsors">
       <div className="site-section-inner">
+        {/* Section Header */}
         <div className="site-eyebrow" data-reveal="true">
-          <span className="site-hud-line"></span> BACKED BY <span className="site-hud-line"></span>
+          <span className="site-hud-line"></span> PARTNERSHIPS <span className="site-hud-line"></span>
         </div>
         <h2 className="site-title" data-reveal="true">
-          OUR <span className="site-title-accent">SPONSORS</span>
+          SPONSOR <span className="site-title-accent">BENEFITS</span>
         </h2>
-        {SPONSOR_TIERS.map((tier) => (
-          <div className="sponsor-tier" key={tier.tier} data-reveal="true">
-            <div className="sponsor-tier-label">{tier.tier}</div>
-            <div className="sponsor-row">
-              {tier.names.map((n) => (
-                <div className="sponsor-chip" key={n}>{n}</div>
-              ))}
+        <p className="site-desc" data-reveal="true">
+          Partner with HackQubit V2 to connect with hundreds of future innovators, promote your APIs, and recruit elite developers.
+        </p>
+
+        {/* Perks Grid */}
+        <div className="perks-grid">
+          {SPONSOR_PERKS.map((perk, i) => (
+            <div className="perk-card" key={perk.title} data-reveal="true" style={{ transitionDelay: `${i * 60}ms` }}>
+              <div className="perk-icon-wrap">{perk.icon}</div>
+              <h3 className="perk-title">{perk.title}</h3>
+              <p className="perk-desc">{perk.desc}</p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        {/* Package Tiers Grid */}
+        <div className="packages-subtitle" data-reveal="true">
+          <span className="site-hud-line"></span> SPONSORSHIP PACKAGES <span className="site-hud-line"></span>
+        </div>
+        
+        <div className="packages-grid">
+          {PACKAGES.map((pkg, i) => (
+            <div 
+              className={`package-card ${pkg.popular ? 'is-popular' : ''}`} 
+              key={pkg.tier} 
+              data-reveal="true" 
+              style={{ 
+                transitionDelay: `${i * 60}ms`,
+                '--tier-color': pkg.accent 
+              }}
+            >
+              {pkg.popular && <div className="package-tag">RECOMMENDED</div>}
+              <div className="package-tier">{pkg.tier}</div>
+              <div className="package-price">{pkg.price}</div>
+              <ul className="package-benefits">
+                {pkg.benefits.map((b, idx) => (
+                  <li key={idx}>
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="3">
+                      <polyline points="20 6 9 17 4 12" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Sponsor CTA */}
+        <div className="sponsor-cta-box" data-reveal="true">
+          <h3>CONNECT WITH OUR PARTNERSHIP TEAM</h3>
+          <p>Ready to warp your brand visibility? Request our full sponsor pitch prospectus deck.</p>
+          <a href="mailto:partnerships@hackqubit.com?subject=HackQubit%20V2%20Sponsorship%20Inquiry" className="btn btn-primary">
+            BE OUR SPONSOR
+          </a>
+        </div>
+
+        {/* Current Sponsors logos */}
+        <div className="current-sponsors-section" data-reveal="true">
+          <div className="current-sponsors-title">PREVIOUS & PLATFORM PARTNERS</div>
+          {SPONSOR_TIERS.map((tier) => (
+            <div className="sponsor-tier-row" key={tier.tier}>
+              <div className="sponsor-tier-row-label">{tier.tier}</div>
+              <div className="sponsor-row">
+                {tier.names.map((n) => (
+                  <div className="sponsor-chip" key={n}>{n}</div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   );
