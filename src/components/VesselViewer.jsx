@@ -174,7 +174,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       const group = new THREE.Group();
 
       // 1. Distant faint starfield
-      const distantCount = isMobile ? 1200 : 3500;
+      const distantCount = isMobile ? 600 : 3000;
       const distantGeo = new THREE.BufferGeometry();
       const distantPos = new Float32Array(distantCount * 3);
       for (let i = 0; i < distantCount; i++) {
@@ -198,7 +198,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       group.add(new THREE.Points(distantGeo, distantMat));
 
       // 2. Medium background starfield
-      const medCount = isMobile ? 800 : 2000;
+      const medCount = isMobile ? 400 : 1600;
       const medGeo = new THREE.BufferGeometry();
       const medPos = new Float32Array(medCount * 3);
       for (let i = 0; i < medCount; i++) {
@@ -223,7 +223,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
       // 3. Bright foreground starfield
       const colors = [0x6ee7ff, 0xffd18a, 0xffffff, 0xcbe5ff];
-      const brightCountPerColor = isMobile ? 40 : 100;
+      const brightCountPerColor = isMobile ? 20 : 80;
       colors.forEach((col) => {
         const cGeo = new THREE.BufferGeometry();
         const cPos = new Float32Array(brightCountPerColor * 3);
@@ -290,7 +290,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         float fbm(vec3 p){
           float v = 0.0;
           float a = 0.5;
-          for(int i=0;i<4;i++){
+          for(int i=0;i<2;i++){
             v += a * noise(p);
             p *= 2.02;
             a *= 0.5;
@@ -308,7 +308,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           vec3 brightCyan = vec3(0.04, 0.22, 0.35);
 
           vec3 nebulaColor = mix(baseInd, brightPurple, vDir.y * 0.5 + 0.5);
-          float gasPattern = fbm(p * 1.6 + vec3(0.4, 1.1, 0.0));
+          float gasPattern = n; // reuse base sample instead of a second full fbm() call
           nebulaColor = mix(nebulaColor, brightCyan, gasPattern * 0.55);
 
           vec3 col = nebulaColor * n * 1.45;
@@ -403,7 +403,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     const keyLight = new THREE.DirectionalLight(0xdbe9ff, 1.95);
     keyLight.position.copy(SUN_DIR).multiplyScalar(12);
     keyLight.castShadow = true;
-    keyLight.shadow.mapSize.set(isMobile ? 1024 : 2048, isMobile ? 1024 : 2048);
+    keyLight.shadow.mapSize.set(isMobile ? 512 : 1536, isMobile ? 512 : 1536);
     keyLight.shadow.bias = -0.0004;
     keyLight.shadow.normalBias = 0.02;
     scene.add(keyLight);
@@ -979,10 +979,10 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
           createBeacon(15, 0, 0, 0xff3b3b, 5.0, true);
           createBeacon(-15, 0, 0, 0x3bff3b, 5.0, true);
-          createBeacon(0, 7.5, 2, 0xffffff, 6.0, true);
-          createBeacon(0, -7.5, -2, 0xffffff, 6.0, true);
-          createBeacon(4, 2, -4, 0xffaa00, 3.8, false);
-          createBeacon(-4, -2, 4, 0x00e1ff, 3.8, false);
+          if (!isMobile) {
+            createBeacon(4, 2, -4, 0xffaa00, 3.8, false);
+            createBeacon(-4, -2, 4, 0x00e1ff, 3.8, false);
+          }
 
           scene.add(stationGroup);
 
@@ -1045,12 +1045,11 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(initialWidth, initialHeight),
-      isMobile ? 0.28 : 0.38,
+      0.38,
       0.4,
       0.94
     );
-    if (isMobile) bloomPass.resolution.set(initialWidth * 0.6, initialHeight * 0.6);
-    composer.addPass(bloomPass);
+    if (!isMobile) composer.addPass(bloomPass); // bloom skipped on mobile: too costly for smooth fps
 
     const bokehPass = null; // removed: DoF pass was too expensive for smooth playback
 
