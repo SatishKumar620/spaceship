@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import './App.css';
 import VesselViewer from './components/VesselViewer';
 import AboutSection from './components/AboutSection';
+import Navbar from './components/Navbar';
+import {
+  VenueSection,
+  PrizesSection,
+  ScheduleSection,
+  ProblemsSection,
+  EventsSection,
+  SponsorsSection,
+  FaqSection,
+} from './components/Sections';
 
 export default function App() {
   const [isExploded, setIsExploded] = useState(false);
@@ -20,7 +30,9 @@ export default function App() {
         <div className="load-bar"></div>
       </div>
 
-      <section className="hero-section">
+      <Navbar />
+
+      <section className="hero-section" id="home">
         {/* Three.js interactive canvas wrapper */}
         <VesselViewer
           isExploded={isExploded}
@@ -103,6 +115,14 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      <VenueSection />
+      <PrizesSection />
+      <ScheduleSection />
+      <ProblemsSection />
+      <EventsSection />
+      <SponsorsSection />
+      <FaqSection />
     </>
   );
 }
