@@ -87,12 +87,26 @@ export default function App() {
 
   React.useEffect(() => {
     if (isLoaded) {
-      // Safely animate DOM elements after loader has fully unmounted and DOM is stable
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-      tl.from('#introEyebrow', { y: 16, opacity: 0, duration: 0.6, delay: 0.25 })
-        .from('#introHeading', { y: 34, opacity: 0, duration: 0.9 }, '-=0.45')
-        .from('#introSub', { y: 20, opacity: 0, duration: 0.8 }, '-=0.55')
-        .from('#introCta', { y: 16, opacity: 0, duration: 0.7 }, '-=0.5');
+      // First ensure elements are immediately visible (safety net for mobile)
+      ['#introEyebrow', '#introHeading', '#introSub', '#introCta'].forEach(sel => {
+        const el = document.querySelector(sel);
+        if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+      });
+      // Then layer on the animation as a progressive enhancement
+      try {
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        gsap.set('#introEyebrow', { opacity: 0, y: 16 });
+        gsap.set('#introHeading', { opacity: 0, y: 34 });
+        gsap.set('#introSub', { opacity: 0, y: 20 });
+        gsap.set('#introCta', { opacity: 0, y: 16 });
+        tl.to('#introEyebrow', { opacity: 1, y: 0, duration: 0.6, delay: 0.2 })
+          .to('#introHeading', { opacity: 1, y: 0, duration: 0.9 }, '-=0.45')
+          .to('#introSub', { opacity: 1, y: 0, duration: 0.8 }, '-=0.55')
+          .to('#introCta', { opacity: 1, y: 0, duration: 0.7 }, '-=0.5');
+      } catch (e) {
+        // If GSAP fails for any reason, elements are already visible above
+        console.warn('GSAP animation skipped:', e);
+      }
     }
   }, [isLoaded]);
 
