@@ -92,20 +92,8 @@ Prepare your crew for launch.
 
 <div className="terminal">
 
-<div className="earthWrap">
-
-<div className="orbit one"></div>
-<div className="orbit two"></div>
-
-<div className="planet">
-
-🌍
-
-</div>
-
-</div>
-
 <div className="cards">
+
 
 {
 
