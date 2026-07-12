@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" width="220" height="60">
+  <defs>
+    <linearGradient id="orbingerGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bd5eff" />
+      <stop offset="100%" stop-color="#00f0ff" />
+    </linearGradient>
+  </defs>
+  <path d="M30 10 L45 20 L45 40 L30 50 L15 40 L15 20 Z" fill="none" stroke="url(#orbingerGlow)" stroke-width="3" />
+  <circle cx="30" cy="30" r="8" fill="url(#orbingerGlow)" />
+  <text x="65" y="38" font-family="'Space Grotesk', sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">ORBINGER</text>
+</svg>

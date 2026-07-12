@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" width="220" height="60">
+  <defs>
+    <linearGradient id="izzkiGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9d00" />
+      <stop offset="100%" stop-color="#ff2d55" />
+    </linearGradient>
+  </defs>
+  <path d="M15 15 H35 V35 H15 Z" fill="none" stroke="url(#izzkiGlow)" stroke-width="2" />
+  <circle cx="15" cy="15" r="4" fill="url(#izzkiGlow)" />
+  <circle cx="35" cy="15" r="4" fill="url(#izzkiGlow)" />
+  <circle cx="15" cy="35" r="4" fill="url(#izzkiGlow)" />
+  <circle cx="35" cy="35" r="4" fill="url(#izzkiGlow)" />
+  <line x1="25" y1="15" x2="25" y2="45" stroke="url(#izzkiGlow)" stroke-width="2" />
+  <circle cx="25" cy="45" r="4" fill="url(#izzkiGlow)" />
+  <text x="65" y="38" font-family="'Space Grotesk', sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">IZZKI TECH</text>
+</svg>

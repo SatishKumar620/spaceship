@@ -428,6 +428,126 @@
 }
 
 
+/* ============================================================
+   INFINITE LOGO CAROUSEL (PAST SPONSORS)
+   ============================================================ */
+.past-sponsors-section {
+  margin-top: 80px;
+  margin-bottom: 60px;
+  width: 100%;
+}
+
+.past-sponsors-header {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--sx-fog);
+  opacity: 0.6;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ticker-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  padding: 10px 0;
+}
+
+/* Mask gradients to fade edges out */
+.ticker-container::before,
+.ticker-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 2;
+  pointer-events: none;
+}
+.ticker-container::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--sx-void) 0%, transparent 100%);
+}
+.ticker-container::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--sx-void) 0%, transparent 100%);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  gap: 40px;
+}
+
+.ticker-group {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+.ticker-logo {
+  height: 38px;
+  width: auto;
+  opacity: 0.45;
+  filter: grayscale(1) brightness(1.2);
+  transition: opacity 0.3s, filter 0.3s, transform 0.3s;
+}
+.ticker-logo:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+  transform: scale(1.05);
+}
+
+.ticker-logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--sx-fog);
+  opacity: 0.4;
+  letter-spacing: 2px;
+  transition: opacity 0.3s, color 0.3s;
+  user-select: none;
+  white-space: nowrap;
+}
+.ticker-logo-text:hover {
+  opacity: 0.9;
+  color: #fff;
+}
+
+/* Animations for Left & Right marquee */
+.scroll-left .ticker-group {
+  animation: marqueeLeft 28s linear infinite;
+}
+
+.scroll-right .ticker-group {
+  animation: marqueeRight 28s linear infinite;
+}
+
+/* Pause animations on hover */
+.ticker-track:hover .ticker-group {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marqueeRight {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+
 .faq-list{ margin-top:20px; }
 .faq-item{ border-bottom:1px solid var(--sx-line); }
 .faq-question{

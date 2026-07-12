@@ -434,6 +434,55 @@ export function SponsorsSection() {
           </a>
         </div>
 
+        {/* Past Sponsors Infinite Ticker */}
+        <div className="past-sponsors-section" data-reveal="true">
+          <div className="past-sponsors-header">
+            <span className="site-hud-line"></span> ALUMNI PARTNERS & PAST SPONSORS <span className="site-hud-line"></span>
+          </div>
+
+          <div className="ticker-container">
+            {/* Ticker Row 1: Scroll Left */}
+            <div className="ticker-track scroll-left">
+              <div className="ticker-group">
+                <img src="/hdfc.svg" alt="HDFC Bank" className="ticker-logo" />
+                <img src="/orbinger.svg" alt="Orbinger" className="ticker-logo" />
+                <img src="/izzki.svg" alt="Izzki Tech Solutions" className="ticker-logo" />
+                <div className="ticker-logo-text">TATA STEEL</div>
+                <div className="ticker-logo-text">GITHUB</div>
+                <div className="ticker-logo-text">MONGODB</div>
+              </div>
+              <div className="ticker-group" aria-hidden="true">
+                <img src="/hdfc.svg" alt="HDFC Bank" className="ticker-logo" />
+                <img src="/orbinger.svg" alt="Orbinger" className="ticker-logo" />
+                <img src="/izzki.svg" alt="Izzki Tech Solutions" className="ticker-logo" />
+                <div className="ticker-logo-text">TATA STEEL</div>
+                <div className="ticker-logo-text">GITHUB</div>
+                <div className="ticker-logo-text">MONGODB</div>
+              </div>
+            </div>
+
+            {/* Ticker Row 2: Scroll Right */}
+            <div className="ticker-track scroll-right">
+              <div className="ticker-group">
+                <div className="ticker-logo-text">GOOGLE CLOUD</div>
+                <div className="ticker-logo-text">POSTMAN</div>
+                <div className="ticker-logo-text">TCS</div>
+                <img src="/hdfc.svg" alt="HDFC Bank" className="ticker-logo" />
+                <img src="/orbinger.svg" alt="Orbinger" className="ticker-logo" />
+                <img src="/izzki.svg" alt="Izzki Tech Solutions" className="ticker-logo" />
+              </div>
+              <div className="ticker-group" aria-hidden="true">
+                <div className="ticker-logo-text">GOOGLE CLOUD</div>
+                <div className="ticker-logo-text">POSTMAN</div>
+                <div className="ticker-logo-text">TCS</div>
+                <img src="/hdfc.svg" alt="HDFC Bank" className="ticker-logo" />
+                <img src="/orbinger.svg" alt="Orbinger" className="ticker-logo" />
+                <img src="/izzki.svg" alt="Izzki Tech Solutions" className="ticker-logo" />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Current Sponsors logos */}
         <div className="current-sponsors-section" data-reveal="true">
           <div className="current-sponsors-title">PREVIOUS & PLATFORM PARTNERS</div>
