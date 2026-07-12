@@ -64,6 +64,9 @@ export default function ScheduleSection() {
       <div className="spaceBackground">
         <div className="nebula one"></div>
         <div className="nebula two"></div>
+        <div className="drone one"></div>
+        <div className="drone two"></div>
+        <div className="drone three"></div>
 
         <div className="stars">
           {Array.from({ length: 90 }).map((_, i) => (

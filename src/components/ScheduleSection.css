@@ -1,0 +1,1327 @@
+/* ===============================
+   MISSION TIMELINE
+   PART 1A
+==================================*/
+
+:root{
+  --bg:#05070d;
+  --panel:rgba(11,16,28,.72);
+  --text:#edf4ff;
+  --muted:#9db3ca;
+  --cyan:#3dc8ff;
+  --red:#ff2d55;
+  --gold:#ffd34d;
+}
+
+.missionSchedule{
+  position:relative;
+  overflow:hidden;
+  padding:140px 24px;
+  background:
+  radial-gradient(circle at 20% 20%,rgba(61,200,255,.08),transparent 35%),
+  radial-gradient(circle at 80% 80%,rgba(255,45,85,.08),transparent 35%),
+  var(--bg);
+}
+
+.spaceBackground{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.scheduleHeader{
+  position:relative;
+  z-index:5;
+  max-width:900px;
+  margin:0 auto 90px;
+  text-align:center;
+}
+
+.missionTag{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 18px;
+  border:1px solid rgba(61,200,255,.35);
+  border-radius:999px;
+  color:var(--cyan);
+  letter-spacing:4px;
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  background:rgba(61,200,255,.08);
+  backdrop-filter:blur(12px);
+  animation:tagPulse 3s infinite;
+}
+
+.scheduleHeader h2{
+  margin:26px 0 18px;
+  font-size:clamp(44px,7vw,84px);
+  line-height:1;
+  font-weight:900;
+  color:var(--text);
+  text-transform:uppercase;
+}
+
+.scheduleHeader h2 span{
+  color:var(--red);
+  text-shadow:
+  0 0 12px rgba(255,45,85,.5),
+  0 0 40px rgba(255,45,85,.25);
+}
+
+.scheduleHeader p{
+  max-width:720px;
+  margin:auto;
+  font-size:18px;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+.timeline{
+  position:relative;
+  z-index:5;
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  gap:36px;
+}
+
+@keyframes tagPulse{
+  0%,100%{
+    box-shadow:0 0 0 rgba(61,200,255,0);
+  }
+  50%{
+    box-shadow:0 0 18px rgba(61,200,255,.35);
+  }
+}
+
+/* ===============================
+   PART 1B - Mission Cards
+==================================*/
+
+.missionCard{
+position:relative;
+display:flex;
+align-items:center;
+gap:32px;
+}
+
+.missionCard.left{
+justify-content:flex-start;
+}
+
+.missionCard.right{
+justify-content:flex-end;
+}
+
+.cardGlass{
+position:relative;
+width:min(520px,100%);
+padding:28px;
+overflow:hidden;
+border-radius:24px;
+background:rgba(8,15,28,.72);
+backdrop-filter:blur(18px);
+border:1px solid rgba(61,200,255,.18);
+box-shadow:
+0 0 25px rgba(0,0,0,.35),
+0 0 60px rgba(61,200,255,.06);
+transition:
+transform .45s,
+border-color .45s,
+box-shadow .45s;
+}
+
+.cardGlass:hover{
+transform:translateY(-8px);
+border-color:rgba(61,200,255,.6);
+box-shadow:
+0 0 30px rgba(61,200,255,.22),
+0 0 90px rgba(61,200,255,.08);
+}
+
+.cardGlass::before{
+content:"";
+position:absolute;
+inset:0;
+padding:1px;
+border-radius:24px;
+background:
+linear-gradient(
+135deg,
+rgba(61,200,255,.65),
+transparent 35%,
+transparent 65%,
+rgba(255,45,85,.65)
+);
+-webkit-mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+pointer-events:none;
+}
+
+.topRow{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
+}
+
+.missionDay{
+padding:8px 16px;
+border-radius:999px;
+background:rgba(61,200,255,.12);
+border:1px solid rgba(61,200,255,.3);
+font-size:12px;
+letter-spacing:3px;
+font-weight:700;
+color:#6fdfff;
+}
+
+.status{
+padding:8px 14px;
+border-radius:999px;
+background:rgba(0,255,120,.12);
+border:1px solid rgba(0,255,120,.35);
+color:#5dff9b;
+font-size:12px;
+font-weight:700;
+letter-spacing:2px;
+animation:statusBlink 2.4s infinite;
+}
+
+.timeBlock{
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+margin-bottom:20px;
+}
+
+.time{
+font-size:34px;
+font-weight:800;
+color:#fff;
+}
+
+.missionCode{
+font-size:13px;
+letter-spacing:2px;
+color:#8eb5d6;
+}
+
+.title{
+font-size:28px;
+font-weight:800;
+margin-bottom:14px;
+color:#fff;
+}
+
+.cardGlass p{
+color:#a9bfd6;
+line-height:1.8;
+margin-bottom:22px;
+}
+
+.telemetry{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+}
+
+.telemetry div{
+padding:14px;
+border-radius:14px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.05);
+font-size:12px;
+letter-spacing:2px;
+color:#87a9c9;
+}
+
+.telemetry b{
+display:block;
+margin-top:8px;
+font-size:18px;
+color:#fff;
+}
+
+@keyframes statusBlink{
+0%,100%{
+opacity:1;
+box-shadow:0 0 10px rgba(0,255,120,.18);
+}
+50%{
+opacity:.55;
+box-shadow:0 0 22px rgba(0,255,120,.4);
+}
+}
+
+
+/* ===============================
+   PART 1C - Plasma Timeline
+==================================*/
+
+.timeline::before{
+content:"";
+position:absolute;
+left:50%;
+top:0;
+transform:translateX(-50%);
+width:4px;
+height:100%;
+border-radius:999px;
+background:linear-gradient(
+180deg,
+rgba(61,200,255,.12),
+rgba(61,200,255,.9),
+rgba(255,45,85,.8),
+rgba(61,200,255,.12)
+);
+box-shadow:
+0 0 18px rgba(61,200,255,.45),
+0 0 50px rgba(61,200,255,.18);
+overflow:hidden;
+}
+
+.timeline::after{
+content:"";
+position:absolute;
+left:50%;
+top:-30%;
+transform:translateX(-50%);
+width:14px;
+height:180px;
+border-radius:999px;
+background:linear-gradient(
+180deg,
+transparent,
+rgba(61,200,255,.95),
+transparent
+);
+filter:blur(10px);
+animation:beamTravel 5s linear infinite;
+}
+
+.node{
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+width:22px;
+height:22px;
+border-radius:50%;
+background:#06101f;
+border:2px solid var(--cyan);
+box-shadow:
+0 0 15px rgba(61,200,255,.55),
+0 0 35px rgba(61,200,255,.18);
+z-index:20;
+}
+
+.node::before{
+content:"";
+position:absolute;
+inset:4px;
+border-radius:50%;
+background:var(--cyan);
+}
+
+.pulse{
+position:absolute;
+inset:-12px;
+border-radius:50%;
+border:2px solid rgba(61,200,255,.55);
+animation:nodePulse 2.8s infinite;
+}
+
+.energyFlow{
+position:absolute;
+left:50%;
+top:0;
+transform:translateX(-50%);
+width:8px;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+}
+
+.energyFlow::before{
+content:"";
+position:absolute;
+left:0;
+top:-200px;
+width:100%;
+height:200px;
+border-radius:999px;
+background:linear-gradient(
+180deg,
+transparent,
+rgba(61,200,255,.95),
+transparent
+);
+filter:blur(8px);
+animation:energyRun 3.5s linear infinite;
+}
+
+.packet{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+width:10px;
+height:10px;
+border-radius:3px;
+background:var(--cyan);
+box-shadow:
+0 0 12px rgba(61,200,255,.8),
+0 0 28px rgba(61,200,255,.35);
+animation:dataPacket 7s linear infinite;
+}
+
+.packet:nth-child(odd){
+background:var(--red);
+box-shadow:
+0 0 12px rgba(255,45,85,.8),
+0 0 28px rgba(255,45,85,.35);
+}
+
+@keyframes beamTravel{
+0%{
+top:-180px;
+}
+100%{
+top:100%;
+}
+}
+
+@keyframes energyRun{
+0%{
+top:-220px;
+}
+100%{
+top:100%;
+}
+}
+
+@keyframes dataPacket{
+0%{
+top:100%;
+opacity:0;
+}
+8%{
+opacity:1;
+}
+92%{
+opacity:1;
+}
+100%{
+top:-30px;
+opacity:0;
+}
+}
+
+@keyframes nodePulse{
+0%{
+transform:scale(.7);
+opacity:.9;
+}
+70%{
+transform:scale(2.2);
+opacity:0;
+}
+100%{
+opacity:0;
+}
+}
+
+
+/*==================================
+ PART 1D - HUD & CARD EFFECTS
+===================================*/
+
+.cardGlass{
+isolation:isolate;
+}
+
+.cardGlass::after{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+115deg,
+transparent 0%,
+rgba(255,255,255,.05) 45%,
+rgba(255,255,255,.14) 50%,
+rgba(255,255,255,.05) 55%,
+transparent 100%);
+transform:translateX(-140%);
+animation:hudSweep 7s linear infinite;
+pointer-events:none;
+z-index:2;
+}
+
+.scan{
+position:absolute;
+left:0;
+top:-120px;
+width:100%;
+height:120px;
+background:
+linear-gradient(
+180deg,
+transparent,
+rgba(61,200,255,.18),
+transparent);
+filter:blur(4px);
+animation:scanDown 5.5s linear infinite;
+pointer-events:none;
+z-index:3;
+}
+
+.cardGlass:hover .scan{
+animation-duration:2s;
+}
+
+.cardGlass:hover{
+transform:
+translateY(-10px)
+scale(1.02);
+}
+
+.cardGlass:hover .title{
+color:#ffffff;
+text-shadow:
+0 0 12px rgba(61,200,255,.6),
+0 0 28px rgba(61,200,255,.25);
+}
+
+.cardGlass:hover .time{
+color:#3dc8ff;
+}
+
+.cardGlass:hover .missionCode{
+color:#ccefff;
+}
+
+.cardGlass:hover .telemetry div{
+border-color:rgba(61,200,255,.35);
+box-shadow:
+inset 0 0 20px rgba(61,200,255,.06),
+0 0 18px rgba(61,200,255,.08);
+}
+
+.cardGlass .topRow::before,
+.cardGlass .topRow::after{
+content:"";
+position:absolute;
+width:28px;
+height:28px;
+border-top:2px solid rgba(61,200,255,.6);
+top:-12px;
+}
+
+.cardGlass .topRow::before{
+left:-12px;
+border-left:2px solid rgba(61,200,255,.6);
+}
+
+.cardGlass .topRow::after{
+right:-12px;
+border-right:2px solid rgba(61,200,255,.6);
+}
+
+.cardGlass .telemetry::before,
+.cardGlass .telemetry::after{
+content:"";
+position:absolute;
+width:28px;
+height:28px;
+bottom:-12px;
+border-bottom:2px solid rgba(255,45,85,.55);
+}
+
+.cardGlass .telemetry::before{
+left:-12px;
+border-left:2px solid rgba(255,45,85,.55);
+}
+
+.cardGlass .telemetry::after{
+right:-12px;
+border-right:2px solid rgba(255,45,85,.55);
+}
+
+.cardGlass{
+animation:floatCard 8s ease-in-out infinite;
+}
+
+.missionCard:nth-child(even) .cardGlass{
+animation-delay:2s;
+}
+
+.missionCard:nth-child(3n) .cardGlass{
+animation-delay:4s;
+}
+
+@keyframes floatCard{
+
+0%{
+transform:translateY(0px);
+}
+
+25%{
+transform:translateY(-4px);
+}
+
+50%{
+transform:translateY(0px);
+}
+
+75%{
+transform:translateY(4px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+@keyframes hudSweep{
+
+0%{
+transform:translateX(-150%);
+}
+
+100%{
+transform:translateX(180%);
+}
+
+}
+
+@keyframes scanDown{
+
+0%{
+top:-120px;
+}
+
+100%{
+top:100%;
+}
+
+}
+
+
+/*==================================
+ PART 2A - SPACE BACKGROUND
+===================================*/
+
+.nebula{
+position:absolute;
+border-radius:50%;
+filter:blur(90px);
+opacity:.18;
+animation:nebulaFloat 22s ease-in-out infinite;
+}
+
+.nebula.one{
+width:520px;
+height:520px;
+top:-140px;
+left:-140px;
+background:radial-gradient(circle,#3dc8ff 0%,transparent 70%);
+}
+
+.nebula.two{
+width:620px;
+height:620px;
+bottom:-220px;
+right:-180px;
+background:radial-gradient(circle,#ff2d55 0%,transparent 70%);
+animation-delay:8s;
+}
+
+.stars{
+position:absolute;
+inset:0;
+overflow:hidden;
+pointer-events:none;
+}
+
+.stars span{
+position:absolute;
+width:2px;
+height:2px;
+border-radius:50%;
+background:#ffffff;
+opacity:.7;
+animation:
+starTwinkle 4s ease-in-out infinite,
+starDrift 40s linear infinite;
+}
+
+.stars span:nth-child(3n){
+background:#3dc8ff;
+box-shadow:0 0 8px #3dc8ff;
+}
+
+.stars span:nth-child(5n){
+width:3px;
+height:3px;
+background:#ff2d55;
+box-shadow:0 0 10px #ff2d55;
+}
+
+.stars span:nth-child(7n){
+background:#ffe27a;
+box-shadow:0 0 10px #ffe27a;
+}
+
+
+.stars span:nth-child(1){left:3%;top:8%;}
+.stars span:nth-child(2){left:10%;top:22%;}
+.stars span:nth-child(3){left:18%;top:13%;}
+.stars span:nth-child(4){left:24%;top:34%;}
+.stars span:nth-child(5){left:31%;top:10%;}
+.stars span:nth-child(6){left:38%;top:27%;}
+.stars span:nth-child(7){left:46%;top:7%;}
+.stars span:nth-child(8){left:55%;top:18%;}
+.stars span:nth-child(9){left:63%;top:32%;}
+.stars span:nth-child(10){left:71%;top:9%;}
+.stars span:nth-child(11){left:79%;top:26%;}
+.stars span:nth-child(12){left:88%;top:15%;}
+.stars span:nth-child(13){left:95%;top:37%;}
+
+@keyframes starTwinkle{
+
+0%,100%{
+opacity:.25;
+transform:scale(.8);
+}
+
+50%{
+opacity:1;
+transform:scale(1.8);
+}
+
+}
+
+@keyframes starDrift{
+
+0%{
+transform:translateY(0);
+}
+
+100%{
+transform:translateY(-70px);
+}
+
+}
+
+@keyframes nebulaFloat{
+
+0%,100%{
+transform:translate(0,0) scale(1);
+}
+
+50%{
+transform:translate(40px,-30px) scale(1.12);
+}
+
+}
+
+
+/*==================================
+ PART 2B - ORBITS & SATELLITES
+===================================*/
+
+.scheduleHeader{
+position:relative;
+overflow:visible;
+}
+
+.scheduleHeader::before,
+.scheduleHeader::after{
+content:"";
+position:absolute;
+left:50%;
+top:120px;
+transform:translateX(-50%);
+border:1px solid rgba(61,200,255,.18);
+border-radius:50%;
+pointer-events:none;
+}
+
+.scheduleHeader::before{
+width:220px;
+height:220px;
+animation:orbitRotate 18s linear infinite;
+}
+
+.scheduleHeader::after{
+width:320px;
+height:320px;
+animation:orbitRotateReverse 26s linear infinite;
+}
+
+.planetHUD{
+position:relative;
+width:320px;
+height:320px;
+margin:50px auto 0;
+}
+
+.planet{
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+font-size:64px;
+filter:
+drop-shadow(0 0 12px rgba(61,200,255,.55))
+drop-shadow(0 0 32px rgba(61,200,255,.28));
+animation:planetFloat 8s ease-in-out infinite;
+}
+
+.orbit{
+position:absolute;
+inset:40px;
+border-radius:50%;
+border:1px dashed rgba(61,200,255,.25);
+animation:orbitRotate 14s linear infinite;
+}
+
+.satellite{
+position:absolute;
+left:50%;
+top:50%;
+width:16px;
+height:16px;
+margin:-8px;
+background:#3dc8ff;
+border-radius:4px;
+box-shadow:
+0 0 12px rgba(61,200,255,.9),
+0 0 28px rgba(61,200,255,.35);
+transform-origin:0 120px;
+animation:satelliteOrbit 10s linear infinite;
+}
+
+.satellite::before{
+content:"";
+position:absolute;
+left:-8px;
+top:4px;
+width:32px;
+height:8px;
+background:rgba(255,255,255,.7);
+border-radius:20px;
+}
+
+.satellite::after{
+content:"";
+position:absolute;
+left:4px;
+top:-8px;
+width:8px;
+height:32px;
+background:rgba(255,255,255,.7);
+border-radius:20px;
+}
+
+
+/*==================================
+ PART 2B - SHOOTING STARS
+===================================*/
+
+.missionSchedule::before,
+.missionSchedule::after{
+content:"";
+position:absolute;
+width:180px;
+height:2px;
+background:
+linear-gradient(
+90deg,
+rgba(255,255,255,0),
+rgba(255,255,255,.95),
+rgba(61,200,255,.8),
+transparent);
+filter:blur(.5px);
+opacity:0;
+pointer-events:none;
+}
+
+.missionSchedule::before{
+top:18%;
+left:-220px;
+animation:shootingStarA 15s linear infinite;
+}
+
+.missionSchedule::after{
+top:62%;
+right:-220px;
+animation:shootingStarB 19s linear infinite;
+animation-delay:7s;
+}
+
+.spaceBackground::before{
+content:"";
+position:absolute;
+inset:-20%;
+background-image:
+radial-gradient(rgba(255,255,255,.16) 1px,transparent 1px);
+background-size:90px 90px;
+opacity:.18;
+animation:spaceDust 45s linear infinite;
+pointer-events:none;
+}
+
+@keyframes orbitRotate{
+
+from{transform:translateX(-50%) rotate(0deg);}
+to{transform:translateX(-50%) rotate(360deg);}
+
+}
+
+@keyframes orbitRotateReverse{
+
+from{transform:translateX(-50%) rotate(360deg);}
+to{transform:translateX(-50%) rotate(0deg);}
+
+}
+
+@keyframes satelliteOrbit{
+
+from{transform:rotate(0deg) translateX(120px) rotate(0deg);}
+to{transform:rotate(360deg) translateX(120px) rotate(-360deg);}
+
+}
+
+@keyframes planetFloat{
+
+0%,100%{
+transform:translate(-50%,-50%) translateY(0);
+}
+
+50%{
+transform:translate(-50%,-50%) translateY(-10px);
+}
+
+}
+
+@keyframes shootingStarA{
+
+0%,70%{
+opacity:0;
+transform:translateX(0) translateY(0) rotate(-22deg);
+}
+
+72%{
+opacity:1;
+}
+
+100%{
+opacity:0;
+transform:translateX(1800px) translateY(450px) rotate(-22deg);
+}
+
+}
+
+@keyframes shootingStarB{
+
+0%,75%{
+opacity:0;
+transform:translateX(0) translateY(0) rotate(18deg);
+}
+
+77%{
+opacity:1;
+}
+
+100%{
+opacity:0;
+transform:translateX(-1800px) translateY(-420px) rotate(18deg);
+}
+
+}
+
+@keyframes spaceDust{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(-180px);
+}
+
+}
+
+
+/*==================================
+ PART 3A - PREMIUM INTERACTIONS
+===================================*/
+
+.missionCard{
+opacity:0;
+transform:translateY(60px) scale(.95);
+animation:missionReveal .8s forwards;
+}
+
+.missionCard:nth-child(1){animation-delay:.10s;}
+.missionCard:nth-child(2){animation-delay:.22s;}
+.missionCard:nth-child(3){animation-delay:.34s;}
+.missionCard:nth-child(4){animation-delay:.46s;}
+.missionCard:nth-child(5){animation-delay:.58s;}
+.missionCard:nth-child(6){animation-delay:.70s;}
+.missionCard:nth-child(7){animation-delay:.82s;}
+.missionCard:nth-child(8){animation-delay:.94s;}
+.missionCard:nth-child(9){animation-delay:1.06s;}
+
+.cardGlass{
+cursor:pointer;
+}
+
+.cardGlass::before{
+animation:borderGlow 6s linear infinite;
+}
+
+.cardGlass:hover{
+box-shadow:
+0 0 35px rgba(61,200,255,.35),
+0 0 90px rgba(61,200,255,.12),
+inset 0 0 35px rgba(61,200,255,.05);
+}
+
+.node{
+transition:.35s;
+}
+
+.missionCard:hover .node{
+transform:translate(-50%,-50%) scale(1.25);
+box-shadow:
+0 0 22px #3dc8ff,
+0 0 60px rgba(61,200,255,.45);
+}
+
+.missionCard:hover .pulse{
+animation-duration:1.2s;
+}
+
+.finishGlow{
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+width:240px;
+height:240px;
+border-radius:50%;
+background:
+radial-gradient(circle,
+rgba(255,211,77,.45),
+transparent 70%);
+filter:blur(24px);
+animation:finishPulse 4s infinite;
+pointer-events:none;
+}
+
+.missionEnd{
+position:relative;
+text-align:center;
+padding:120px 20px 40px;
+}
+
+.missionEnd h3{
+font-size:54px;
+font-weight:900;
+letter-spacing:6px;
+color:#ffd34d;
+text-shadow:
+0 0 18px rgba(255,211,77,.65),
+0 0 50px rgba(255,211,77,.25);
+margin-bottom:16px;
+}
+
+.missionEnd p{
+font-size:18px;
+color:#d7e5f7;
+letter-spacing:2px;
+}
+
+@keyframes missionReveal{
+
+0%{
+opacity:0;
+transform:
+translateY(60px)
+scale(.95);
+filter:blur(12px);
+}
+
+100%{
+opacity:1;
+transform:
+translateY(0)
+scale(1);
+filter:blur(0);
+}
+
+}
+
+@keyframes borderGlow{
+
+0%{
+filter:hue-rotate(0deg);
+}
+
+100%{
+filter:hue-rotate(360deg);
+}
+
+}
+
+@keyframes finishPulse{
+
+0%,100%{
+opacity:.45;
+transform:
+translate(-50%,-50%)
+scale(1);
+}
+
+50%{
+opacity:1;
+transform:
+translate(-50%,-50%)
+scale(1.18);
+}
+
+}
+
+
+/*==================================
+ PART 3B - ADVANCED HUD
+===================================*/
+
+.telemetry{
+position:relative;
+overflow:hidden;
+}
+
+.telemetry::after{
+content:"";
+position:absolute;
+left:-120%;
+top:0;
+width:120%;
+height:100%;
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(61,200,255,.15),
+transparent);
+animation:telemetrySweep 5s linear infinite;
+}
+
+.telemetry div{
+position:relative;
+overflow:hidden;
+}
+
+.telemetry div::after{
+content:"";
+position:absolute;
+left:10px;
+bottom:8px;
+height:3px;
+border-radius:99px;
+background:#3dc8ff;
+box-shadow:0 0 12px #3dc8ff;
+animation:barPulse 2.5s infinite;
+}
+
+.telemetry div:nth-child(1)::after{
+width:82%;
+animation-delay:.2s;
+}
+
+.telemetry div:nth-child(2)::after{
+width:95%;
+animation-delay:.6s;
+}
+
+.telemetry div:nth-child(3)::after{
+width:68%;
+animation-delay:1s;
+}
+
+/* Floating drones */
+
+.missionSchedule .drone{
+position:absolute;
+width:26px;
+height:26px;
+border-radius:50%;
+border:2px solid rgba(61,200,255,.4);
+background:rgba(6,16,32,.8);
+box-shadow:
+0 0 18px rgba(61,200,255,.35);
+}
+
+.missionSchedule .drone::before{
+content:"";
+position:absolute;
+left:50%;
+top:50%;
+width:8px;
+height:8px;
+margin-left:-4px;
+margin-top:-4px;
+border-radius:50%;
+background:#3dc8ff;
+box-shadow:0 0 12px #3dc8ff;
+}
+
+.missionSchedule .drone.one{
+left:8%;
+top:18%;
+animation:droneOne 18s linear infinite;
+}
+
+.missionSchedule .drone.two{
+right:9%;
+top:42%;
+animation:droneTwo 22s linear infinite;
+}
+
+.missionSchedule .drone.three{
+left:14%;
+bottom:10%;
+animation:droneThree 20s linear infinite;
+}
+
+/* Hologram grid */
+
+.missionSchedule::after{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(rgba(61,200,255,.04) 1px,transparent 1px),
+linear-gradient(90deg,rgba(61,200,255,.04) 1px,transparent 1px);
+background-size:90px 90px;
+mask-image:
+radial-gradient(circle at center,#000 40%,transparent 95%);
+pointer-events:none;
+opacity:.35;
+animation:gridMove 30s linear infinite;
+}
+
+@keyframes telemetrySweep{
+
+0%{
+left:-120%;
+}
+
+100%{
+left:120%;
+}
+
+}
+
+@keyframes barPulse{
+
+0%,100%{
+opacity:.4;
+transform:scaleX(.75);
+}
+
+50%{
+opacity:1;
+transform:scaleX(1);
+}
+
+}
+
+@keyframes droneOne{
+
+0%{
+transform:translate(0,0);
+}
+
+25%{
+transform:translate(70px,-25px);
+}
+
+50%{
+transform:translate(130px,20px);
+}
+
+75%{
+transform:translate(40px,60px);
+}
+
+100%{
+transform:translate(0,0);
+}
+
+}
+
+@keyframes droneTwo{
+
+0%{
+transform:translate(0,0);
+}
+
+30%{
+transform:translate(-80px,-40px);
+}
+
+70%{
+transform:translate(-30px,70px);
+}
+
+100%{
+transform:translate(0,0);
+}
+
+}
+
+@keyframes droneThree{
+
+0%{
+transform:translate(0,0);
+}
+
+40%{
+transform:translate(90px,-70px);
+}
+
+80%{
+transform:translate(40px,-20px);
+}
+
+100%{
+transform:translate(0,0);
+}
+
+}
+
+@keyframes gridMove{
+
+0%{
+background-position:0 0,0 0;
+}
+
+100%{
+background-position:90px 90px,90px 90px;
+}
+
+}
+
