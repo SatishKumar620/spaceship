@@ -141,35 +141,39 @@
 
 
   /* ============================================================
-     HERO
+     HERO — everything is position:absolute inside this container.
+     When the user scrolls past, the hero section (and its canvas +
+     HUD) scroll off-screen naturally. Nothing is position:fixed.
      ============================================================ */
   .hero-section {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     min-height: 100vh;
-    /* overflow must NOT be hidden — it clips the absolutely positioned hero-ui */
-    overflow: visible;
+    overflow: hidden;
     z-index: 2;
   }
+  @supports (height: 100dvh) {
+    .hero-section { height: 100dvh; min-height: 100dvh; }
+  }
+
   .hero{
-    position:relative;
-    width:100vw; height:100vh;
-    min-height:100vh;
-    overflow:visible;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
   }
 
   #sceneCanvas{
-    position:fixed; top:0; left:0;
-    width:100vw; height:100vh;
-    z-index:0;
-    display:block;
-    opacity:0;
-    /* pan-y: allows vertical swipe to scroll past the canvas on mobile */
-    touch-action:pan-y;
-    cursor:grab;
-    /* Canvas should NEVER intercept pointer events meant for buttons above it */
-    pointer-events:none;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+    opacity: 0;
+    touch-action: pan-y;
+    cursor: grab;
+    pointer-events: none;
   }
   #sceneCanvas:active{ cursor:grabbing; }
   /* Re-enable pointer-events on canvas only on desktop (where OrbitControls is active) */
@@ -178,25 +182,14 @@
   }
 
   .hero-ui{
-    position:fixed;
-    top:0; left:0; right:0; bottom:0;
-    z-index:10;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 5vh 5vw 6vh;
-    /* hero-ui itself is non-interactive but children can override */
-    pointer-events:none;
-    /* Smooth fade when scrolling past hero */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    opacity: 1;
-    visibility: visible;
-  }
-  /* Once the user scrolls past the hero, hide the overlay completely */
-  .hero-ui--passed {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+    pointer-events: none;
   }
 
   .top-row{
@@ -453,9 +446,9 @@
       height: 100dvh !important;
     }
 
-    /* Hero UI: fixed overlay, stacked above everything, bottom-aligned */
+    /* Hero UI: absolute overlay, stacked above everything, bottom-aligned */
     .hero-ui {
-      position: fixed !important;
+      position: absolute !important;
       top: 0 !important;
       left: 0 !important;
       right: 0 !important;
@@ -466,12 +459,6 @@
       justify-content: flex-end !important;
       align-items: flex-start !important;
       padding: 0 24px calc(90px + env(safe-area-inset-bottom, 0px)) !important;
-      pointer-events: none !important;
-    }
-    /* Ensure hero-ui--passed hides everything on mobile too */
-    .hero-ui.hero-ui--passed {
-      opacity: 0 !important;
-      visibility: hidden !important;
       pointer-events: none !important;
     }
 
