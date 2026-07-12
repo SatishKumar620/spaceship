@@ -40,6 +40,9 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     const isMobile = window.innerWidth < 820 || /Android|iPhone|iPad/i.test(navigator.userAgent);
     const PIXEL_RATIO = Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2);
 
+    const initialWidth = heroEl.clientWidth || window.innerWidth || 800;
+    const initialHeight = heroEl.clientHeight || window.innerHeight || 600;
+
     /* ================================================================
        1. RENDERER
        ================================================================ */
@@ -49,7 +52,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       powerPreference: 'high-performance',
     });
     renderer.setPixelRatio(PIXEL_RATIO);
-    renderer.setSize(heroEl.clientWidth, heroEl.clientHeight);
+    renderer.setSize(initialWidth, initialHeight);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -62,7 +65,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
        ================================================================ */
     const scene = new THREE.Scene();
 
-    const camera = new THREE.PerspectiveCamera(36, heroEl.clientWidth / heroEl.clientHeight, 0.1, 2000);
+    const camera = new THREE.PerspectiveCamera(36, initialWidth / initialHeight, 0.1, 2000);
     const CAMERA_HOME = new THREE.Vector3(3.8, 1.5, 5.1);
     camera.position.copy(CAMERA_HOME);
     camera.lookAt(0, 0, 0);
@@ -271,10 +274,10 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           vec3 f = fract(x);
           f = f * f * (3.0 - 2.0 * f);
           return mix(
-            mix(mix(hash(i+vec3(0,0,0)), hash(i+vec3(1,0,0)), f.x),
-                mix(hash(i+vec3(0,1,0)), hash(i+vec3(1,1,0)), f.x), f.y),
-            mix(mix(hash(i+vec3(0,0,1)), hash(i+vec3(1,0,1)), f.x),
-                mix(hash(i+vec3(0,1,1)), hash(i+vec3(1,1,1)), f.x), f.y),
+            mix(mix(hash(i+vec3(0.0,0.0,0.0)), hash(i+vec3(1.0,0.0,0.0)), f.x),
+                mix(hash(i+vec3(0.0,1.0,0.0)), hash(i+vec3(1.0,1.0,0.0)), f.x), f.y),
+            mix(mix(hash(i+vec3(0.0,0.0,1.0)), hash(i+vec3(1.0,0.0,1.0)), f.x),
+                mix(hash(i+vec3(0.0,1.0,1.0)), hash(i+vec3(1.0,1.0,1.0)), f.x), f.y),
             f.z
           );
         }
@@ -919,7 +922,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           station.position.sub(center);
 
           const maxDim = Math.max(size.x, size.y, size.z);
-          const STATION_TARGET_SIZE = 34;
+          const STATION_TARGET_SIZE = 55;
           const stationScale = maxDim > 0 ? STATION_TARGET_SIZE / maxDim : 1;
 
           stationGroup = new THREE.Group();
@@ -1042,12 +1045,12 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     composer.addPass(new RenderPass(scene, camera));
 
     const bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(heroEl.clientWidth, heroEl.clientHeight),
+      new THREE.Vector2(initialWidth, initialHeight),
       isMobile ? 0.28 : 0.38,
       0.4,
       0.94
     );
-    if (isMobile) bloomPass.resolution.set(heroEl.clientWidth * 0.6, heroEl.clientHeight * 0.6);
+    if (isMobile) bloomPass.resolution.set(initialWidth * 0.6, initialHeight * 0.6);
     composer.addPass(bloomPass);
 
     let bokehPass = null;
@@ -1056,8 +1059,8 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         focus: 7.2,
         aperture: 0.00028,
         maxblur: 0.006,
-        width: heroEl.clientWidth,
-        height: heroEl.clientHeight,
+        width: initialWidth,
+        height: initialHeight,
       });
       composer.addPass(bokehPass);
     }
@@ -1253,8 +1256,8 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
        ================================================================ */
     let resizeRAF = null;
     function handleResize() {
-      const w = heroEl.clientWidth;
-      const h = heroEl.clientHeight;
+      const w = heroEl.clientWidth || window.innerWidth || 800;
+      const h = heroEl.clientHeight || window.innerHeight || 600;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
@@ -1275,6 +1278,11 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       resizeRAF = requestAnimationFrame(handleResize);
     };
     window.addEventListener('resize', onWindowResize);
+
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+    resizeObserver.observe(heroEl);
 
     /* ================================================================
        12. ANIMATION LOOP
@@ -1346,8 +1354,10 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         labelRegistry.forEach(({ el, target }) => {
           target.getWorldPosition(_labelWorldPos);
           const ndc = _labelWorldPos.clone().project(camera);
-          el.style.left = (ndc.x * 0.5 + 0.5) * heroEl.clientWidth + 'px';
-          el.style.top = (-ndc.y * 0.5 + 0.5) * heroEl.clientHeight + 'px';
+          const w = heroEl.clientWidth || window.innerWidth || 800;
+          const h = heroEl.clientHeight || window.innerHeight || 600;
+          el.style.left = (ndc.x * 0.5 + 0.5) * w + 'px';
+          el.style.top = (-ndc.y * 0.5 + 0.5) * h + 'px';
           el.style.display = ndc.z > 1 ? 'none' : 'flex';
         });
       }
@@ -1388,6 +1398,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
        ================================================================ */
     return () => {
       cancelAnimationFrame(animateId);
+      resizeObserver.disconnect();
       window.removeEventListener('resize', onWindowResize);
       canvas.removeEventListener('pointerdown', onPointerDown);
       canvas.removeEventListener('pointerup', onPointerUp);
