@@ -66,7 +66,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     renderer.setPixelRatio(PIXEL_RATIO);
     renderer.setSize(initialWidth, initialHeight);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.18;
+    renderer.toneMappingExposure = 1.25;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -572,6 +572,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       [normalMap, roughnessMap].forEach(tex => {
         tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
         tex.repeat.set(repeat, repeat);
+        tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
         tex.needsUpdate = true;
       });
 
@@ -596,10 +597,10 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
             roughness: 0.24,
             roughnessMap: hullDetail.roughnessMap,
             normalMap: hullDetail.normalMap,
-            normalScale: new THREE.Vector2(0.75, 0.75),
-            envMapIntensity: 1.1,
-            clearcoat: 0.35,
-            clearcoatRoughness: 0.14,
+            normalScale: new THREE.Vector2(0.9, 0.9),
+            envMapIntensity: 1.35,
+            clearcoat: 0.5,
+            clearcoatRoughness: 0.1,
           });
         }
         if (name === 'glass') {
@@ -642,7 +643,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       model.position.sub(center);
 
       const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 5.4 / maxDim;
+      const scale = 4.3 / maxDim;
       model.scale.setScalar(scale);
 
       modelGroup.add(model);
@@ -879,6 +880,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       img.onload = () => {
         tex.image = img;
         if (colorSpace) tex.colorSpace = colorSpace;
+        tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
         tex.needsUpdate = true;
       };
       img.src = dataURI;
