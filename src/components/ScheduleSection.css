@@ -1325,3 +1325,33 @@ background-position:90px 90px,90px 90px;
 
 }
 
+
+.earthHUD{
+width:260px;
+height:260px;
+display:block;
+pointer-events:none;
+user-select:none;
+filter:
+drop-shadow(0 0 22px rgba(0,220,255,.45))
+drop-shadow(0 0 70px rgba(0,220,255,.18));
+animation:
+earthFloat 8s ease-in-out infinite;
+}
+
+@keyframes earthFloat{
+
+0%,100%{
+transform:
+translateY(0)
+scale(1);
+}
+
+50%{
+transform:
+translateY(-8px)
+scale(1.03);
+}
+
+}
+
