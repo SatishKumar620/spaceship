@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import VesselViewer from './components/VesselViewer';
+import AboutSection from './components/AboutSection';
 
 export default function App() {
   const [isExploded, setIsExploded] = useState(false);
@@ -74,6 +75,8 @@ export default function App() {
           </button>
         </div>
       </section>
+
+        <AboutSection />
 
       {/* Specifications Section */}
       <section className="specs-section">
