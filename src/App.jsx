@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import {
   VenueSection,
   PrizesSection,
+  PrizeDockSection,
   ScheduleSection,
   ProblemsSection,
   EventsSection,
@@ -90,6 +91,7 @@ export default function App() {
       </section>
 
         <AboutSection />
+        <PrizeDockSection />
 
       {/* Specifications Section */}
       <section className="specs-section">

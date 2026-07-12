@@ -2,6 +2,23 @@ import React, { useState } from 'react';
 import './Sections.css';
 
 /* ============================================================
+   PRIZE DOCK (background image + future 3D model layer)
+   ============================================================ */
+export function PrizeDockSection() {
+  return (
+    <section className="site-section prize-dock-section" id="prize-dock">
+      <div className="prize-dock-bg" />
+      {/* This is where the GLB prize models will render, floating above
+          the platform in the image, with cursor-tracking rotation. */}
+      <div id="prizeModelDock" className="prize-model-dock" />
+      <div className="prize-dock-caption" data-reveal="true">
+        <span className="site-hud-line"></span> REWARDS AWAIT <span className="site-hud-line"></span>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
    VENUE
    ============================================================ */
 export function VenueSection() {

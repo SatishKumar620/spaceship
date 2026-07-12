@@ -220,3 +220,47 @@
   .schedule-time{ min-width:100%; }
   .schedule-dot{ top:36px; }
 }
+
+/* ============================================================
+   PRIZE DOCK
+   ============================================================ */
+.prize-dock-section{
+  position:relative;
+  min-height:80vh;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  overflow:hidden;
+  padding:0 !important;
+}
+.prize-dock-bg{
+  position:absolute;
+  inset:0;
+  background-image:url('/images/prize-dock.png');
+  background-size:cover;
+  background-position:center;
+  z-index:0;
+}
+.prize-dock-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(6,8,13,0.15) 0%, rgba(6,8,13,0.55) 100%);
+}
+.prize-model-dock{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+}
+.prize-dock-caption{
+  position:relative;
+  z-index:2;
+  margin-bottom:6vh;
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px;
+  letter-spacing:0.3em;
+  color:var(--cyan);
+  text-transform:uppercase;
+  display:flex; align-items:center; gap:14px;
+}
