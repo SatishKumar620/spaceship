@@ -418,6 +418,15 @@
     .part-label .chip{ padding:4px 8px; }
     .hud-readout{ display:none; }
     .cta-row{ flex-direction:column; max-width:220px; }
+    .hero-ui {
+      position: relative !important;
+      height: auto !important;
+      min-height: 100vh;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center !important;
+      padding: 100px 24px 60px !important;
+    }
   }
 
   /* ============================================================

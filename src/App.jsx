@@ -40,7 +40,11 @@ export default function App() {
 
   const scrollToAbout = () => {
     const el = document.getElementById('about');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      const yOffset = -80;
+      const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -81,7 +85,7 @@ export default function App() {
         {/* HUD overlay */}
         <div className="hero-ui">
           <div className="top-row">
-            <div className="brand">VANGUARD<span>// SYSTEMS</span></div>
+            <div className="brand">HACKQUBIT<span>// V2</span></div>
             <div className="hud-readout">
               SYS.STATUS: <b>NOMINAL</b><br />
               POWER.CORE: <b>100%</b><br />
@@ -90,13 +94,13 @@ export default function App() {
           </div>
 
           <div className="hero-copy">
-            <div id="introEyebrow" className="eyebrow">INTERACTIVE MANUAL</div>
+            <div id="introEyebrow" className="eyebrow">SPACE SPRINT CHALLENGE</div>
             <h1 id="introHeading">
-              <span className="h1-line">VANGUARD-CLASS</span>
-              <span className="h1-line h1-accent" data-text="EXPLORATION VESSEL">EXPLORATION VESSEL</span>
+              <span className="h1-line">LAUNCH YOUR</span>
+              <span className="h1-line h1-accent" data-text="INNOVATION">INNOVATION</span>
             </h1>
             <p id="introSub" className="sub">
-              Designed for long-range deep space transit, visualised here in orbit around Kepler-186f. Explore components, subsystem details, and engine arrays interactively.
+              Join hundreds of creators for a 24-hour orbital build sprint at RVSCET. Prototype solutions in AI, FinTech, and healthcare to win massive rewards.
             </p>
             <div id="introCta" className="cta-row">
               <button

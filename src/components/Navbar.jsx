@@ -66,14 +66,18 @@ export default function Navbar() {
     e.preventDefault();
     setMenuOpen(false);
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (el) {
+      const yOffset = -80; // offset the fixed navigation bar
+      const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (
     <header className={`site-nav ${scrolled ? 'is-scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
       <div className="site-nav-inner">
         <a href="#home" className="site-nav-brand" onClick={goTo('home')}>
-          VANGUARD<span>// HACKQUBIT</span>
+          HACKQUBIT<span>// V2</span>
         </a>
 
         <nav className="site-nav-links" ref={listRef}>
