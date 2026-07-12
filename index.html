@@ -2,8 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- Viewport: viewport-fit=cover enables safe-area-inset-* on notched phones (iPhone X+, Android 9+) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover" />
+
+    <!-- Prevent iOS from auto-detecting phone numbers as links -->
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- iOS Safari: make it feel like a native app -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="HACKQUBIT V2" />
+
+    <!-- Android Chrome theme color -->
+    <meta name="theme-color" content="#06080D" />
+
+    <!-- SEO -->
     <title>HACKQUBIT V2 // Space-Sprint Hackathon</title>
+    <meta name="description" content="HACKQUBIT V2 — A 48-hour national hackathon at RVSCET. Build, Innovate, Launch. ₹1L+ prize pool across AI, FinTech, Healthcare & more." />
+
+    <!-- Preconnect to Google Fonts for faster load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
     <div id="root"></div>

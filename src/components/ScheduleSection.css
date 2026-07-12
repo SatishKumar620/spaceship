@@ -1166,3 +1166,42 @@ background-position:90px 90px,90px 90px;
 
 
 
+
+/* ============================================================
+   SCHEDULE SECTION — MOBILE RESPONSIVE (Added for cross-device fix)
+   ============================================================ */
+@media (max-width: 860px) {
+  .missionSchedule {
+    padding: 80px 20px !important;
+  }
+  .scheduleHeader {
+    margin-bottom: 50px;
+  }
+  .scheduleTabs {
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .tabButton {
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+  .timelineTrack {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .missionSchedule {
+    padding: 60px 16px !important;
+  }
+  .scheduleTabs {
+    gap: 6px;
+  }
+  .tabButton {
+    font-size: 11px;
+    padding: 9px 12px;
+    letter-spacing: 0.5px;
+  }
+}

@@ -26,6 +26,21 @@ export default function App() {
   const [showRegModal, setShowRegModal] = useState(false);
   const [loadingPercent, setLoadingPercent] = useState(0);
 
+  // iOS scroll lock: overflow:hidden on html/body doesn't work on iOS Safari
+  // Must use position:fixed with saved scroll position
+  React.useEffect(() => {
+    if (showRegModal) {
+      const scrollY = window.scrollY;
+      document.body.classList.add('scroll-locked');
+      document.body.style.top = `-${scrollY}px`;
+    } else {
+      const scrollY = parseInt(document.body.style.top || '0') * -1;
+      document.body.classList.remove('scroll-locked');
+      document.body.style.top = '';
+      if (scrollY) window.scrollTo(0, scrollY);
+    }
+  }, [showRegModal]);
+
   React.useEffect(() => {
     if (!isLoaded) {
       const interval = setInterval(() => {
@@ -159,9 +174,9 @@ export default function App() {
           onLoaded={() => setIsLoaded(true)}
         />
 
-        {/* HUD overlay */}
-        <div className="hero-ui">
-          <div className="top-row">
+        {/* HUD overlay — pointer-events:none on container, restored on interactive children */}
+        <div className="hero-ui" style={{ pointerEvents: 'none' }}>
+          <div className="top-row" style={{ pointerEvents: 'none' }}>
             <div className="brand">HACKQUBIT<span>// V2</span></div>
             <div className="hud-readout">
               SYS.STATUS: <b>NOMINAL</b><br />
@@ -170,7 +185,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="hero-copy">
+          <div className="hero-copy" style={{ pointerEvents: 'none' }}>
             <div id="introEyebrow" className="eyebrow">SPACE SPRINT CHALLENGE</div>
             <h1 id="introHeading">
               <span className="h1-line">LAUNCH YOUR</span>
@@ -179,10 +194,12 @@ export default function App() {
             <p id="introSub" className="sub">
               Join hundreds of creators for a 24-hour orbital build sprint at RVSCET. Prototype solutions in AI, FinTech, and healthcare to win massive rewards.
             </p>
-            <div id="introCta" className="cta-row">
+            {/* CTA Row — explicit pointer-events:auto overrides parent none */}
+            <div id="introCta" className="cta-row" style={{ pointerEvents: 'auto' }}>
               <button
                 type="button"
                 className="btn btn-primary"
+                style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
                 onClick={() => setShowRegModal(true)}
               >
                 REGISTRATION
@@ -190,6 +207,7 @@ export default function App() {
               <button
                 type="button"
                 className="btn btn-ghost"
+                style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
                 onClick={scrollToAbout}
               >
                 LEARN MORE
@@ -202,6 +220,7 @@ export default function App() {
             className="scroll-cue"
             onClick={scrollToAbout}
             aria-label="Scroll to mission brief"
+            style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
           >
             <span>SCROLL TO BRIEF</span>
             <div className="scroll-cue-btn">
@@ -212,6 +231,7 @@ export default function App() {
           </button>
         </div>
       </section>
+
 
       <AboutSection />
       <VenueSectionNew />
