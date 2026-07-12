@@ -1,5 +1,5 @@
+import React, { useState } from 'react';
 import "./ScheduleSection.css";
-import EarthHUD from "../assets/hologram-earth.svg";
 
 const SCHEDULE = [
   {
@@ -59,32 +59,20 @@ const SCHEDULE = [
 ];
 
 export default function ScheduleSection() {
+  const [activeDay, setActiveDay] = useState("SOL 01");
+
+  const filteredSchedule = SCHEDULE.filter(item => item.day === activeDay);
+
   return (
     <section id="schedule" className="missionSchedule">
 
       <div className="spaceBackground">
         <div className="nebula one"></div>
         <div className="nebula two"></div>
-        <div className="drone one"></div>
-        <div className="drone two"></div>
-        <div className="drone three"></div>
 
         <div className="stars">
-          {Array.from({ length: 90 }).map((_, i) => (
+          {Array.from({ length: 45 }).map((_, i) => (
             <span key={i}></span>
-          ))}
-        </div>
-
-        <div className="timelineBeam">
-          <div className="beamGlow"></div>
-          <div className="energyFlow"></div>
-
-          {Array.from({ length: 18 }).map((_, i) => (
-            <div
-              key={i}
-              className="packet"
-              style={{ animationDelay: `${i * 0.8}s` }}
-            />
           ))}
         </div>
       </div>
@@ -99,45 +87,65 @@ export default function ScheduleSection() {
         <p>
           Every milestone moves your crew one step closer to mission success.
         </p>
+
+        <div className="scheduleTabs">
+          <button
+            type="button"
+            className={`tabButton ${activeDay === 'SOL 01' ? 'active' : ''}`}
+            onClick={() => setActiveDay('SOL 01')}
+          >
+            SOL 01 <span className="tabLabel">// DAY 01</span>
+          </button>
+          <button
+            type="button"
+            className={`tabButton ${activeDay === 'SOL 02' ? 'active' : ''}`}
+            onClick={() => setActiveDay('SOL 02')}
+          >
+            SOL 02 <span className="tabLabel">// DAY 02</span>
+          </button>
+        </div>
       </div>
 
       <div className="timeline">
-        {SCHEDULE.map((item, index) => (
-          <div
-            key={index}
-            className={`missionCard ${index % 2 ? "right" : "left"}`}
-          >
-            <div className="node">
-              <div className="pulse"></div>
-            </div>
-
-            <div className="cardGlass">
-              <div className="scan"></div>
-
-              <div className="topRow">
-                <div className="missionDay">{item.day}</div>
-                <div className="status">ONLINE</div>
+        {filteredSchedule.map((item, index) => {
+          const originalIndex = SCHEDULE.findIndex(s => s.title === item.title);
+          return (
+            <div
+              key={item.title}
+              className={`missionCard ${index % 2 ? "right" : "left"}`}
+            >
+              <div className="node">
+                <div className="pulse"></div>
               </div>
 
-              <div className="timeBlock">
-                <div className="time">{item.time}</div>
-                <div className="missionCode">
-                  T+{String(index).padStart(2, "0")}:00
+              <div className="cardGlass">
+                <div className="scan"></div>
+
+                <div className="topRow">
+                  <div className="missionDay">{item.day}</div>
+                  <div className="status">ONLINE</div>
+                </div>
+
+                <div className="timeBlock">
+                  <div className="time">{item.time}</div>
+                  <div className="missionCode">
+                    T+{String(originalIndex).padStart(2, "0")}:00
+                  </div>
+                </div>
+
+                <div className="title">{item.title}</div>
+
+                <p>{item.description}</p>
+
+                <div className="telemetry">
+                  <div>SIGNAL <b>98%</b></div>
+                  <div>POWER <b>100%</b></div>
+                  <div>SYNC <b>OK</b></div>
                 </div>
               </div>
-
-              <div className="title">{item.title}</div>
-
-              <p>{item.description}</p>
-
-              <div className="telemetry">
-                <div>SIGNAL <b>98%</b></div>
-                <div>POWER <b>100%</b></div>
-                <div>SYNC <b>OK</b></div>
-              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="missionEnd">

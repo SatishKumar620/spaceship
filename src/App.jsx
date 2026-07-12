@@ -6,9 +6,6 @@ import Navbar from './components/Navbar';
 import GalacticRewards from "./components/GalacticRewards";
 import VenueSectionNew from "./components/VenueSection";
 import {
-  VenueSection,
-  PrizesSection,
-  PrizeDockSection,
   ProblemsSection,
   EventsSection,
   SponsorsSection,
@@ -21,8 +18,8 @@ export default function App() {
   const [isExploded, setIsExploded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const scrollToSpecs = () => {
-    const el = document.querySelector('.specs-section');
+  const scrollToAbout = () => {
+    const el = document.getElementById('about');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -71,8 +68,8 @@ export default function App() {
               >
                 {isExploded ? 'REASSEMBLE HULL' : 'EXPLODE HULL'}
               </button>
-              <button className="btn btn-ghost" onClick={scrollToSpecs}>
-                SPEC SHEET
+              <button className="btn btn-ghost" onClick={scrollToAbout}>
+                MISSION BRIEF
               </button>
             </div>
           </div>
@@ -80,10 +77,10 @@ export default function App() {
           <button
             type="button"
             className="scroll-cue"
-            onClick={scrollToSpecs}
-            aria-label="Scroll to specifications"
+            onClick={scrollToAbout}
+            aria-label="Scroll to mission brief"
           >
-            <span>SCROLL TO SPECS</span>
+            <span>SCROLL TO BRIEF</span>
             <div className="scroll-cue-btn">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
@@ -93,43 +90,14 @@ export default function App() {
         </div>
       </section>
 
-        <AboutSection />
-        <PrizeDockSection />
-
-      {/* Specifications Section */}
-      <section className="specs-section">
-        <div className="specs-head" data-reveal="true">
-          <div className="eyebrow">SPECIFICATIONS</div>
-          <h2 className="specs-title">VESSEL CORE DATA</h2>
-        </div>
-        <div className="specs-grid">
-          <div className="spec-card" data-reveal="true">
-            <div className="num">82.4<span>m</span></div>
-            <div className="lbl">Total Hull Length</div>
-          </div>
-          <div className="spec-card" data-reveal="true">
-            <div className="num">3,400<span>t</span></div>
-            <div className="lbl">Dry Mass</div>
-          </div>
-          <div className="spec-card" data-reveal="true">
-            <div className="num">Fusion</div>
-            <div className="lbl">Primary Reactor Type</div>
-          </div>
-          <div className="spec-card" data-reveal="true">
-            <div className="num">0.86<span>c</span></div>
-            <div className="lbl">Max Warp Velocity</div>
-          </div>
-        </div>
-      </section>
-
+      <AboutSection />
       <VenueSectionNew />
-      <PrizesSection />
+      <GalacticRewards />
       <ScheduleSection />
       <ProblemsSection />
       <EventsSection />
       <SponsorsSection />
       <FaqSection />
-      <GalacticRewards />
 </>
   );
 }

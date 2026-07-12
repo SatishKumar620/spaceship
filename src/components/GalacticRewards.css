@@ -250,16 +250,18 @@ filter:blur(80px);
 opacity:.18;
 }
 
-.first{
-transform:translateY(-30px);
+.prize-card-desc {
+  font-family:'Inter', sans-serif;
+  font-size:13.5px;
+  color:#9db3ca;
+  text-align:center;
+  margin-top:14px;
+  min-height:40px;
+  line-height:1.5;
 }
 
-.second{
-transform:translateY(25px);
-}
-
-.third{
-transform:translateY(55px);
+.first, .second, .third, .track {
+  transform: none;
 }
 
 .particles{

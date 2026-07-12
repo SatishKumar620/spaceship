@@ -1352,9 +1352,11 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       frameCount = 0;
     const SAMPLE_WINDOW = 40;
 
+    let isVisible = true;
     let animateId;
 
     function animate() {
+      if (!isVisible) return;
       animateId = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
       const dt = clock.getDelta();
@@ -1503,14 +1505,59 @@ sunCoreSprite.scale.setScalar(14 + Math.sin(t * 5.0) * 0.4);
         camera.position.sub(controls.target).setLength(clamped).add(controls.target);
       }
 
-      composer.render();
+      if (isMobile) {
+        renderer.render(scene, camera);
+      } else {
+        composer.render();
+      }
     }
-    animate();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let isAnyVisible = false;
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            isAnyVisible = true;
+          }
+        });
+
+        if (isAnyVisible) {
+          if (!isVisible) {
+            isVisible = true;
+            clock.getDelta(); // reset clock delta to prevent jump
+            animate();
+          }
+        } else {
+          if (isVisible) {
+            isVisible = false;
+            cancelAnimationFrame(animateId);
+          }
+        }
+      },
+      { rootMargin: '150px 0px' }
+    );
+
+    const homeSec = document.getElementById('home');
+    const aboutSec = document.getElementById('about');
+    if (homeSec) observer.observe(homeSec);
+    if (aboutSec) observer.observe(aboutSec);
+
+    // Initial check: if both elements are offscreen, start paused
+    const homeRect = homeSec ? homeSec.getBoundingClientRect() : null;
+    const aboutRect = aboutSec ? aboutSec.getBoundingClientRect() : null;
+    const isHomeVisible = homeRect ? (homeRect.bottom > -150 && homeRect.top < window.innerHeight + 150) : true;
+    const isAboutVisible = aboutRect ? (aboutRect.bottom > -150 && aboutRect.top < window.innerHeight + 150) : false;
+    isVisible = isHomeVisible || isAboutVisible;
+
+    if (isVisible) {
+      animate();
+    }
 
     /* ================================================================
        CLEANUP
        ================================================================ */
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(animateId);
       resizeObserver.disconnect();
       window.removeEventListener('resize', onWindowResize);

@@ -4,20 +4,30 @@ const prizes = [
   {
     place: "01",
     title: "Champion",
-    amount: "₹15,000",
+    amount: "₹50,000",
+    desc: "+ Goodies & fast-track interviews",
     cls: "first"
   },
   {
     place: "02",
     title: "Runner Up",
-    amount: "₹10,000",
+    amount: "₹30,000",
+    desc: "+ Sponsor swag bundle",
     cls: "second"
   },
   {
     place: "03",
     title: "Second Runner Up",
-    amount: "₹5,000",
+    amount: "₹20,000",
+    desc: "+ Sponsor swag bundle",
     cls: "third"
+  },
+  {
+    place: "Track",
+    title: "Best Track Awards",
+    amount: "₹5,000",
+    desc: "Per track, across all categories",
+    cls: "track"
   }
 ];
 
@@ -25,7 +35,7 @@ export default function GalacticRewards() {
 
   return (
 
-<section className="galacticRewards">
+<section id="prizes" className="galacticRewards">
 
 <div className="bgGrid"></div>
 <div className="bgGlow glowA"></div>
@@ -53,7 +63,7 @@ Push your limits, dominate the leaderboard and claim futuristic rewards.
 {prizes.map((p)=>(
 
 <div
-key={p.place}
+key={p.place + p.title}
 className={`rewardCard ${p.cls}`}
 >
 
@@ -108,6 +118,10 @@ strokeWidth="2"
 
 <div className="amount">
 {p.amount}
+</div>
+
+<div className="prize-card-desc">
+{p.desc}
 </div>
 
 <div className="divider"></div>

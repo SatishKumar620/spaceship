@@ -2,248 +2,112 @@ import React, { useState } from 'react';
 import './Sections.css';
 
 /* ============================================================
-   PRIZE DOCK (background image + future 3D model layer)
-   ============================================================ */
-export function PrizeDockSection() {
-  return (
-    <section className="site-section prize-dock-section" id="prize-dock">
-      <div className="prize-dock-bg" />
-      {/* This is where the GLB prize models will render, floating above
-          the platform in the image, with cursor-tracking rotation. */}
-      <div id="prizeModelDock" className="prize-model-dock" />
-      <div className="prize-dock-caption" data-reveal="true">
-        <span className="site-hud-line"></span> REWARDS AWAIT <span className="site-hud-line"></span>
-      </div>
-    </section>
-  );
-}
-
-/* ============================================================
-   VENUE
-   ============================================================ */
-export function VenueSection() {
-  return (
-    <section className="site-section venue-section" id="venue">
-      <div className="site-section-inner">
-        <div className="site-eyebrow" data-reveal="true">
-          <span className="site-hud-line"></span> LOCATION <span className="site-hud-line"></span>
-        </div>
-        <h2 className="site-title" data-reveal="true">
-          MISSION <span className="site-title-accent">VENUE</span>
-        </h2>
-        <div className="venue-grid">
-          <div className="venue-card" data-reveal="true">
-            <div className="venue-card-label">Host Campus</div>
-            <div className="venue-card-value">RVS College of Engineering &amp; Technology</div>
-            <div className="venue-card-sub">Jamshedpur, Jharkhand — hosted by Helix, the Tech &amp; AI Club</div>
-          </div>
-          <div className="venue-card" data-reveal="true">
-            <div className="venue-card-label">Format</div>
-            <div className="venue-card-value">On-Campus, In-Person</div>
-            <div className="venue-card-sub">Dedicated build zones, mentor desks &amp; a 24/7 hacker lounge</div>
-          </div>
-          <div className="venue-card" data-reveal="true">
-            <div className="venue-card-label">Arrival</div>
-            <div className="venue-card-value">Reporting opens 08:00 IST</div>
-            <div className="venue-card-sub">Check-in, kits &amp; team allotment before kickoff</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ============================================================
-   PRIZES
-   ============================================================ */
-const PRIZES = [
-  { rank: 'CHAMPION', amount: '₹50,000', note: '+ goodies & fast-track interviews' },
-  { rank: 'RUNNER-UP', amount: '₹30,000', note: '+ sponsor swag bundle' },
-  { rank: 'SECOND RUNNER-UP', amount: '₹20,000', note: '+ sponsor swag bundle' },
-  { rank: 'BEST TRACK AWARDS', amount: '₹5,000', note: 'per track, across all categories' },
-];
-
-export function PrizesSection() {
-  return (
-    <section className="site-section prizes-section" id="prizes">
-      <div className="site-section-inner">
-        <div className="site-eyebrow" data-reveal="true">
-          <span className="site-hud-line"></span> REWARDS <span className="site-hud-line"></span>
-        </div>
-        <h2 className="site-title" data-reveal="true">
-          PRIZE <span className="site-title-accent">POOL</span>
-        </h2>
-        <p className="site-desc" data-reveal="true">
-          Over ₹1,00,000 in prizes across the overall leaderboard and individual problem tracks.
-        </p>
-        <div className="prizes-grid">
-          {PRIZES.map((p, i) => (
-            <div className="prize-card" key={p.rank} data-reveal="true" style={{ transitionDelay: `${i * 80}ms` }}>
-              <div className="prize-rank">{p.rank}</div>
-              <div className="prize-amount">{p.amount}</div>
-              <div className="prize-note">{p.note}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ============================================================
-   SCHEDULE
-   ============================================================ */
-const SCHEDULE = [
-  { time: 'Day 1 · 08:00', title: 'Check-in & Team Reporting', tag: 'LOGISTICS' },
-  { time: 'Day 1 · 10:00', title: 'Opening Ceremony & Problem Reveal', tag: 'KICKOFF' },
-  { time: 'Day 1 · 11:00', title: 'Hacking Begins', tag: 'BUILD' },
-  { time: 'Day 1 · 20:00', title: 'Mentor Rounds & Midnight Snacks', tag: 'SUPPORT' },
-  { time: 'Day 2 · 08:00', title: 'Progress Checkpoint', tag: 'REVIEW' },
-  { time: 'Day 2 · 10:00', title: 'Hacking Ends — Submissions Lock', tag: 'DEADLINE' },
-  { time: 'Day 2 · 12:00', title: 'Judging & Finalist Pitches', tag: 'JUDGING' },
-  { time: 'Day 2 · 16:00', title: 'Closing Ceremony & Prize Distribution', tag: 'CLOSING' },
-];
-
-export function ScheduleSection() {
-  return (
-    <section className="site-section schedule-section" id="schedule">
-      <div className="site-section-inner">
-        <div className="site-eyebrow" data-reveal="true">
-          <span className="site-hud-line"></span> TIMELINE <span className="site-hud-line"></span>
-        </div>
-        <h2 className="site-title" data-reveal="true">
-          24-HOUR <span className="site-title-accent">SCHEDULE</span>
-        </h2>
-        <div className="schedule-track">
-          {SCHEDULE.map((s, i) => (
-            <div className="schedule-row" key={s.title} data-reveal="true" style={{ transitionDelay: `${i * 60}ms` }}>
-              <div className="schedule-time">{s.time}</div>
-              <div className="schedule-dot"></div>
-              <div className="schedule-body">
-                <div className="schedule-title">{s.title}</div>
-                <div className="schedule-tag">{s.tag}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ============================================================
    PROBLEM STATEMENTS / TRACKS
    ============================================================ */
 const TRACKS = [
   {
     code: 'TH-01',
     title: 'Artificial Intelligence & Machine Learning',
-    desc: 'Develop intelligent systems using machine learning, deep learning, NLP and generative AI.'
+    desc: 'Develop intelligent systems using machine learning, deep learning, NLP and generative AI.',
+    category: 'AI & Data Science'
   },
   {
     code: 'TH-02',
     title: 'Cybersecurity',
-    desc: 'Build secure applications for authentication, privacy, digital forensics and cyber defence.'
+    desc: 'Build secure applications for authentication, privacy, digital forensics and cyber defence.',
+    category: 'Software & FinTech'
   },
   {
     code: 'TH-03',
     title: 'Computer Vision',
-    desc: 'Create image and video understanding solutions using modern vision techniques.'
+    desc: 'Create image and video understanding solutions using modern vision techniques.',
+    category: 'AI & Data Science'
   },
   {
     code: 'TH-04',
     title: 'Healthcare & MedTech',
-    desc: 'Improve diagnosis, patient care, accessibility and healthcare management.'
+    desc: 'Improve diagnosis, patient care, accessibility and healthcare management.',
+    category: 'Bio & Social Impact'
   },
   {
     code: 'TH-05',
     title: 'FinTech',
-    desc: 'Innovate in digital payments, banking, investment and financial inclusion.'
+    desc: 'Innovate in digital payments, banking, investment and financial inclusion.',
+    category: 'Software & FinTech'
   },
   {
     code: 'TH-06',
     title: 'Education & EdTech',
-    desc: 'Design technology that enhances learning and skill development.'
+    desc: 'Design technology that enhances learning and skill development.',
+    category: 'Software & FinTech'
   },
   {
     code: 'TH-07',
     title: 'Agriculture & FoodTech',
-    desc: 'Create smart farming, irrigation and food supply chain solutions.'
+    desc: 'Create smart farming, irrigation and food supply chain solutions.',
+    category: 'Bio & Social Impact'
   },
   {
     code: 'TH-08',
     title: 'Smart Cities & IoT',
-    desc: 'Develop connected infrastructure, sensors and intelligent urban systems.'
+    desc: 'Develop connected infrastructure, sensors and intelligent urban systems.',
+    category: 'IoT & Emerging Tech'
   },
   {
     code: 'TH-09',
     title: 'Sustainability & Climate Tech',
-    desc: 'Build solutions for renewable energy, conservation and climate resilience.'
+    desc: 'Build solutions for renewable energy, conservation and climate resilience.',
+    category: 'Bio & Social Impact'
   },
   {
     code: 'TH-10',
     title: 'Data Science & Analytics',
-    desc: 'Transform complex data into actionable insights using analytics.'
+    desc: 'Transform complex data into actionable insights using analytics.',
+    category: 'AI & Data Science'
   },
   {
     code: 'TH-11',
     title: 'AR / VR & Immersive Experiences',
-    desc: 'Create immersive augmented and virtual reality experiences.'
+    desc: 'Create immersive augmented and virtual reality experiences.',
+    category: 'IoT & Emerging Tech'
   },
   {
     code: 'TH-12',
     title: 'Industry 4.0 & Automation',
-    desc: 'Develop robotics, manufacturing and industrial automation solutions.'
+    desc: 'Develop robotics, manufacturing and industrial automation solutions.',
+    category: 'IoT & Emerging Tech'
   },
   {
     code: 'TH-13',
     title: 'Accessibility & Inclusive Technology',
-    desc: 'Design technology that is accessible and inclusive for everyone.'
+    desc: 'Design technology that is accessible and inclusive for everyone.',
+    category: 'Bio & Social Impact'
   },
   {
     code: 'TH-14',
     title: 'Space Technology',
-    desc: 'Build innovative software inspired by satellites, astronomy and exploration.'
+    desc: 'Build innovative software inspired by satellites, astronomy and exploration.',
+    category: 'IoT & Emerging Tech'
   },
   {
     code: 'TH-15',
     title: 'Open Innovation',
-    desc: 'Solve any real-world challenge with your own original idea.'
+    desc: 'Solve any real-world challenge with your own original idea.',
+    category: 'Software & FinTech'
   },
 ];
 
-
 export function ProblemsSection() {
+  const [activeTab, setActiveTab] = useState('ALL');
+
+  const categories = ['ALL', 'AI & Data Science', 'Software & FinTech', 'IoT & Emerging Tech', 'Bio & Social Impact'];
+
+  const filteredTracks = activeTab === 'ALL'
+    ? TRACKS
+    : TRACKS.filter((t) => t.category === activeTab);
+
   return (
-    
-<section className="site-section problems-section" id="problems">
-
-<div className="problem-space-bg">
-
-<div className="problem-stars"></div>
-
-<div className="problem-nebula"></div>
-
-<div className="problem-galaxy"></div>
-
-<div className="problem-blackhole"></div>
-
-<div className="problem-planet problem-planet-a"></div>
-
-<div className="problem-planet problem-planet-b"></div>
-
-<div className="problem-orbit orbit-a"></div>
-
-<div className="problem-orbit orbit-b"></div>
-
-<div className="problem-ship">
-<svg viewBox="0 0 64 64" width="44" height="44">
-<path fill="currentColor" d="M32 4L42 26L58 32L42 38L32 60L22 38L6 32L22 26z"/>
-</svg>
-</div>
-
-</div>
-
+    <section className="site-section problems-section" id="problems">
       <div className="site-section-inner">
         <div className="site-eyebrow" data-reveal="true">
           <span className="site-hud-line"></span> TRACKS <span className="site-hud-line"></span>
@@ -254,10 +118,24 @@ export function ProblemsSection() {
         <p className="site-desc" data-reveal="true">
           Choose one innovation theme for your project. Teams are free to solve any real-world problem within their selected domain.
         </p>
+
+        <div className="problems-tabs">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              className={`problems-tab ${activeTab === cat ? 'active' : ''}`}
+              onClick={() => setActiveTab(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
         <div className="tracks-grid">
-          {TRACKS.map((t, i) => (
-            <div className="track-card" key={t.code} data-reveal="true" style={{ transitionDelay: `${i * 70}ms` }}>
-              <div className="track-code">{t.code}</div>
+          {filteredTracks.map((t, i) => (
+            <div className="track-card" key={t.code} data-reveal="true" style={{ transitionDelay: `${i * 45}ms` }}>
+              <div className="track-code">{t.code} <span className="track-category-tag">// {t.category}</span></div>
               <div className="track-title">{t.title}</div>
               <div className="track-desc">{t.desc}</div>
             </div>

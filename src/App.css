@@ -263,56 +263,7 @@
     50%{ transform:translateY(5px); }
   }
 
-  /* ============================================================
-     SPECS SECTION (scroll-triggered content below hero)
-     ============================================================ */
-  .specs-section{
-    position:relative;
-    background:var(--void-2);
-    padding:14vh 5vw;
-    border-top:1px solid var(--line);
-  }
-  .specs-head{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.3em;
-    color:var(--cyan);
-    text-transform:uppercase;
-    margin-bottom:16px;
-  }
-  .specs-title{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:600;
-    font-size:clamp(28px, 4vw, 48px);
-    max-width:640px;
-    margin-bottom:8vh;
-    color:var(--off-white);
-  }
-  .specs-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .spec-card{
-    background:var(--void-2);
-    padding:32px 26px;
-  }
-  .spec-card .num{
-    font-family:'JetBrains Mono', monospace;
-    font-size:30px;
-    font-weight:700;
-    color:var(--off-white);
-    margin-bottom:8px;
-  }
-  .spec-card .num span{ color:var(--amber); font-size:16px; }
-  .spec-card .lbl{
-    font-family:'Inter', sans-serif;
-    font-size:13px;
-    color:var(--fog);
-    line-height:1.5;
-  }
+
 
   /* ============================================================
      EXPLODED VIEW — floating part labels + interaction hint
@@ -380,7 +331,6 @@
   @media (max-width: 860px){
     .part-label{ font-size:10px; }
     .part-label .chip{ padding:4px 8px; }
-    .specs-grid{ grid-template-columns:repeat(2, 1fr); }
     .hud-readout{ display:none; }
     .cta-row{ flex-direction:column; max-width:220px; }
   }

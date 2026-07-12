@@ -38,6 +38,54 @@
   text-align:center;
 }
 
+.scheduleTabs {
+  display:inline-flex;
+  gap:16px;
+  margin-top:35px;
+  padding:6px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  backdrop-filter:blur(10px);
+}
+
+.tabButton {
+  font-family:'Space Grotesk', sans-serif;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:1px;
+  padding:12px 24px;
+  background:transparent;
+  border:1px solid transparent;
+  color:var(--muted);
+  cursor:pointer;
+  border-radius:8px;
+  transition:all 0.3s ease;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+
+.tabButton .tabLabel {
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  font-weight:400;
+  opacity:0.6;
+}
+
+.tabButton:hover {
+  color:var(--text);
+  background:rgba(255,255,255,0.04);
+}
+
+.tabButton.active {
+  color:var(--cyan);
+  background:rgba(61,200,255,0.12);
+  border-color:rgba(61,200,255,0.25);
+  box-shadow:0 0 15px rgba(61,200,255,0.15);
+}
+
+
 .missionTag{
   display:inline-flex;
   align-items:center;
@@ -288,24 +336,6 @@ box-shadow:
 overflow:hidden;
 }
 
-.timeline::after{
-content:"";
-position:absolute;
-left:50%;
-top:-30%;
-transform:translateX(-50%);
-width:14px;
-height:180px;
-border-radius:999px;
-background:linear-gradient(
-180deg,
-transparent,
-rgba(61,200,255,.95),
-transparent
-);
-filter:blur(10px);
-animation:beamTravel 5s linear infinite;
-}
 
 .node{
 position:absolute;
@@ -339,90 +369,6 @@ border:2px solid rgba(61,200,255,.55);
 animation:nodePulse 2.8s infinite;
 }
 
-.energyFlow{
-position:absolute;
-left:50%;
-top:0;
-transform:translateX(-50%);
-width:8px;
-height:100%;
-pointer-events:none;
-overflow:hidden;
-}
-
-.energyFlow::before{
-content:"";
-position:absolute;
-left:0;
-top:-200px;
-width:100%;
-height:200px;
-border-radius:999px;
-background:linear-gradient(
-180deg,
-transparent,
-rgba(61,200,255,.95),
-transparent
-);
-filter:blur(8px);
-animation:energyRun 3.5s linear infinite;
-}
-
-.packet{
-position:absolute;
-left:50%;
-transform:translateX(-50%);
-width:10px;
-height:10px;
-border-radius:3px;
-background:var(--cyan);
-box-shadow:
-0 0 12px rgba(61,200,255,.8),
-0 0 28px rgba(61,200,255,.35);
-animation:dataPacket 7s linear infinite;
-}
-
-.packet:nth-child(odd){
-background:var(--red);
-box-shadow:
-0 0 12px rgba(255,45,85,.8),
-0 0 28px rgba(255,45,85,.35);
-}
-
-@keyframes beamTravel{
-0%{
-top:-180px;
-}
-100%{
-top:100%;
-}
-}
-
-@keyframes energyRun{
-0%{
-top:-220px;
-}
-100%{
-top:100%;
-}
-}
-
-@keyframes dataPacket{
-0%{
-top:100%;
-opacity:0;
-}
-8%{
-opacity:1;
-}
-92%{
-opacity:1;
-}
-100%{
-top:-30px;
-opacity:0;
-}
-}
 
 @keyframes nodePulse{
 0%{
@@ -1161,50 +1107,6 @@ width:68%;
 animation-delay:1s;
 }
 
-/* Floating drones */
-
-.missionSchedule .drone{
-position:absolute;
-width:26px;
-height:26px;
-border-radius:50%;
-border:2px solid rgba(61,200,255,.4);
-background:rgba(6,16,32,.8);
-box-shadow:
-0 0 18px rgba(61,200,255,.35);
-}
-
-.missionSchedule .drone::before{
-content:"";
-position:absolute;
-left:50%;
-top:50%;
-width:8px;
-height:8px;
-margin-left:-4px;
-margin-top:-4px;
-border-radius:50%;
-background:#3dc8ff;
-box-shadow:0 0 12px #3dc8ff;
-}
-
-.missionSchedule .drone.one{
-left:8%;
-top:18%;
-animation:droneOne 18s linear infinite;
-}
-
-.missionSchedule .drone.two{
-right:9%;
-top:42%;
-animation:droneTwo 22s linear infinite;
-}
-
-.missionSchedule .drone.three{
-left:14%;
-bottom:10%;
-animation:droneThree 20s linear infinite;
-}
 
 /* Hologram grid */
 
@@ -1249,69 +1151,6 @@ transform:scaleX(1);
 
 }
 
-@keyframes droneOne{
-
-0%{
-transform:translate(0,0);
-}
-
-25%{
-transform:translate(70px,-25px);
-}
-
-50%{
-transform:translate(130px,20px);
-}
-
-75%{
-transform:translate(40px,60px);
-}
-
-100%{
-transform:translate(0,0);
-}
-
-}
-
-@keyframes droneTwo{
-
-0%{
-transform:translate(0,0);
-}
-
-30%{
-transform:translate(-80px,-40px);
-}
-
-70%{
-transform:translate(-30px,70px);
-}
-
-100%{
-transform:translate(0,0);
-}
-
-}
-
-@keyframes droneThree{
-
-0%{
-transform:translate(0,0);
-}
-
-40%{
-transform:translate(90px,-70px);
-}
-
-80%{
-transform:translate(40px,-20px);
-}
-
-100%{
-transform:translate(0,0);
-}
-
-}
 
 @keyframes gridMove{
 
@@ -1326,32 +1165,4 @@ background-position:90px 90px,90px 90px;
 }
 
 
-.earthHUD{
-width:260px;
-height:260px;
-display:block;
-pointer-events:none;
-user-select:none;
-filter:
-drop-shadow(0 0 22px rgba(0,220,255,.45))
-drop-shadow(0 0 70px rgba(0,220,255,.18));
-animation:
-earthFloat 8s ease-in-out infinite;
-}
-
-@keyframes earthFloat{
-
-0%,100%{
-transform:
-translateY(0)
-scale(1);
-}
-
-50%{
-transform:
-translateY(-8px)
-scale(1.03);
-}
-
-}
 
