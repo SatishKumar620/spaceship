@@ -178,83 +178,87 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
        4. SPACE BACKDROP
        ================================================================ */
     function buildLayeredStarfield() {
-      const group = new THREE.Group();
-
-      // 1. Distant faint starfield
       const distantCount = isMobile ? 600 : 3000;
-      const distantGeo = new THREE.BufferGeometry();
-      const distantPos = new Float32Array(distantCount * 3);
-      for (let i = 0; i < distantCount; i++) {
-        const r = 350 + Math.random() * 150;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(2 * Math.random() - 1);
-        distantPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-        distantPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-        distantPos[i * 3 + 2] = r * Math.cos(phi);
-      }
-      distantGeo.setAttribute('position', new THREE.BufferAttribute(distantPos, 3));
-      const distantMat = new THREE.PointsMaterial({
-        color: 0x8a9bb8,
-        size: 0.65,
-        sizeAttenuation: true,
-        transparent: true,
-        opacity: 0.5,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-      });
-      group.add(new THREE.Points(distantGeo, distantMat));
-
-      // 2. Medium background starfield
       const medCount = isMobile ? 400 : 1600;
-      const medGeo = new THREE.BufferGeometry();
-      const medPos = new Float32Array(medCount * 3);
-      for (let i = 0; i < medCount; i++) {
-        const r = 300 + Math.random() * 150;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(2 * Math.random() - 1);
-        medPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-        medPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-        medPos[i * 3 + 2] = r * Math.cos(phi);
-      }
-      medGeo.setAttribute('position', new THREE.BufferAttribute(medPos, 3));
-      const medMat = new THREE.PointsMaterial({
-        color: 0xffffff,
-        size: 1.15,
-        sizeAttenuation: true,
-        transparent: true,
-        opacity: 0.8,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-      });
-      group.add(new THREE.Points(medGeo, medMat));
+      const brightLayers = [
+        { color: new THREE.Color(0x00d9ff), count: isMobile ? 20 : 80 },
+        { color: new THREE.Color(0xffd18a), count: isMobile ? 20 : 80 },
+        { color: new THREE.Color(0xffffff), count: isMobile ? 20 : 80 },
+        { color: new THREE.Color(0xcbe5ff), count: isMobile ? 20 : 80 },
+      ];
+      const brightTotal = brightLayers.reduce((s, c) => s + c.count, 0);
+      const total = distantCount + medCount + brightTotal;
 
-      // 3. Bright foreground starfield
-      const colors = [0x00d9ff, 0xffd18a, 0xffffff, 0xcbe5ff];
-      const brightCountPerColor = isMobile ? 20 : 80;
-      colors.forEach((col) => {
-        const cGeo = new THREE.BufferGeometry();
-        const cPos = new Float32Array(brightCountPerColor * 3);
-        for (let i = 0; i < brightCountPerColor; i++) {
-          const r = 250 + Math.random() * 200;
+      const positions = new Float32Array(total * 3);
+      const colors = new Float32Array(total * 3);
+      const sizes = new Float32Array(total);
+      const alphas = new Float32Array(total);
+
+      let idx = 0;
+      const placeSphere = (count, rMin, rRange) => {
+        for (let i = 0; i < count; i++) {
+          const r = rMin + Math.random() * rRange;
           const theta = Math.random() * Math.PI * 2;
           const phi = Math.acos(2 * Math.random() - 1);
-          cPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-          cPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-          cPos[i * 3 + 2] = r * Math.cos(phi);
+          positions[idx * 3] = r * Math.sin(phi) * Math.cos(theta);
+          positions[idx * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+          positions[idx * 3 + 2] = r * Math.cos(phi);
+          idx++;
         }
-        cGeo.setAttribute('position', new THREE.BufferAttribute(cPos, 3));
-        const cMat = new THREE.PointsMaterial({
-          color: col,
-          size: 1.7,
-          sizeAttenuation: true,
-          transparent: true,
-          opacity: 0.9,
-          depthWrite: false,
-          blending: THREE.AdditiveBlending,
-        });
-        group.add(new THREE.Points(cGeo, cMat));
+      };
+
+      const fillLayer = (start, end, color, size, alpha) => {
+        for (let i = start; i < end; i++) {
+          colors[i * 3] = color.r; colors[i * 3 + 1] = color.g; colors[i * 3 + 2] = color.b;
+          sizes[i] = size; alphas[i] = alpha;
+        }
+      };
+
+      let s = idx; placeSphere(distantCount, 350, 150); fillLayer(s, idx, new THREE.Color(0x8a9bb8), 4.5, 0.5);
+      s = idx; placeSphere(medCount, 300, 150); fillLayer(s, idx, new THREE.Color(0xffffff), 7.5, 0.8);
+      brightLayers.forEach(({ color, count }) => {
+        s = idx; placeSphere(count, 250, 200); fillLayer(s, idx, color, 11, 0.9);
       });
 
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geo.setAttribute('aColor', new THREE.BufferAttribute(colors, 3));
+      geo.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
+      geo.setAttribute('aAlpha', new THREE.BufferAttribute(alphas, 1));
+
+      const mat = new THREE.ShaderMaterial({
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        vertexShader: `
+          attribute float aSize;
+          attribute float aAlpha;
+          attribute vec3 aColor;
+          varying vec3 vColor;
+          varying float vAlpha;
+          void main(){
+            vColor = aColor;
+            vAlpha = aAlpha;
+            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+            gl_PointSize = aSize * (300.0 / -mvPosition.z);
+            gl_Position = projectionMatrix * mvPosition;
+          }
+        `,
+        fragmentShader: `
+          varying vec3 vColor;
+          varying float vAlpha;
+          void main(){
+            vec2 uv = gl_PointCoord - 0.5;
+            float d = length(uv);
+            float alpha = smoothstep(0.5, 0.0, d) * vAlpha;
+            if (alpha < 0.01) discard;
+            gl_FragColor = vec4(vColor, alpha);
+          }
+        `,
+      });
+
+      const group = new THREE.Group();
+      group.add(new THREE.Points(geo, mat));
       return group;
     }
     const starfield = buildLayeredStarfield();
@@ -487,6 +491,8 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     let explodableParts = [];
     let labelRegistry = [];
     let shipRadius = 1;
+    const materialCache = new Map();
+    const CACHEABLE_MATERIAL_NAMES = new Set(['shiphull', 'glass', 'mat black', 'plasma', 'glow', 'glow.001']);
 
     // Procedural gunmetal hull texture
     function buildHullDetailTextures(repeat = 5) {
@@ -631,7 +637,16 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         if (child.isMesh) {
           child.castShadow = true;
           child.receiveShadow = true;
-          if (child.material) child.material = buildMaterialFor(child.material);
+          if (child.material) {
+            const key = (child.material.name || '').toLowerCase();
+            if (CACHEABLE_MATERIAL_NAMES.has(key) && materialCache.has(key)) {
+              child.material = materialCache.get(key);
+            } else {
+              const built = buildMaterialFor(child.material);
+              if (CACHEABLE_MATERIAL_NAMES.has(key)) materialCache.set(key, built);
+              child.material = built;
+            }
+          }
         }
       });
 
@@ -1074,38 +1089,16 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
 
+    const bloomResScale = isMobile ? 0.4 : 1.0;
     const bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(initialWidth, initialHeight),
-      0.38,
+      new THREE.Vector2(initialWidth * bloomResScale, initialHeight * bloomResScale),
+      isMobile ? 0.22 : 0.38,
       0.4,
       0.94
     );
-    if (!isMobile) composer.addPass(bloomPass); // bloom skipped on mobile: too costly for smooth fps
+    composer.addPass(bloomPass); // low-res bloom on mobile: keeps the glow, negligible fps cost
 
     const bokehPass = null; // removed: DoF pass was too expensive for smooth playback
-
-    const vignetteShader = {
-      uniforms: { tDiffuse: { value: null }, offset: { value: 1.15 }, darkness: { value: 1.15 } },
-      vertexShader: `
-        varying vec2 vUv;
-        void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }
-      `,
-      fragmentShader: `
-        uniform sampler2D tDiffuse;
-        uniform float offset;
-        uniform float darkness;
-        varying vec2 vUv;
-        void main(){
-          vec4 texel = texture2D(tDiffuse, vUv);
-          vec2 uv = (vUv - 0.5) * offset;
-          float vig = 1.0 - dot(uv, uv) * darkness;
-          texel.rgb *= clamp(vig, 0.0, 1.0);
-          gl_FragColor = texel;
-        }
-      `,
-    };
-    const vignettePass = new ShaderPass(vignetteShader);
-    composer.addPass(vignettePass);
 
     const cinematicGradeShader = {
       uniforms: {
@@ -1114,6 +1107,8 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         contrast: { value: 1.12 },
         aberration: { value: isMobile ? 0.0011 : 0.0018 },
         grainAmount: { value: isMobile ? 0.02 : 0.028 },
+        vignetteOffset: { value: 1.15 },
+        vignetteDarkness: { value: 1.15 },
       },
       vertexShader: `
         varying vec2 vUv;
@@ -1125,6 +1120,8 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         uniform float contrast;
         uniform float aberration;
         uniform float grainAmount;
+        uniform float vignetteOffset;
+        uniform float vignetteDarkness;
         varying vec2 vUv;
 
         float grainNoise(vec2 uv, float t){
@@ -1145,6 +1142,10 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           col = (col - 0.5) * contrast + 0.5;
           float grain = (grainNoise(vUv, uTime) - 0.5) * grainAmount;
           col += grain;
+
+          vec2 vUvVig = (vUv - 0.5) * vignetteOffset;
+          float vig = 1.0 - dot(vUvVig, vUvVig) * vignetteDarkness;
+          col *= clamp(vig, 0.0, 1.0);
 
           gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
         }
@@ -1301,8 +1302,8 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       const dpr = currentDPR;
       renderer.setPixelRatio(dpr);
       bloomPass.resolution.set(
-        (isMobile ? w * 0.6 : w) * (dpr / MAX_DPR),
-        (isMobile ? h * 0.6 : h) * (dpr / MAX_DPR)
+        w * bloomResScale * (dpr / MAX_DPR),
+        h * bloomResScale * (dpr / MAX_DPR)
       );
 
       if (bokehPass) bokehPass.setSize(w, h);
