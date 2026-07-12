@@ -43,33 +43,34 @@ export default function AboutSection() {
     const el = sectionRef.current;
     if (!el) return;
 
-    // Strategy 1: Intersection Observer
+    const reveal = () => setInView(true);
+
+    // Strategy 1: Intersection Observer (threshold 1% = fires as soon as even a sliver is visible)
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setInView(true);
-            observer.unobserve(entry.target);
-          }
+          if (entry.isIntersecting) { reveal(); observer.unobserve(entry.target); }
         });
       },
       { threshold: 0.01 }
     );
     observer.observe(el);
 
-    // Strategy 2: Scroll Listener Fallback (Guarantees visibility on scroll)
+    // Strategy 2: Scroll position fallback (fires once user scrolls past 100px)
     const handleScroll = () => {
-      if (window.scrollY > 120) {
-        setInView(true);
-        window.removeEventListener('scroll', handleScroll);
-      }
+      if (window.scrollY > 100) { reveal(); window.removeEventListener('scroll', handleScroll); }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Check immediately on mount
+
+    // Strategy 3: Custom event — fired directly by scrollToAbout button click
+    window.addEventListener('forceReveal', reveal);
+
+    handleScroll(); // check immediately on mount
 
     return () => {
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('forceReveal', reveal);
     };
   }, []);
 

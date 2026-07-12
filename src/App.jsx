@@ -98,14 +98,15 @@ export default function App() {
 
   const scrollToAbout = () => {
     const el = document.getElementById('about');
-    if (el) {
-      const yOffset = -80;
-      if (window.lenis) {
-        window.lenis.scrollTo(el, { offset: yOffset });
-      } else {
-        const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
+    if (!el) return;
+    // Dispatch a custom event so AboutSection can force-reveal its content
+    window.dispatchEvent(new CustomEvent('forceReveal'));
+    const yOffset = -70;
+    if (window.lenis) {
+      window.lenis.scrollTo(el, { offset: yOffset, duration: 1.2 });
+    } else {
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 

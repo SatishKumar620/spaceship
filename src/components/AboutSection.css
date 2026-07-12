@@ -72,8 +72,10 @@
   text-transform:uppercase;
   opacity:0; transform:translateY(16px);
   transition:opacity 0.7s ease, transform 0.7s ease;
+  /* Fallback: show after 1.5s even if class never fires */
+  animation: revealFallback 0s 1.5s forwards;
 }
-.is-in-view .about-eyebrow{ opacity:1; transform:translateY(0); }
+.is-in-view .about-eyebrow{ opacity:1; transform:translateY(0); animation:none; }
 
 .about-hud-line{
   height:1px; width:38px;
@@ -93,8 +95,9 @@
   text-transform:uppercase;
   opacity:0; transform:translateY(20px);
   transition:opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+  animation: revealFallback 0s 1.8s forwards;
 }
-.is-in-view .about-title{ opacity:1; transform:translateY(0); }
+.is-in-view .about-title{ opacity:1; transform:translateY(0); animation:none; }
 
 .about-title-accent{
   color:var(--hq-red-2);
@@ -109,8 +112,9 @@
   color:rgba(238,242,246,0.72);
   opacity:0; transform:translateY(20px);
   transition:opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+  animation: revealFallback 0s 2s forwards;
 }
-.is-in-view .about-desc{ opacity:1; transform:translateY(0); }
+.is-in-view .about-desc{ opacity:1; transform:translateY(0); animation:none; }
 
 .about-stats-grid{
   display:grid;
@@ -130,8 +134,14 @@
   opacity:0;
   transform:translateY(28px);
   transition:opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  animation: revealFallback 0s 2.2s forwards;
 }
-.is-in-view .about-stat-card{ opacity:1; transform:translateY(0); }
+.is-in-view .about-stat-card{ opacity:1; transform:translateY(0); animation:none; }
+
+/* Emergency fallback: if is-in-view never fires, force everything visible after delay */
+@keyframes revealFallback {
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .about-stat-card.is-active,
 .about-stat-card:hover{

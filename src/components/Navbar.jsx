@@ -65,13 +65,15 @@ export default function Navbar() {
   const goTo = (id) => (e) => {
     e.preventDefault();
     setMenuOpen(false);
+    // Dispatch forceReveal so hidden sections immediately show their content
+    window.dispatchEvent(new CustomEvent('forceReveal'));
     const el = document.getElementById(id);
     if (el) {
-      const yOffset = -80;
+      const yOffset = -70;
       if (window.lenis) {
-        window.lenis.scrollTo(el, { offset: yOffset });
+        window.lenis.scrollTo(el, { offset: yOffset, duration: 1.2 });
       } else {
-        const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
     }

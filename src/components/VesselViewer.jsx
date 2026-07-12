@@ -1155,6 +1155,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
        9. CONTROLS
        ================================================================ */
     const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enabled = !isMobile;
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
     controls.enablePan = false;
@@ -1488,9 +1489,15 @@ sunCoreSprite.scale.setScalar(14 + Math.sin(t * 5.0) * 0.4);
       nebulaMat.uniforms.uTime.value = t * 60.0;
       cinematicGradePass.uniforms.uTime.value = t;
 
-      controls.enabled = flightProgressRef.current < 0.001;
-      controls.autoRotate = controls.enabled;
-      controls.update();
+      if (isMobile) {
+        const rotateSpeed = 0.0012;
+        camera.position.applyAxisAngle(new THREE.Vector3(0, 1, 0), rotateSpeed);
+        camera.lookAt(0, 0, 0);
+      } else {
+        controls.enabled = flightProgressRef.current < 0.001;
+        controls.autoRotate = controls.enabled;
+        controls.update();
+      }
 
       // Safety clamp: guards against Chrome's "Desktop site" zoom-to-fit
       // hack on mobile scrambling touch/dolly math and flinging the camera
