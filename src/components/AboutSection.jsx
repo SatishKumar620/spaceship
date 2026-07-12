@@ -37,6 +37,7 @@ function StatCard({ value, suffix, label, index }) {
 export default function AboutSection() {
   const sectionRef = useRef(null);
   const [inView, setInView] = useState(false);
+  const [shipDocked, setShipDocked] = useState(false);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -54,6 +55,17 @@ export default function AboutSection() {
     );
     observer.observe(el);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onDock = () => setShipDocked(true);
+    const onUndock = () => setShipDocked(false);
+    window.addEventListener('ship:docked', onDock);
+    window.addEventListener('ship:undocked', onUndock);
+    return () => {
+      window.removeEventListener('ship:docked', onDock);
+      window.removeEventListener('ship:undocked', onUndock);
+    };
   }, []);
 
   return (
@@ -113,7 +125,7 @@ export default function AboutSection() {
           <div className="about-orbit-ring about-orbit-ring--2">
             <span className="about-orbit-dot about-orbit-dot--alt"></span>
           </div>
-          <div className="about-orbit-core">
+          <div className={`about-orbit-core${shipDocked ? ' is-docked' : ''}`} id="shipDockTarget" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
               <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" strokeLinejoin="round" strokeLinecap="round" />
             </svg>

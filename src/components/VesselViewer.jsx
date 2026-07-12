@@ -27,6 +27,8 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
   const modelRef = useRef(null);
   const sceneRef = useRef(null);
   const labelRegistryRef = useRef([]);
+  const flightProgressRef = useRef(0);
+  const isDockedRef = useRef(false);
 
   // Update ref when prop changes
   useEffect(() => {
@@ -1031,6 +1033,28 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         },
       });
 
+      // Flight: carries the vessel from its hero position into the dock
+      // spot inside the About section as the user scrolls between them.
+      const dockEl = document.getElementById('shipDockTarget');
+      if (dockEl) {
+        ScrollTrigger.create({
+          trigger: '#hero',
+          start: 'bottom top',
+          endTrigger: '#shipDockTarget',
+          end: 'center center',
+          scrub: 1,
+          onUpdate: (self) => {
+            flightProgressRef.current = self.progress;
+            canvas.style.pointerEvents = self.progress > 0.001 ? 'none' : 'auto';
+            const docked = self.progress > 0.985;
+            if (docked !== isDockedRef.current) {
+              isDockedRef.current = docked;
+              window.dispatchEvent(new CustomEvent(docked ? 'ship:docked' : 'ship:undocked'));
+            }
+          },
+        });
+      }
+
       gsap.utils.toArray('[data-reveal]').forEach((el) => {
         gsap.from(el, {
           y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
@@ -1299,6 +1323,25 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     const clock = new THREE.Clock();
     const _labelWorldPos = new THREE.Vector3();
 
+    // Flight-path scratch vectors (reused every frame to avoid GC churn)
+    const _flightHome = new THREE.Vector3(0, 0, 0);
+    const _flightControl = new THREE.Vector3();
+    const _flightDock = new THREE.Vector3();
+    const _flightPoint = new THREE.Vector3();
+    const _flightDir = new THREE.Vector3();
+    const _flightNdc = new THREE.Vector3();
+    const dockTargetEl = document.getElementById('shipDockTarget');
+
+    // Quadratic bezier: gives the ship a swept arc rather than a straight line
+    function bezierPoint(out, p0, p1, p2, u) {
+      const inv = 1 - u;
+      out.set(0, 0, 0);
+      out.addScaledVector(p0, inv * inv);
+      out.addScaledVector(p1, 2 * inv * u);
+      out.addScaledVector(p2, u * u);
+      return out;
+    }
+
     const MAX_DPR = PIXEL_RATIO;
     const MIN_DPR = isMobile ? 0.85 : 1.2;
     let currentDPR = PIXEL_RATIO;
@@ -1330,8 +1373,46 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       }
 
       if (model) {
-        modelGroup.position.y = modelBaseY + Math.sin(t * 0.55) * 0.12;
-        modelGroup.rotation.z = Math.sin(t * 0.35) * 0.01;
+        const flightP = flightProgressRef.current;
+
+        if (flightP > 0.0005) {
+          // Mid-flight (or docked): fly the model along an arc toward the
+          // live screen position of the About section's dock target.
+          if (dockTargetEl) {
+            const rect = dockTargetEl.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const w = window.innerWidth || 1;
+            const h = window.innerHeight || 1;
+            _flightNdc.set((cx / w) * 2 - 1, -(cy / h) * 2 + 1, 0.5).unproject(camera);
+            _flightDir.copy(_flightNdc).sub(camera.position).normalize();
+            const depth = camera.position.length() || 5;
+            _flightDock.copy(camera.position).addScaledVector(_flightDir, depth);
+          }
+
+          _flightHome.set(0, modelBaseY, 0);
+          _flightControl.copy(_flightHome).lerp(_flightDock, 0.5).add(new THREE.Vector3(0, 3.4, -1.6));
+
+          const eased = flightP * flightP * (3 - 2 * flightP); // smoothstep
+          bezierPoint(_flightPoint, _flightHome, _flightControl, _flightDock, eased);
+          modelGroup.position.copy(_flightPoint);
+          modelGroup.position.y += Math.sin(t * 0.55) * 0.05 * (1 - eased);
+
+          const bank = Math.sin(eased * Math.PI);
+          modelGroup.rotation.z = bank * 0.55;
+          modelGroup.rotation.x = -bank * 0.18;
+          modelGroup.rotation.y += dt * (0.25 + flightP * 1.4);
+
+          const dockedScale = THREE.MathUtils.lerp(1, 0.22, eased);
+          modelGroup.scale.setScalar(dockedScale);
+        } else {
+          modelGroup.position.y = modelBaseY + Math.sin(t * 0.55) * 0.12;
+          modelGroup.rotation.z = Math.sin(t * 0.35) * 0.01;
+          modelGroup.rotation.x = 0;
+          modelGroup.position.x = 0;
+          modelGroup.position.z = 0;
+          modelGroup.scale.setScalar(1);
+        }
 
         const et = explodeStateRef.current.t;
         if (et > 0.0001) {
@@ -1397,6 +1478,8 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       nebulaMat.uniforms.uTime.value = t * 60.0;
       cinematicGradePass.uniforms.uTime.value = t;
 
+      controls.enabled = flightProgressRef.current < 0.001;
+      controls.autoRotate = controls.enabled;
       controls.update();
       composer.render();
     }
