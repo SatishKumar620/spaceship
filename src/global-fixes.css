@@ -124,6 +124,13 @@ body {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+/* Once user scrolls past hero, completely remove from interaction tree */
+.hero-ui--passed {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* Buttons: always tappable */
@@ -150,7 +157,7 @@ body {
 .site-nav {
   /* Safe area for notched phones */
   padding-top: max(12px, env(safe-area-inset-top, 0px));
-  z-index: 100 !important;
+  z-index: 1000 !important;
 }
 
 /* ---------------------------------------------------------------
@@ -378,13 +385,13 @@ select {
 
 /* Navbar blur — all states */
 .site-nav {
-  -webkit-backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
 }
 .site-nav.is-scrolled {
-  -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
 }
 .site-nav.menu-open {
-  -webkit-backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
 }
 
 /* Modal overlay */

@@ -187,6 +187,16 @@
     padding: 5vh 5vw 6vh;
     /* hero-ui itself is non-interactive but children can override */
     pointer-events:none;
+    /* Smooth fade when scrolling past hero */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+  }
+  /* Once the user scrolls past the hero, hide the overlay completely */
+  .hero-ui--passed {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 
   .top-row{
@@ -455,7 +465,13 @@
       flex-direction: column !important;
       justify-content: flex-end !important;
       align-items: flex-start !important;
-      padding: 0 24px 90px !important;
+      padding: 0 24px calc(90px + env(safe-area-inset-bottom, 0px)) !important;
+      pointer-events: none !important;
+    }
+    /* Ensure hero-ui--passed hides everything on mobile too */
+    .hero-ui.hero-ui--passed {
+      opacity: 0 !important;
+      visibility: hidden !important;
       pointer-events: none !important;
     }
 
@@ -502,10 +518,10 @@
       position: relative !important;
     }
 
-    /* Scroll cue: sits at the bottom */
+    /* Scroll cue: sits at the very bottom of the hero-ui */
     .scroll-cue {
-      position: fixed !important;
-      bottom: 20px !important;
+      position: absolute !important;
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
       left: 50% !important;
       transform: translateX(-50%) !important;
       z-index: 40 !important;

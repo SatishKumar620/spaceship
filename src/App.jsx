@@ -25,6 +25,7 @@ export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showRegModal, setShowRegModal] = useState(false);
   const [loadingPercent, setLoadingPercent] = useState(0);
+  const [heroPassed, setHeroPassed] = useState(false);
 
   // iOS scroll lock: overflow:hidden on html/body doesn't work on iOS Safari
   // Must use position:fixed with saved scroll position
@@ -100,6 +101,19 @@ export default function App() {
     };
   }, []);
 
+  // Hide hero-ui once user scrolls past the hero section
+  // This prevents it from blocking clicks on sections below
+  React.useEffect(() => {
+    const onScroll = () => {
+      const heroEl = document.getElementById('home');
+      const threshold = heroEl ? heroEl.offsetHeight * 0.85 : window.innerHeight * 0.85;
+      setHeroPassed(window.scrollY > threshold);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   React.useEffect(() => {
     if (isLoaded) {
       // First ensure elements are immediately visible (safety net for mobile)
@@ -130,9 +144,13 @@ export default function App() {
     if (!el) return;
     // Dispatch a custom event so AboutSection can force-reveal its content
     window.dispatchEvent(new CustomEvent('forceReveal'));
-    const yOffset = -70;
+    const yOffset = -80;
+    // Stop Lenis momentarily then scroll — fixes mobile Lenis blocking native scroll
     if (window.lenis) {
-      window.lenis.scrollTo(el, { offset: yOffset, duration: 1.2 });
+      window.lenis.stop();
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      setTimeout(() => { if (window.lenis) window.lenis.start(); }, 1200);
     } else {
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
@@ -175,7 +193,8 @@ export default function App() {
         />
 
         {/* HUD overlay — pointer-events:none on container, restored on interactive children */}
-        <div className="hero-ui" style={{ pointerEvents: 'none' }}>
+        {/* heroPassed: hide (opacity 0 + pointer-events:none) once user scrolls past hero */}
+        <div className={`hero-ui${heroPassed ? ' hero-ui--passed' : ''}`} style={{ pointerEvents: 'none' }}>
           <div className="top-row" style={{ pointerEvents: 'none' }}>
             <div className="brand">HACKQUBIT<span>// V2</span></div>
             <div className="hud-readout">
