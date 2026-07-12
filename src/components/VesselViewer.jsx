@@ -64,7 +64,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     renderer.setPixelRatio(PIXEL_RATIO);
     renderer.setSize(initialWidth, initialHeight);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.0;
+    renderer.toneMappingExposure = 1.18;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -431,9 +431,9 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     const sunCtx = sunCanvas.getContext('2d');
     const sunGrad = sunCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
     sunGrad.addColorStop(0.0, 'rgba(255,246,214,1)');
-    sunGrad.addColorStop(0.15, 'rgba(255,224,150,0.9)');
-    sunGrad.addColorStop(0.45, 'rgba(255,180,90,0.28)');
-    sunGrad.addColorStop(1.0, 'rgba(255,150,60,0)');
+    sunGrad.addColorStop(0.15, 'rgba(255,120,150,0.9)');
+    sunGrad.addColorStop(0.45, 'rgba(255,30,58,0.35)');
+    sunGrad.addColorStop(1.0, 'rgba(255,30,58,0)');
     sunCtx.fillStyle = sunGrad;
     sunCtx.fillRect(0, 0, 256, 256);
     const sunTexture = new THREE.CanvasTexture(sunCanvas);
@@ -956,12 +956,12 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           stationSun.castShadow = false; // saved: avoid a second full shadow map alongside keyLight
           scene.add(stationSun);
 
-          const stationFill = new THREE.DirectionalLight(0xbadaff, 1.55);
+          const stationFill = new THREE.DirectionalLight(0x00d9ff, 1.8);
           stationFill.position.set(CAMERA_HOME.x + 4, CAMERA_HOME.y + 3, CAMERA_HOME.z + 2);
           stationFill.target = stationSunTarget;
           scene.add(stationFill);
 
-          const stationFill2 = new THREE.DirectionalLight(0xffb84d, 0.85);
+          const stationFill2 = new THREE.DirectionalLight(0xff1e3a, 1.25);
           stationFill2.position.set(-CAMERA_HOME.x - 4, -CAMERA_HOME.y + 1, -CAMERA_HOME.z - 2);
           stationFill2.target = stationSunTarget;
           scene.add(stationFill2);
