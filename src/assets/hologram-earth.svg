@@ -1,0 +1,533 @@
+
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 4.77 KiB | 2.38 MiB/s, done.
+Total 6 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (4/4), completed with 4 local objects.
+To https://github.com/SatishKumar620/spaceship.git
+   60a739e..cf2ff97  main -> main
+~/spaceship $ mkdir -p src/assets
+cat > src/assets/hologram-earth.svg <<'EOF'
+>
+<g id="earth" filter="url(#glow)">
+
+<circle
+cx="400"
+cy="400"
+r="145"
+fill="none"
+stroke="url(#earthGlow)"
+stroke-width="2.4"/>
+
+<!-- Latitude -->
+
+<ellipse cx="400" cy="400" rx="145" ry="145"
+fill="none"
+stroke="#35d8ff"
+stroke-opacity=".18"/>
+
+<ellipse cx="400" cy="400" rx="145" ry="118"
+fill="none"
+stroke="#35d8ff"
+stroke-opacity=".28"/>
+
+<ellipse cx="400" cy="400" rx="145" ry="90"
+fill="none"
+stroke="#35d8ff"
+stroke-opacity=".34"/>
+
+<ellipse cx="400" cy="400" rx="145" ry="58"
+fill="none"
+stroke="#35d8ff"
+stroke-opacity=".34"/>
+
+<ellipse cx="400" cy="400" rx="145" ry="28"
+fill="none"
+stroke="#35d8ff"
+stroke-opacity=".25"/>
+
+<!-- Longitude -->
+
+<ellipse
+cx="400"
+cy="400"
+rx="26"
+ry="145"
+fill="none"
+stroke="#35d8ff"
+stroke-opacity=".32"/>
+
+<ellipse
+cx="400"
+cy="400"
+rx="58"
+ry="145"
+fill="none"
+stroke="#35d8ff"
+stroke-opacity=".30"/>
+
+<ellipse
+cx="400"
+cy="400"
+rx="90"
+ry="145"
+fill="none"
+stroke="#35d8ff"
+stroke-opacity=".28"/>
+
+<ellipse
+cx="400"
+cy="400"
+rx="118"
+ry="145"
+fill="none"
+stroke="#35d8ff"
+stroke-opacity=".22"/>
+
+<animateTransform
+attributeName="transform"
+type="rotate"
+from="0 400 400"
+to="360 400 400"
+dur="32s"
+repeatCount="indefinite"/>
+
+</g>
+
+<!-- Inner Energy Core -->
+
+<circle
+cx="400"
+cy="400"
+r="9"
+fill="#7fefff">
+
+<animate
+attributeName="r"
+values="7;11;7"
+dur="2.2s"
+repeatCount="indefinite"/>
+
+<animate
+attributeName="opacity"
+values=".7;1;.7"
+dur="2.2s"
+repeatCount="indefinite"/>
+
+</circle>
+<g id="continents" filter="url(#glow)">
+
+<path
+d="M340 316
+L364 305
+L390 315
+L396 340
+L382 360
+L355 370
+L336 350
+Z"
+fill="#00e7ff"
+opacity=".82"/>
+
+<path
+d="M432 330
+L470 340
+L497 372
+L482 402
+L452 428
+L426 395
+Z"
+fill="#00ffc8"
+opacity=".82"/>
+
+<path
+d="M386 432
+L425 446
+L417 485
+L395 500
+L372 470
+Z"
+fill="#00e7ff"
+opacity=".82"/>
+
+<path
+d="M318 404
+L338 396
+L350 420
+L334 442
+L314 430
+Z"
+fill="#00ffd5"
+opacity=".75"/>
+
+</g>
+
+<!-- Mission Nodes -->
+
+<g id="nodes">
+
+<circle cx="366" cy="332" r="4" fill="#ff4268">
+<animate attributeName="r"
+values="4;7;4"
+dur="2s"
+repeatCount="indefinite"/>
+</circle>
+
+<circle cx="468" cy="372" r="4" fill="#00eaff">
+<animate attributeName="r"
+values="4;7;4"
+dur="2.8s"
+repeatCount="indefinite"/>
+</circle>
+
+<circle cx="402" cy="468" r="4" fill="#00ffd5">
+<animate attributeName="r"
+values="4;7;4"
+dur="3.1s"
+repeatCount="indefinite"/>
+</circle>
+
+</g>
+
+<!-- Target Rings -->
+
+<circle
+cx="468"
+cy="372"
+r="14"
+fill="none"
+stroke="#00eaff"
+stroke-width="1"
+opacity=".45">
+
+<animate
+attributeName="r"
+values="10;24;10"
+dur="3s"
+repeatCount="indefinite"/>
+
+<animate
+attributeName="opacity"
+values=".7;0;.7"
+dur="3s"
+repeatCount="indefinite"/>
+
+</circle>
+
+<!-- HUD Triangles -->
+
+<polygon
+points="365,270 375,288 355,288"
+fill="#ff365d"/>
+
+<polygon
+points="528,428 540,448 516,448"
+fill="#00eaff"/>
+
+<polygon
+points="270,450 282,470 258,470"
+fill="#00ffd5"/>
+
+<!-- Scan Lines -->
+
+<line
+x1="230"
+y1="265"
+x2="340"
+y2="320"
+stroke="#ff365d"
+stroke-width="1"
+opacity=".35"/>
+
+<line
+x1="520"
+y1="545"
+x2="650"
+y2="620"
+stroke="#00eaff"
+stroke-width="1"
+opacity=".30"/>
+
+<line
+x1="565"
+y1="220"
+x2="480"
+y2="320"
+stroke="#00ffd5"
+stroke-width="1"
+opacity=".28"/>
+<!-- ===========================
+ ORBITAL SYSTEM
+=========================== -->
+
+<g id="orbitSystem">
+
+<ellipse
+cx="400"
+cy="400"
+rx="235"
+ry="82"
+fill="none"
+stroke="#ff4268"
+stroke-width="1.5"
+stroke-opacity=".35">
+
+<animateTransform
+attributeName="transform"
+type="rotate"
+from="0 400 400"
+to="360 400 400"
+dur="20s"
+repeatCount="indefinite"/>
+
+</ellipse>
+
+<g id="satellite">
+
+<animateTransform
+attributeName="transform"
+type="rotate"
+from="0 400 400"
+to="360 400 400"
+dur="20s"
+repeatCount="indefinite"/>
+
+<g transform="translate(635 400)">
+
+<rect
+x="-10"
+y="-4"
+width="20"
+height="8"
+rx="2"
+fill="#e8f7ff"/>
+
+<rect
+x="-30"
+y="-14"
+width="16"
+height="28"
+fill="#00cfff"
+opacity=".8"/>
+
+<rect
+x="14"
+y="-14"
+width="16"
+height="28"
+fill="#00cfff"
+opacity=".8"/>
+
+<circle
+cx="0"
+cy="0"
+r="3"
+fill="#ff4b6e"/>
+
+</g>
+
+</g>
+
+</g>
+
+<!-- ===========================
+ RADAR SWEEP
+=========================== -->
+
+<g id="radar">
+
+<path
+d="M400 400
+L400 245
+A155 155 0 0 1 545 355 Z"
+fill="#00e5ff"
+opacity=".12">
+
+<animateTransform
+attributeName="transform"
+type="rotate"
+from="0 400 400"
+to="360 400 400"
+dur="5s"
+repeatCount="indefinite"/>
+
+</path>
+
+</g>
+
+<!-- ===========================
+ ENERGY PULSE
+=========================== -->
+
+<circle
+cx="400"
+cy="400"
+r="145"
+fill="none"
+stroke="#00e5ff"
+stroke-width="1"
+opacity=".18">
+
+<animate
+attributeName="r"
+values="145;175;145"
+dur="3.5s"
+repeatCount="indefinite"/>
+
+<animate
+attributeName="opacity"
+values=".5;0;.5"
+dur="3.5s"
+repeatCount="indefinite"/>
+
+</circle>
+
+<!-- ===========================
+ HUD CORNERS
+=========================== -->
+
+<g stroke="#00d9ff" stroke-width="2" opacity=".45">
+
+<path d="M155 155h35M155 155v35"/>
+
+<path d="M645 155h-35M645 155v35"/>
+
+<path d="M155 645h35M155 645v-35"/>
+
+<path d="M645 645h-35M645 645v-35"/>
+
+</g>
+<!-- ===========================
+ TELEMETRY HUD
+=========================== -->
+
+<g font-family="monospace" font-size="16">
+
+<text x="92" y="95" fill="#00e5ff" opacity=".85">
+MISSION CONTROL
+</text>
+
+<text x="92" y="122" fill="#6fdfff">
+SYNC : 100%
+</text>
+
+<text x="92" y="146" fill="#6fdfff">
+SIGNAL : 98%
+</text>
+
+<text x="92" y="170" fill="#6fdfff">
+STATUS : ONLINE
+</text>
+
+<text x="560" y="100" fill="#ff4b6e">
+TARGET LOCK
+</text>
+
+<text x="560" y="126" fill="#ffe97b">
+EARTH NODE
+</text>
+
+<text x="560" y="152" fill="#6fdfff">
+COORD : 23.4N
+</text>
+
+<text x="560" y="176" fill="#6fdfff">
+ALT : 408 KM
+</text>
+
+</g>
+
+<!-- ===========================
+ FLOATING STARS
+=========================== -->
+
+<g fill="#ffffff">
+
+<circle cx="95" cy="240" r="2">
+<animate attributeName="opacity" values=".2;1;.2" dur="2s" repeatCount="indefinite"/>
+</circle>
+
+<circle cx="170" cy="640" r="2">
+<animate attributeName="opacity" values=".2;1;.2" dur="3s" repeatCount="indefinite"/>
+</circle>
+
+<circle cx="700" cy="230" r="2">
+<animate attributeName="opacity" values=".2;1;.2" dur="2.5s" repeatCount="indefinite"/>
+</circle>
+
+<circle cx="720" cy="610" r="2">
+<animate attributeName="opacity" values=".2;1;.2" dur="4s" repeatCount="indefinite"/>
+</circle>
+
+<circle cx="330" cy="80" r="2">
+<animate attributeName="opacity" values=".2;1;.2" dur="3.5s" repeatCount="indefinite"/>
+</circle>
+
+<circle cx="500" cy="730" r="2">
+<animate attributeName="opacity" values=".2;1;.2" dur="2.8s" repeatCount="indefinite"/>
+</circle>
+
+</g>
+
+<!-- ===========================
+ DATA LINES
+=========================== -->
+
+<g stroke="#00d9ff" stroke-width="1" opacity=".35">
+
+<line x1="530" y1="320" x2="690" y2="260"/>
+
+<line x1="300" y1="470" x2="130" y2="570"/>
+
+<line x1="455" y1="510" x2="635" y2="590"/>
+
+</g>
+
+<!-- ===========================
+ HUD BOXES
+=========================== -->
+
+<rect
+x="650"
+y="250"
+width="90"
+height="55"
+fill="none"
+stroke="#00d9ff"
+stroke-width="2"
+opacity=".45"/>
+
+<text
+x="695"
+y="284"
+font-size="18"
+text-anchor="middle"
+fill="#00ffd0"
+font-family="monospace">
+
+SYNC
+
+</text>
+
+<rect
+x="70"
+y="540"
+width="110"
+height="55"
+fill="none"
+stroke="#ff4268"
+stroke-width="2"
+opacity=".45"/>
+
+<text
+x="125"
+y="574"
+font-size="18"
+text-anchor="middle"
+fill="#ff4268"
+font-family="monospace">
+
+SCAN
+
+</text>
+
+</svg>
