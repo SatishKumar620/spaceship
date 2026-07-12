@@ -1,4 +1,5 @@
 import "./ScheduleSection.css";
+import EarthHUD from "../assets/hologram-earth.svg";
 
 const SCHEDULE = [
   {
