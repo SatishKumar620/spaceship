@@ -150,7 +150,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
       const highlightDefs = [
         { pos: [-14, 6, -16], color: 0x8a6fff, size: 2.2 },
-        { pos: [0, -10, 14], color: 0x6ee7ff, size: 1.4 },
+        { pos: [0, -10, 14], color: 0x00d9ff, size: 1.4 },
       ];
       highlightDefs.forEach((h) => {
         const m = new THREE.Mesh(
@@ -227,7 +227,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       group.add(new THREE.Points(medGeo, medMat));
 
       // 3. Bright foreground starfield
-      const colors = [0x6ee7ff, 0xffd18a, 0xffffff, 0xcbe5ff];
+      const colors = [0x00d9ff, 0xffd18a, 0xffffff, 0xcbe5ff];
       const brightCountPerColor = isMobile ? 20 : 80;
       colors.forEach((col) => {
         const cGeo = new THREE.BufferGeometry();
@@ -417,12 +417,12 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     planetBounceLight.position.copy(EARTH_DIR).multiplyScalar(12);
     scene.add(planetBounceLight);
 
-    const rimLight = new THREE.DirectionalLight(0x6ee7ff, 1.4);
+    const rimLight = new THREE.DirectionalLight(0x00d9ff, 1.4);
     rimLight.position.set(-4, 3, -8);
     scene.add(rimLight);
 
-    const engineGlowA = new THREE.PointLight(0xff9a4d, 1.0, 6, 2);
-    const engineGlowB = new THREE.PointLight(0x6ee7ff, 0.7, 5, 2);
+    const engineGlowA = new THREE.PointLight(0xff1e3a, 1.0, 6, 2);
+    const engineGlowB = new THREE.PointLight(0x00d9ff, 0.7, 5, 2);
     scene.add(engineGlowA, engineGlowB);
 
     // Visible sun core
@@ -611,7 +611,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           return new THREE.MeshStandardMaterial({ color: 0x0c0e12, metalness: 0.5, roughness: 0.55, envMapIntensity: 1.0 });
         }
         if (name === 'plasma' || name === 'glow' || name === 'glow.001') {
-          const baseColor = old.color ? old.color.clone() : new THREE.Color(0x6ee7ff);
+          const baseColor = old.color ? old.color.clone() : new THREE.Color(0x00d9ff);
           const intensity = name === 'plasma' ? 2.4 : 1.5;
           const mat = new THREE.MeshStandardMaterial({
             color: baseColor, emissive: baseColor.clone(), emissiveIntensity: intensity,
@@ -1189,7 +1189,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
                 intensity: c.material.emissiveIntensity ?? 1,
               });
             }
-            c.material.emissive.lerp(new THREE.Color(0x6ee7ff), 0.35);
+            c.material.emissive.lerp(new THREE.Color(0x00d9ff), 0.35);
             c.material.emissiveIntensity = Math.max(c.material.emissiveIntensity ?? 0, 0.6);
           }
         });
