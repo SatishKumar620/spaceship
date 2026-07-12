@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
 import './App.css';
 import VesselViewer from './components/VesselViewer';
+
+gsap.registerPlugin(ScrollTrigger);
 import AboutSection from './components/AboutSection';
 import Navbar from './components/Navbar';
 import GalacticRewards from "./components/GalacticRewards";
@@ -38,12 +43,44 @@ export default function App() {
     }
   }, [isLoaded]);
 
+  React.useEffect(() => {
+    // Initialize Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      smoothTouch: false, // Let mobile touch scroll naturally
+      touchMultiplier: 1.5,
+    });
+
+    window.lenis = lenis;
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      window.lenis = null;
+    };
+  }, []);
+
   const scrollToAbout = () => {
     const el = document.getElementById('about');
     if (el) {
       const yOffset = -80;
-      const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(el, { offset: yOffset });
+      } else {
+        const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }
   };
 

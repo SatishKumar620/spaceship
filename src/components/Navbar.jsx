@@ -67,9 +67,13 @@ export default function Navbar() {
     setMenuOpen(false);
     const el = document.getElementById(id);
     if (el) {
-      const yOffset = -80; // offset the fixed navigation bar
-      const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      const yOffset = -80;
+      if (window.lenis) {
+        window.lenis.scrollTo(el, { offset: yOffset });
+      } else {
+        const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }
   };
 
