@@ -23,6 +23,11 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
   const explodeStateRef = useRef({ t: 0 });
   const isExplodedRef = useRef(isExploded);
 
+  // Refs to share Three.js objects between the two effects
+  const modelRef = useRef(null);
+  const sceneRef = useRef(null);
+  const labelRegistryRef = useRef([]);
+
   // Update ref when prop changes
   useEffect(() => {
     isExplodedRef.current = isExploded;
@@ -64,6 +69,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
        2. SCENE + CAMERA
        ================================================================ */
     const scene = new THREE.Scene();
+    sceneRef.current = scene;
 
     const camera = new THREE.PerspectiveCamera(36, initialWidth / initialHeight, 0.1, 2000);
     const CAMERA_HOME = new THREE.Vector3(3.8, 1.5, 5.1);
@@ -569,6 +575,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     const loader = new GLTFLoader();
     loader.load('/models/spaceship.glb', (gltf) => {
       model = gltf.scene;
+      modelRef.current = model;
 
       function buildMaterialFor(old) {
         const name = (old.name || '').toLowerCase();
@@ -802,6 +809,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           el.style.opacity = isExplodedRef.current ? 1 : 0;
           if (labelLayer) labelLayer.appendChild(el);
           labelRegistry.push({ el, target: group });
+          labelRegistryRef.current = labelRegistry;
         }
       });
 
@@ -1446,7 +1454,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
      REACT-CONTROLLED EXPLODE TWEEN
      ================================================================ */
   useEffect(() => {
-    if (!model) return;
+    if (!modelRef.current) return;
 
     if (explodeTweenRef.current) explodeTweenRef.current.kill();
     if (cameraTweenRef.current) cameraTweenRef.current.kill();
@@ -1466,7 +1474,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     });
 
     // Animate camera zoom manually or using GSAP
-    const sceneCamera = scene.children.find(c => c.isPerspectiveCamera);
+    const sceneCamera = sceneRef.current.children.find(c => c.isPerspectiveCamera);
     if (sceneCamera) {
       gsap.to(sceneCamera, {
         zoom: isExploded ? 0.8 : 1.0,
@@ -1482,7 +1490,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     }
 
     // Toggle label element visibility
-    labelRegistry.forEach(({ el }) => {
+    labelRegistryRef.current.forEach(({ el }) => {
       gsap.to(el, {
         opacity: isExploded ? 1 : 0,
         duration: isExploded ? 0.8 : 0.4,
