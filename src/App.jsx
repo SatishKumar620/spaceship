@@ -70,17 +70,30 @@ export default function App() {
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
-    gsap.ticker.lagSmoothing(0);
+    let rafId;
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
       window.lenis = null;
     };
   }, []);
+
+  React.useEffect(() => {
+    if (isLoaded) {
+      // Safely animate DOM elements after loader has fully unmounted and DOM is stable
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      tl.from('#introEyebrow', { y: 16, opacity: 0, duration: 0.6, delay: 0.25 })
+        .from('#introHeading', { y: 34, opacity: 0, duration: 0.9 }, '-=0.45')
+        .from('#introSub', { y: 20, opacity: 0, duration: 0.8 }, '-=0.55')
+        .from('#introCta', { y: 16, opacity: 0, duration: 0.7 }, '-=0.5');
+    }
+  }, [isLoaded]);
 
   const scrollToAbout = () => {
     const el = document.getElementById('about');

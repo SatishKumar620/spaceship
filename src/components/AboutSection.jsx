@@ -51,7 +51,7 @@ export default function AboutSection() {
           }
         });
       },
-      { threshold: 0.22 }
+      { threshold: 0.02 }
     );
     observer.observe(el);
     return () => observer.disconnect();

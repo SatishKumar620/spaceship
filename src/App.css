@@ -414,6 +414,10 @@
   }
 
   @media (max-width: 860px){
+    .hero-section, .hero {
+      min-height: auto !important;
+      height: 100vh !important;
+    }
     .part-label{ font-size:10px; }
     .part-label .chip{ padding:4px 8px; }
     .hud-readout{ display:none; }

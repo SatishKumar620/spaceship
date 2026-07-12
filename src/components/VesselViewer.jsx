@@ -1026,14 +1026,10 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       // Fire callback to hide loader in App.jsx
       onLoaded();
 
-      // Trigger standard entrance animations
+      // Trigger standard entrance animations for ThreeJS scene
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
       tl.to(canvas, { opacity: 1, duration: 1.4 })
         .from(modelGroup.scale, { x: 0.001, y: 0.001, z: 0.001, duration: 1.6, ease: 'power4.out' }, '<')
-        .from('#introEyebrow', { y: 16, opacity: 0, duration: 0.6 }, '-=1.0')
-        .from('#introHeading', { y: 34, opacity: 0, duration: 0.9 }, '-=0.45')
-        .from('#introSub', { y: 20, opacity: 0, duration: 0.8 }, '-=0.55')
-        .from('#introCta', { y: 16, opacity: 0, duration: 0.7 }, '-=0.5')
         .from('#interactHint', { opacity: 0, y: -10, duration: 0.6 }, '-=0.3');
 
       // Setup ScrollTrigger interaction
