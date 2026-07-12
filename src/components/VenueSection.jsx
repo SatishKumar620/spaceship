@@ -163,6 +163,37 @@ animationDuration:`${5+Math.random()*6}s`
 
 </div>
 
+
+<div className="mapSection">
+
+  <div className="mapHud">
+    <span></span>
+    <h3>MISSION COORDINATES</h3>
+    <span></span>
+  </div>
+
+  <div className="mapFrame">
+    <iframe
+      title="RVSCET Jamshedpur"
+      src="https://www.google.com/maps?q=RVS+College+of+Engineering+and+Technology+Jamshedpur&output=embed"
+      loading="lazy"
+      allowFullScreen
+      referrerPolicy="no-referrer-when-downgrade"
+    />
+    <div className="mapScan"></div>
+  </div>
+
+  <a
+    className="mapButton"
+    href="https://maps.google.com/?q=RVS+College+of+Engineering+and+Technology+Jamshedpur"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    OPEN IN GOOGLE MAPS
+  </a>
+
+</div>
+
 </section>
 
 )
