@@ -9,12 +9,13 @@ import {
   VenueSection,
   PrizesSection,
   PrizeDockSection,
-  ScheduleSection,
   ProblemsSection,
   EventsSection,
   SponsorsSection,
   FaqSection,
-} from './components/Sections';
+} from "./components/Sections";
+
+import ScheduleSection from "./components/ScheduleSection";
 
 export default function App() {
   const [isExploded, setIsExploded] = useState(false);
