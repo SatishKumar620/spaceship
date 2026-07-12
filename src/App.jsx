@@ -70,6 +70,12 @@ export default function App() {
   }, [isLoaded]);
 
   React.useEffect(() => {
+    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.innerWidth < 860;
+    if (isTouch) {
+      window.lenis = null;
+      return;
+    }
+
     // Initialize Lenis smooth scroll safely (handling Vite ES Module interop)
     const LenisClass = Lenis.default || Lenis;
     const lenis = new LenisClass({
@@ -100,8 +106,6 @@ export default function App() {
     };
   }, []);
 
-
-
   React.useEffect(() => {
     if (isLoaded) {
       // First ensure elements are immediately visible (safety net for mobile)
@@ -124,6 +128,12 @@ export default function App() {
         // If GSAP fails for any reason, elements are already visible above
         console.warn('GSAP animation skipped:', e);
       }
+
+      // Refresh ScrollTrigger after a short delay to ensure layout has settled
+      const refreshTimer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 300);
+      return () => clearTimeout(refreshTimer);
     }
   }, [isLoaded]);
 
