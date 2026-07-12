@@ -3,6 +3,7 @@ import './App.css';
 import VesselViewer from './components/VesselViewer';
 import AboutSection from './components/AboutSection';
 import Navbar from './components/Navbar';
+import GalacticRewards from "./components/GalacticRewards";
 import {
   VenueSection,
   PrizesSection,
@@ -126,6 +127,7 @@ export default function App() {
       <EventsSection />
       <SponsorsSection />
       <FaqSection />
-    </>
+      <GalacticRewards />
+</>
   );
 }

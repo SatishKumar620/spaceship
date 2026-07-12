@@ -1,0 +1,527 @@
+.galacticRewards{
+position:relative;
+overflow:hidden;
+padding:140px 24px;
+background:#06080d;
+isolation:isolate;
+}
+
+.bgGrid{
+position:absolute;
+inset:0;
+background-image:
+linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+background-size:70px 70px;
+opacity:.3;
+animation:gridMove 20s linear infinite;
+}
+
+.bgGlow{
+position:absolute;
+width:700px;
+height:700px;
+border-radius:50%;
+filter:blur(130px);
+opacity:.28;
+pointer-events:none;
+}
+
+.glowA{
+left:-180px;
+top:-150px;
+background:#ff2d3b;
+animation:pulseA 8s ease-in-out infinite;
+}
+
+.glowB{
+right:-220px;
+bottom:-220px;
+background:#39a8ff;
+animation:pulseB 10s ease-in-out infinite;
+}
+
+.scanLines{
+position:absolute;
+inset:0;
+background:repeating-linear-gradient(
+0deg,
+transparent 0px,
+transparent 4px,
+rgba(255,255,255,.02) 5px
+);
+pointer-events:none;
+animation:scanMove 6s linear infinite;
+}
+
+.titleWrap{
+position:relative;
+text-align:center;
+max-width:850px;
+margin:auto;
+z-index:5;
+}
+
+.eyebrow{
+letter-spacing:8px;
+font-size:13px;
+font-weight:700;
+color:#39a8ff;
+text-transform:uppercase;
+margin-bottom:18px;
+}
+
+.titleWrap h2{
+font-size:62px;
+font-weight:900;
+color:#fff;
+line-height:1.05;
+margin:0;
+}
+
+.titleWrap h2 span{
+color:#ff2d3b;
+text-shadow:0 0 25px rgba(255,45,59,.7);
+}
+
+.subtitle{
+margin-top:24px;
+color:#bfc8d5;
+font-size:18px;
+line-height:1.8;
+max-width:650px;
+margin-inline:auto;
+}
+
+.rewardWrap{
+margin-top:90px;
+display:flex;
+justify-content:center;
+gap:35px;
+flex-wrap:wrap;
+position:relative;
+z-index:5;
+}
+
+.rewardCard{
+position:relative;
+width:320px;
+padding:90px 28px 45px;
+border-radius:28px;
+overflow:hidden;
+background:rgba(14,19,30,.72);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+transition:.45s;
+cursor:pointer;
+transform-style:preserve-3d;
+}
+
+.rewardCard:hover{
+transform:
+translateY(-15px)
+rotateX(6deg)
+rotateY(-6deg)
+scale(1.03);
+box-shadow:
+0 0 70px rgba(255,45,59,.18),
+0 0 120px rgba(57,168,255,.15);
+}
+
+.rewardCard::before{
+content:"";
+position:absolute;
+inset:0;
+padding:1px;
+border-radius:inherit;
+background:
+linear-gradient(
+135deg,
+#ff2d3b,
+#39a8ff,
+#ffffff,
+#ff2d3b
+);
+-webkit-mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+animation:borderSpin 8s linear infinite;
+}
+
+.cursorGlow{
+position:absolute;
+width:180px;
+height:180px;
+border-radius:50%;
+background:radial-gradient(circle,#39a8ff55,transparent 70%);
+top:-60px;
+left:-60px;
+filter:blur(20px);
+animation:cursorFloat 8s ease-in-out infinite;
+}
+
+.energyRing{
+position:absolute;
+left:50%;
+top:130px;
+width:170px;
+height:170px;
+margin-left:-85px;
+border-radius:50%;
+border:2px solid rgba(57,168,255,.35);
+animation:ringRotate 12s linear infinite;
+}
+
+.ring2{
+width:220px;
+height:220px;
+margin-left:-110px;
+margin-top:-25px;
+border-color:rgba(255,45,59,.25);
+animation-direction:reverse;
+animation-duration:18s;
+}
+
+.crystal{
+width:110px;
+margin:auto;
+animation:floatCrystal 5s ease-in-out infinite;
+position:relative;
+z-index:2;
+}
+
+.crystal svg{
+width:100%;
+display:block;
+filter:
+drop-shadow(0 0 15px #39a8ff)
+drop-shadow(0 0 35px #ff2d3b);
+}
+
+.place{
+margin-top:45px;
+font-size:13px;
+letter-spacing:5px;
+text-align:center;
+color:#39a8ff;
+}
+
+.rewardCard h3{
+margin:18px 0 12px;
+text-align:center;
+color:#fff;
+font-size:28px;
+font-weight:800;
+}
+
+.amount{
+font-size:46px;
+font-weight:900;
+text-align:center;
+color:#fff;
+text-shadow:0 0 20px rgba(255,45,59,.5);
+}
+
+.divider{
+width:70%;
+height:1px;
+margin:30px auto;
+background:
+linear-gradient(
+90deg,
+transparent,
+#39a8ff,
+transparent
+);
+}
+
+.bottomGlow{
+position:absolute;
+left:0;
+right:0;
+bottom:-90px;
+margin:auto;
+width:240px;
+height:180px;
+background:#ff2d3b;
+filter:blur(80px);
+opacity:.18;
+}
+
+.first{
+transform:translateY(-30px);
+}
+
+.second{
+transform:translateY(25px);
+}
+
+.third{
+transform:translateY(55px);
+}
+
+.particles{
+position:absolute;
+inset:0;
+overflow:hidden;
+pointer-events:none;
+z-index:1;
+}
+
+.particles span{
+position:absolute;
+bottom:-40px;
+width:4px;
+height:4px;
+border-radius:50%;
+background:#39a8ff;
+box-shadow:
+0 0 8px #39a8ff,
+0 0 20px #39a8ff;
+animation:particleUp linear infinite;
+opacity:.75;
+}
+
+.particles span:nth-child(3n){
+background:#ff2d3b;
+box-shadow:
+0 0 8px #ff2d3b,
+0 0 20px #ff2d3b;
+}
+
+.rewardCard::after{
+content:"";
+position:absolute;
+top:-150%;
+left:-40%;
+width:60%;
+height:400%;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.35),
+transparent
+);
+transform:rotate(25deg);
+animation:shimmer 5s linear infinite;
+}
+
+.rewardCard:hover .crystal{
+animation:floatCrystal .9s ease-in-out infinite;
+}
+
+.rewardCard:hover .energyRing{
+animation-duration:4s;
+}
+
+.rewardCard:hover .bottomGlow{
+opacity:.45;
+}
+
+@keyframes floatCrystal{
+
+0%,100%{
+transform:
+translateY(0px)
+rotate(0deg);
+}
+
+50%{
+transform:
+translateY(-16px)
+rotate(2deg);
+}
+
+}
+
+@keyframes ringRotate{
+
+from{
+transform:
+translateX(-50%)
+rotate(0deg);
+}
+
+to{
+transform:
+translateX(-50%)
+rotate(360deg);
+}
+
+}
+
+@keyframes borderSpin{
+
+0%{
+filter:hue-rotate(0deg);
+}
+
+100%{
+filter:hue-rotate(360deg);
+}
+
+}
+
+@keyframes shimmer{
+
+0%{
+left:-60%;
+}
+
+100%{
+left:170%;
+}
+
+}
+
+@keyframes particleUp{
+
+0%{
+transform:
+translateY(0)
+scale(.4);
+opacity:0;
+}
+
+20%{
+opacity:1;
+}
+
+100%{
+transform:
+translateY(-120vh)
+scale(1.3);
+opacity:0;
+}
+
+}
+
+@keyframes cursorFloat{
+
+0%,100%{
+transform:
+translate(0,0);
+}
+
+25%{
+transform:
+translate(70px,40px);
+}
+
+50%{
+transform:
+translate(30px,110px);
+}
+
+75%{
+transform:
+translate(-30px,60px);
+}
+
+}
+
+@keyframes pulseA{
+
+0%,100%{
+transform:scale(1);
+opacity:.25;
+}
+
+50%{
+transform:scale(1.25);
+opacity:.45;
+}
+
+}
+
+@keyframes pulseB{
+
+0%,100%{
+transform:scale(1);
+opacity:.22;
+}
+
+50%{
+transform:scale(1.35);
+opacity:.42;
+}
+
+}
+
+@keyframes scanMove{
+
+0%{
+transform:translateY(-100%);
+}
+
+100%{
+transform:translateY(100%);
+}
+
+}
+
+@keyframes gridMove{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(70px);
+}
+
+}
+
+@media(max-width:1100px){
+
+.rewardWrap{
+gap:24px;
+}
+
+.rewardCard{
+width:300px;
+}
+
+.first,
+.second,
+.third{
+transform:none;
+}
+
+}
+
+@media(max-width:768px){
+
+.galacticRewards{
+padding:90px 18px;
+}
+
+.titleWrap h2{
+font-size:42px;
+}
+
+.subtitle{
+font-size:16px;
+}
+
+.rewardCard{
+width:100%;
+max-width:360px;
+}
+
+.rewardWrap{
+margin-top:60px;
+}
+
+.energyRing{
+display:none;
+}
+
+.bgGlow{
+filter:blur(90px);
+}
+
+}
+
