@@ -1484,6 +1484,16 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       controls.enabled = flightProgressRef.current < 0.001;
       controls.autoRotate = controls.enabled;
       controls.update();
+
+      // Safety clamp: guards against Chrome's "Desktop site" zoom-to-fit
+      // hack on mobile scrambling touch/dolly math and flinging the camera
+      // inside the model. Cheap, runs every frame, invisible in normal use.
+      const distFromTarget = camera.position.distanceTo(controls.target);
+      if (distFromTarget < controls.minDistance || distFromTarget > controls.maxDistance) {
+        const clamped = THREE.MathUtils.clamp(distFromTarget, controls.minDistance, controls.maxDistance);
+        camera.position.sub(controls.target).setLength(clamped).add(controls.target);
+      }
+
       composer.render();
     }
     animate();
