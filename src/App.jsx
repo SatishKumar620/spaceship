@@ -55,8 +55,9 @@ export default function App() {
   }, [isLoaded]);
 
   React.useEffect(() => {
-    // Initialize Lenis smooth scroll
-    const lenis = new Lenis({
+    // Initialize Lenis smooth scroll safely (handling Vite ES Module interop)
+    const LenisClass = Lenis.default || Lenis;
+    const lenis = new LenisClass({
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',

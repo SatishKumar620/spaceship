@@ -42,6 +42,8 @@ export default function AboutSection() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+
+    // Strategy 1: Intersection Observer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -51,10 +53,24 @@ export default function AboutSection() {
           }
         });
       },
-      { threshold: 0.02 }
+      { threshold: 0.01 }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+
+    // Strategy 2: Scroll Listener Fallback (Guarantees visibility on scroll)
+    const handleScroll = () => {
+      if (window.scrollY > 120) {
+        setInView(true);
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Check immediately on mount
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
