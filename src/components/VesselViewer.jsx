@@ -399,10 +399,10 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     /* ================================================================
        5. LIGHTING RIG
        ================================================================ */
-    const ambient = new THREE.AmbientLight(0x0a0f1d, 0.02);
+    const ambient = new THREE.AmbientLight(0x0a0f1d, 0.08);
     scene.add(ambient);
 
-    const hemiFill = new THREE.HemisphereLight(0x1a2f63, 0x020306, 0.03);
+    const hemiFill = new THREE.HemisphereLight(0x1a2f63, 0x020306, 0.10);
     scene.add(hemiFill);
 
     const keyLight = new THREE.DirectionalLight(0xdbe9ff, 1.95);
