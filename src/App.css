@@ -62,6 +62,14 @@
   /* ============================================================
      HERO
      ============================================================ */
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    min-height: 640px;
+    overflow: hidden;
+    z-index: 2;
+  }
   .hero{
     position:relative;
     width:100vw; height:100vh;
@@ -210,6 +218,7 @@
     cursor:pointer;
     letter-spacing:0.02em;
     transition:transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    pointer-events:auto;
   }
   .btn-primary{
     background:var(--off-white);
