@@ -4,6 +4,7 @@ import VesselViewer from './components/VesselViewer';
 import AboutSection from './components/AboutSection';
 import Navbar from './components/Navbar';
 import GalacticRewards from "./components/GalacticRewards";
+import VenueSectionNew from "./components/VenueSection";
 import {
   VenueSection,
   PrizesSection,
@@ -120,7 +121,7 @@ export default function App() {
         </div>
       </section>
 
-      <VenueSection />
+      <VenueSectionNew />
       <PrizesSection />
       <ScheduleSection />
       <ProblemsSection />

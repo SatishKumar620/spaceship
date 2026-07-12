@@ -64,7 +64,7 @@ export default function VenueSection(){
 
 return(
 
-<section className="venueSection">
+<section id="venue" className="venueSection">
 
 <div className="spaceGrid"></div>
 <div className="nebula red"></div>
