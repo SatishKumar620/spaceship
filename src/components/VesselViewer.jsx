@@ -1549,6 +1549,16 @@ sunCoreSprite.scale.setScalar(14 + Math.sin(t * 5.0) * 0.4);
     if (homeSec) observer.observe(homeSec);
     if (aboutSec) observer.observe(aboutSec);
 
+    // fix: once the ship has finished docking, stop treating #about's
+    // (large, long-lived) intersection as a reason to keep the full
+    // render loop running — it was churning on the main thread for
+    // nearly the entire time users scrolled through About, competing
+    // with touch-scroll input processing and making scroll feel stuck.
+    const handleDocked = () => { if (aboutSec) observer.unobserve(aboutSec); };
+    const handleUndocked = () => { if (aboutSec) observer.observe(aboutSec); };
+    window.addEventListener('ship:docked', handleDocked);
+    window.addEventListener('ship:undocked', handleUndocked);
+
     // Initial check: if both elements are offscreen, start paused
     const homeRect = homeSec ? homeSec.getBoundingClientRect() : null;
     const aboutRect = aboutSec ? aboutSec.getBoundingClientRect() : null;
@@ -1565,6 +1575,8 @@ sunCoreSprite.scale.setScalar(14 + Math.sin(t * 5.0) * 0.4);
        ================================================================ */
     return () => {
       observer.disconnect();
+      window.removeEventListener('ship:docked', handleDocked);
+      window.removeEventListener('ship:undocked', handleUndocked);
       cancelAnimationFrame(animateId);
       resizeObserver.disconnect();
       window.removeEventListener('resize', onWindowResize);
