@@ -143,12 +143,11 @@ export default function App() {
     // Dispatch a custom event so AboutSection can force-reveal its content
     window.dispatchEvent(new CustomEvent('forceReveal'));
     const yOffset = -80;
-    // Stop Lenis momentarily then scroll — fixes mobile Lenis blocking native scroll
     if (window.lenis) {
-      window.lenis.stop();
-      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-      setTimeout(() => { if (window.lenis) window.lenis.start(); }, 1200);
+      // fix: was calling lenis.stop() before scrolling, which adds the
+      // "lenis-stopped" class (overflow:hidden) and blocked the very
+      // window.scrollTo() call for ~1.2s. Use Lenis's own scrollTo instead.
+      window.lenis.scrollTo(el, { offset: yOffset, duration: 1.2 });
     } else {
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });

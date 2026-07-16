@@ -1058,7 +1058,10 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           scrub: 1,
           onUpdate: (self) => {
             flightProgressRef.current = self.progress;
-            canvas.style.pointerEvents = self.progress > 0.001 ? 'none' : 'auto';
+            const wantsPointerEvents = self.progress > 0.001 ? 'none' : 'auto';
+            if (canvas.style.pointerEvents !== wantsPointerEvents) {
+              canvas.style.pointerEvents = wantsPointerEvents; // fix: only write on change, avoid per-scroll-tick style recalc
+            }
             const docked = self.progress > 0.985;
             if (docked !== isDockedRef.current) {
               isDockedRef.current = docked;
@@ -1159,6 +1162,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
     controls.enablePan = false;
+    controls.enableZoom = false; // fix: default true was capturing wheel/scroll over the full-viewport hero canvas
     controls.minDistance = 3.2;
     controls.maxDistance = 8;
     controls.minPolarAngle = Math.PI * 0.16;
