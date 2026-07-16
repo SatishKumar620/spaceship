@@ -1382,9 +1382,16 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         const flightP = flightProgressRef.current;
 
         if (flightP > 0.0005) {
-          // Mid-flight (or docked): fly the model along an arc toward the
-          // live screen position of the About section's dock target.
-          if (dockTargetEl) {
+          // Mid-flight: fly the model along an arc toward the live screen
+          // position of the About section's dock target.
+          // fix: getBoundingClientRect() forces a synchronous layout flush.
+          // This used to run every single rAF frame for as long as the ship
+          // stayed docked (i.e. indefinitely, the whole time a user is
+          // scrolling around the About section+), pinning the main thread
+          // and making touch-scroll feel disabled. Only re-measure while
+          // actually still transitioning; once docked, the target's screen
+          // position is effectively static, so reuse the last value.
+          if (dockTargetEl && flightP < 0.999) {
             const rect = dockTargetEl.getBoundingClientRect();
             const cx = rect.left + rect.width / 2;
             const cy = rect.top + rect.height / 2;
