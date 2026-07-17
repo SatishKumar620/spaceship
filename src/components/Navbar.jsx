@@ -83,7 +83,7 @@ export default function Navbar() {
     <header className={`site-nav ${scrolled ? 'is-scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
       <div className="site-nav-inner">
         <a href="#home" className="site-nav-brand" onClick={goTo('home')}>
-          HACKQUBIT<span>// V2</span>
+          HACKQUBIT<span>2.O</span>
         </a>
 
         <nav className="site-nav-links" ref={listRef}>

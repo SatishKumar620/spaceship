@@ -917,6 +917,20 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       return tex;
     }
 
+    // Add a distant sun/star for visual flair (0 performance cost)
+    const sunGeometry = new THREE.PlaneGeometry(300, 300);
+    const sunMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0x00f2fe, 
+      transparent: true, 
+      opacity: 0.15, 
+      depthWrite: false, 
+      blending: THREE.AdditiveBlending 
+    });
+    const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
+    sunMesh.position.set(-50, 20, -100);
+    sunMesh.lookAt(0, 0, 0);
+    scene.add(sunMesh);
+
     async function loadSpaceStation() {
       try {
         const badge = document.getElementById('stationDebugBadge');
@@ -1089,9 +1103,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       // Note: [data-reveal] animations have been moved to a lightweight
       // CSS IntersectionObserver in App.jsx for vastly improved scrolling performance!
 
-      if (!isMobile) {
         setTimeout(loadSpaceStation, 400);
-      }
     }
 
     /* ================================================================

@@ -379,7 +379,7 @@ const PACKAGES = [
     accent: 'var(--sx-red-2)',
     popular: true,
     benefits: [
-      'Top-tier branding: "HackQubit V2 presented by [You]"',
+      'Top-tier branding: "HackQubit 2.O presented by [You]"',
       '10-minute keynote/opening slot',
       'Premium physical booth space',
       '4 crew representative passes',
@@ -454,7 +454,7 @@ export function SponsorsSection() {
           SPONSOR <span className="site-title-accent">BENEFITS</span>
         </h2>
         <p className="site-desc" data-reveal="true">
-          Partner with HackQubit V2 to connect with hundreds of future innovators, promote your APIs, and recruit elite developers.
+          Partner with HackQubit 2.O to connect with hundreds of future innovators, promote your APIs, and recruit elite developers.
         </p>
 
         {/* Perks Grid */}
@@ -505,7 +505,7 @@ export function SponsorsSection() {
         <div className="sponsor-cta-box" data-reveal="true">
           <h3>CONNECT WITH OUR PARTNERSHIP TEAM</h3>
           <p>Ready to warp your brand visibility? Request our full sponsor pitch prospectus deck.</p>
-          <a href="mailto:partnerships@hackqubit.com?subject=HackQubit%20V2%20Sponsorship%20Inquiry" className="btn btn-primary">
+          <a href="mailto:partnerships@hackqubit.com?subject=HackQubit%202.O%20Sponsorship%20Inquiry" className="btn btn-primary">
             BE OUR SPONSOR
           </a>
         </div>

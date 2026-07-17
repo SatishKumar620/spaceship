@@ -118,10 +118,10 @@ export default function AboutSection() {
             <span className="about-hud-line"></span>
           </div>
           <h2 className="about-title">
-            ABOUT <span className="about-title-accent">HACKQUBIT V2</span>
+            ABOUT <span className="about-title-accent">HACKQUBIT 2.O</span>
           </h2>
           <p className="about-desc">
-            HackQubit V2 is the next chapter of our flagship national-level hackathon —
+            HackQubit 2.O is the next chapter of our flagship national-level hackathon —
             a 48-hour arena where students from across the country converge to design,
             build, and ship real solutions under pressure. Powered by mentorship from
             industry engineers and judged by builders who've shipped at scale, it's

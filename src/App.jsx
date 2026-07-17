@@ -212,7 +212,7 @@ export default function App() {
         {/* HUD overlay — pointer-events:none on container, restored on interactive children */}
         <div className="hero-ui" style={{ pointerEvents: 'none' }}>
           <div className="top-row" style={{ pointerEvents: 'none' }}>
-            <div className="brand">HACKQUBIT<span>// V2</span></div>
+            <div className="brand">HACKQUBIT<span>2.O</span></div>
             <div className="hud-readout">
               SYS.STATUS: <b>NOMINAL</b><br />
               POWER.CORE: <b>100%</b><br />
@@ -293,7 +293,7 @@ export default function App() {
               &times;
             </button>
             <h3>SECURE YOUR PORT</h3>
-            <p className="modal-subtitle">Register your crew for HackQubit V2</p>
+            <p className="modal-subtitle">Register your crew for HackQubit 2.O</p>
             <form onSubmit={(e) => {
               e.preventDefault();
               alert("Registration successful! Crew credentials dispatched to warp coordinate.");

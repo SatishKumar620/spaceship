@@ -20,7 +20,7 @@ export default function Footer() {
           {/* Logo & Description */}
           <div className="footer-brand">
             <h2 className="footer-logo glow-text">
-              HACKQUBIT <span className="footer-logo-accent">// V2</span>
+              HACKQUBIT <span className="footer-logo-accent">2.O</span>
             </h2>
             <p className="footer-description">
               A 24-hour interstellar coding odyssey. Build high-performance applications, push limits, and secure prizes.
