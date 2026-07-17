@@ -21,13 +21,6 @@ const prizes = [
     amount: "₹20,000",
     desc: "+ Sponsor swag bundle",
     cls: "third"
-  },
-  {
-    place: "Track",
-    title: "Best Track Awards",
-    amount: "₹5,000",
-    desc: "Per track, across all categories",
-    cls: "track"
   }
 ];
 
@@ -37,64 +30,90 @@ const getPrizeIcon = (cls) => {
     return (
       <svg viewBox="0 0 120 120" fill="none">
         <defs>
-          <linearGradient id="grad-first" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#ffd700"/>
-            <stop offset="50%" stopColor="#ff8c00"/>
-            <stop offset="100%" stopColor="#ffffff"/>
+          <linearGradient id="grad-gold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#ffdf00"/>
+            <stop offset="50%" stopColor="#d4af37"/>
+            <stop offset="100%" stopColor="#ffdf00"/>
+          </linearGradient>
+          <linearGradient id="grad-gold-dark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#d4af37"/>
+            <stop offset="100%" stopColor="#996515"/>
           </linearGradient>
         </defs>
-        {/* Crown / Trophy shape */}
-        <path d="M20,40 L35,80 L60,105 L85,80 L100,40 L70,55 L60,20 L50,55 Z" fill="url(#grad-first)" stroke="#fff" strokeWidth="2" strokeLinejoin="round"/>
-        <circle cx="60" cy="20" r="6" fill="#fff" />
-        <circle cx="20" cy="40" r="4" fill="#fff" />
-        <circle cx="100" cy="40" r="4" fill="#fff" />
+        {/* Real Trophy Shape */}
+        {/* Base */}
+        <path d="M40,110 L80,110 L85,115 L35,115 Z" fill="url(#grad-gold-dark)" stroke="#fff" strokeWidth="1"/>
+        <path d="M45,100 L75,100 L80,110 L40,110 Z" fill="url(#grad-gold)" stroke="#fff" strokeWidth="1"/>
+        {/* Stem */}
+        <path d="M55,70 L65,70 L60,100 Z" fill="url(#grad-gold-dark)" stroke="#fff" strokeWidth="1"/>
+        {/* Cup */}
+        <path d="M30,20 C30,60 40,70 60,70 C80,70 90,60 90,20 Z" fill="url(#grad-gold)" stroke="#fff" strokeWidth="1.5"/>
+        {/* Handles */}
+        <path d="M30,30 C15,30 15,50 35,55" fill="none" stroke="url(#grad-gold-dark)" strokeWidth="4" strokeLinecap="round"/>
+        <path d="M90,30 C105,30 105,50 85,55" fill="none" stroke="url(#grad-gold-dark)" strokeWidth="4" strokeLinecap="round"/>
+        {/* Top Rim */}
+        <ellipse cx="60" cy="20" rx="30" ry="8" fill="url(#grad-gold-dark)" stroke="#fff" strokeWidth="1"/>
+        <ellipse cx="60" cy="20" rx="26" ry="5" fill="#4a3b00"/>
+        {/* Star Sparkle */}
+        <path d="M60,35 L62,45 L72,47 L62,49 L60,59 L58,49 L48,47 L58,45 Z" fill="#fff"/>
       </svg>
     );
   } else if (cls === 'second') {
     return (
       <svg viewBox="0 0 120 120" fill="none">
         <defs>
-          <linearGradient id="grad-second" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#e0e0e0"/>
-            <stop offset="50%" stopColor="#8a9ba8"/>
-            <stop offset="100%" stopColor="#ffffff"/>
+          <linearGradient id="grad-silver" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#f5f5f5"/>
+            <stop offset="50%" stopColor="#c0c0c0"/>
+            <stop offset="100%" stopColor="#e0e0e0"/>
+          </linearGradient>
+          <linearGradient id="grad-silver-dark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#a9a9a9"/>
+            <stop offset="100%" stopColor="#808080"/>
           </linearGradient>
         </defs>
-        {/* Diamond / Shield shape */}
-        <polygon points="60,10 100,45 60,110 20,45" fill="url(#grad-second)" stroke="#fff" strokeWidth="2" strokeLinejoin="round"/>
-        <polygon points="60,10 80,45 60,90 40,45" fill="rgba(255,255,255,0.4)" />
+        {/* Base */}
+        <path d="M42,105 L78,105 L82,110 L38,110 Z" fill="url(#grad-silver-dark)" stroke="#fff" strokeWidth="1"/>
+        <path d="M47,95 L73,95 L78,105 L42,105 Z" fill="url(#grad-silver)" stroke="#fff" strokeWidth="1"/>
+        {/* Stem */}
+        <path d="M56,70 L64,70 L60,95 Z" fill="url(#grad-silver-dark)" stroke="#fff" strokeWidth="1"/>
+        {/* Cup */}
+        <path d="M35,25 C35,55 45,70 60,70 C75,70 85,55 85,25 Z" fill="url(#grad-silver)" stroke="#fff" strokeWidth="1.5"/>
+        {/* Handles */}
+        <path d="M35,35 C22,35 22,50 40,55" fill="none" stroke="url(#grad-silver-dark)" strokeWidth="3" strokeLinecap="round"/>
+        <path d="M85,35 C98,35 98,50 80,55" fill="none" stroke="url(#grad-silver-dark)" strokeWidth="3" strokeLinecap="round"/>
+        {/* Top Rim */}
+        <ellipse cx="60" cy="25" rx="25" ry="6" fill="url(#grad-silver-dark)" stroke="#fff" strokeWidth="1"/>
+        <ellipse cx="60" cy="25" rx="21" ry="3" fill="#333333"/>
       </svg>
     );
   } else if (cls === 'third') {
     return (
       <svg viewBox="0 0 120 120" fill="none">
         <defs>
-          <linearGradient id="grad-third" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id="grad-bronze" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#cd7f32"/>
-            <stop offset="50%" stopColor="#a0522d"/>
-            <stop offset="100%" stopColor="#ffffff"/>
+            <stop offset="50%" stopColor="#b87333"/>
+            <stop offset="100%" stopColor="#8c5226"/>
+          </linearGradient>
+          <linearGradient id="grad-bronze-dark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#8c5226"/>
+            <stop offset="100%" stopColor="#5c3317"/>
           </linearGradient>
         </defs>
-        {/* Hexagon / Core shape */}
-        <polygon points="60,15 95,35 95,85 60,105 25,85 25,35" fill="url(#grad-third)" stroke="#fff" strokeWidth="2" strokeLinejoin="round"/>
-        <circle cx="60" cy="60" r="20" fill="rgba(255,255,255,0.3)" stroke="#fff" strokeWidth="1"/>
-      </svg>
-    );
-  } else {
-    // Track Prize
-    return (
-      <svg viewBox="0 0 120 120" fill="none">
-        <defs>
-          <linearGradient id="grad-track" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#00f2fe"/>
-            <stop offset="50%" stopColor="#4facfe"/>
-            <stop offset="100%" stopColor="#ffffff"/>
-          </linearGradient>
-        </defs>
-        {/* Tech Insignia */}
-        <rect x="35" y="35" width="50" height="50" rx="10" fill="url(#grad-track)" stroke="#fff" strokeWidth="2" transform="rotate(45 60 60)"/>
-        <circle cx="60" cy="60" r="10" fill="#fff"/>
-        <path d="M10,60 L30,60 M90,60 L110,60 M60,10 L60,30 M60,90 L60,110" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
+        {/* Base */}
+        <path d="M45,100 L75,100 L79,105 L41,105 Z" fill="url(#grad-bronze-dark)" stroke="#fff" strokeWidth="1"/>
+        <path d="M49,90 L71,90 L75,100 L45,100 Z" fill="url(#grad-bronze)" stroke="#fff" strokeWidth="1"/>
+        {/* Stem */}
+        <path d="M57,65 L63,65 L60,90 Z" fill="url(#grad-bronze-dark)" stroke="#fff" strokeWidth="1"/>
+        {/* Cup */}
+        <path d="M40,30 C40,55 48,65 60,65 C72,65 80,55 80,30 Z" fill="url(#grad-bronze)" stroke="#fff" strokeWidth="1.5"/>
+        {/* Handles */}
+        <path d="M40,40 C30,40 30,52 44,55" fill="none" stroke="url(#grad-bronze-dark)" strokeWidth="2.5" strokeLinecap="round"/>
+        <path d="M80,40 C90,40 90,52 76,55" fill="none" stroke="url(#grad-bronze-dark)" strokeWidth="2.5" strokeLinecap="round"/>
+        {/* Top Rim */}
+        <ellipse cx="60" cy="30" rx="20" ry="5" fill="url(#grad-bronze-dark)" stroke="#fff" strokeWidth="1"/>
+        <ellipse cx="60" cy="30" rx="17" ry="2.5" fill="#331c0e"/>
       </svg>
     );
   }
