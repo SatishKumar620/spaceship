@@ -14,6 +14,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Custom Space-Themed Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #02040a;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(61, 200, 255, 0.4);
+  border-radius: 8px;
+  border: 2px solid #02040a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(61, 200, 255, 0.8);
+}
+::-webkit-scrollbar-corner {
+  background: #02040a;
+}
+
 /* Remove default tap highlight on iOS/Android */
 a, button, [role="button"], input, select, textarea, label {
   -webkit-tap-highlight-color: transparent;

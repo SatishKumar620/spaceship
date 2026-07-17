@@ -7,7 +7,7 @@
 
   position:relative;
   z-index:1;
-  background:var(--sx-void-2);
+  background: radial-gradient(circle at top, rgba(61, 200, 255, 0.04) 0%, var(--sx-void-2) 60%);
   padding:11vh 6vw;
   border-top:1px solid var(--sx-line);
   scroll-margin-top:90px;
@@ -42,12 +42,12 @@
 }
 .site-title-accent{ color:var(--sx-red-2); }
 
-.site-desc{
-  max-width:620px;
-  color:var(--sx-fog);
-  font-size:15px;
-  line-height:1.7;
-  margin-bottom:40px;
+.site-desc {
+  max-width: 620px;
+  color: #a4b1cd;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 40px;
 }
 
 /* will-change removed: forced premature GPU layer promotion for dozens of elements */
@@ -239,8 +239,9 @@
 }
 
 .perk-card:hover {
-  border-color: rgba(255, 33, 85, 0.25);
-  transform: translateY(-4px);
+  border-color: rgba(255, 33, 85, 0.4);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(255, 33, 85, 0.15);
 }
 
 .perk-icon-wrap {
@@ -335,6 +336,14 @@
   letter-spacing: 2px;
   color: var(--tier-color);
   margin-bottom: 12px;
+}
+.site-eyebrow {
+  color: var(--sx-red-1);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .package-price {
@@ -717,7 +726,9 @@
 }
 
 .track-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(61, 200, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: rgba(61, 200, 255, 0.3);
 }
 
 .track-card > *:not(.track-watermark) {

@@ -339,13 +339,21 @@
     color:var(--void);
     border:1px solid var(--off-white);
   }
-  .btn-primary:hover{ transform:translateY(-2px); }
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 20px rgba(61, 200, 255, 0.4);
+  }
   .btn-ghost{
     background:transparent;
     color:var(--off-white);
     border:1px solid var(--line);
   }
-  .btn-ghost:hover{ border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px); }
+  .btn-ghost:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 15px rgba(61, 200, 255, 0.2);
+  }
 
   .scroll-cue{
     position:absolute;
