@@ -1086,10 +1086,14 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       }
 
       gsap.utils.toArray('[data-reveal]').forEach((el) => {
-        gsap.from(el, {
-          y: 15, opacity: 0, duration: 0.45, ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 95%' }
-        });
+        gsap.fromTo(el, 
+          { y: 40, opacity: 0, scale: 0.97, rotation: 1 },
+          {
+            y: 0, opacity: 1, scale: 1, rotation: 0,
+            duration: 0.8, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 92%' }
+          }
+        );
       });
 
       if (!isMobile) {
