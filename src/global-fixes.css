@@ -62,12 +62,9 @@ html {
 --------------------------------------------------------------- */
 html {
   scroll-behavior: auto !important; /* Lenis handles smooth scroll */
-  overflow-x: hidden;
 }
 body {
   overflow-x: hidden;
-  /* Prevent rubber-band scroll from causing issues on iOS */
-  overscroll-behavior: none;
   /* Fix for momentum scrolling on iOS */
   -webkit-overflow-scrolling: touch;
 }
@@ -101,7 +98,7 @@ body {
   /* Desktop with mouse: re-enable canvas pointer events for OrbitControls */
   #sceneCanvas {
     pointer-events: auto !important;
-    touch-action: none !important;
+    touch-action: pan-y !important;
     cursor: grab;
   }
   #sceneCanvas:active { cursor: grabbing; }
