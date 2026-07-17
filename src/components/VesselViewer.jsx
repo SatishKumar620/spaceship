@@ -839,6 +839,10 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           const el = document.createElement('div');
           el.className = 'part-label';
           el.innerHTML = `<span class="dot"></span><span class="chip">${category}</span>`;
+          // Use absolute positioning with top/left 0, we'll translate it
+          el.style.position = 'absolute';
+          el.style.top = '0px';
+          el.style.left = '0px';
           el.style.opacity = isExplodedRef.current ? 1 : 0;
           if (labelLayer) labelLayer.appendChild(el);
           labelRegistry.push({ el, target: group });
@@ -1261,9 +1265,10 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
     let lastPointerMoveTime = 0;
     const onPointerMove = (e) => {
-      if (isMobile || e.buttons !== 0) return;
+      // Disable hover raycasting entirely on mobile, or if a scroll is likely happening
+      if (isMobile || e.buttons !== 0 || window.scrollY > 50) return;
       const now = performance.now();
-      if (now - lastPointerMoveTime < 33) return; // ~30fps throttle
+      if (now - lastPointerMoveTime < 100) return; // Throttle to 10fps instead of 30fps for hover
       lastPointerMoveTime = now;
       setHoveredGroup(getIntersectedCategoryGroup(e.clientX, e.clientY));
     };
@@ -1465,14 +1470,15 @@ modelGroup.scale.setScalar(1);
           material.emissiveIntensity = base + Math.sin(t * speed) * depth * (isPlasma ? 0.5 + et * 0.5 : 1);
         });
 
-        // HTML Screen space labels
+        // HTML Screen space labels - USE TRANSFORM FOR HARDWARE ACCELERATION
         labelRegistry.forEach(({ el, target }) => {
           target.getWorldPosition(_labelWorldPos);
           const ndc = _labelWorldPos.clone().project(camera);
           const w = heroEl.clientWidth || window.innerWidth || 800;
           const h = heroEl.clientHeight || window.innerHeight || 600;
-          el.style.left = (ndc.x * 0.5 + 0.5) * w + 'px';
-          el.style.top = (-ndc.y * 0.5 + 0.5) * h + 'px';
+          const x = (ndc.x * 0.5 + 0.5) * w;
+          const y = (-ndc.y * 0.5 + 0.5) * h;
+          el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
           el.style.display = ndc.z > 1 ? 'none' : 'flex';
         });
       }
