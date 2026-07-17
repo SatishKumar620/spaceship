@@ -1177,7 +1177,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
        9. CONTROLS
        ================================================================ */
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enabled = !isMobile;
+    controls.enabled = true;
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
     controls.enablePan = false;

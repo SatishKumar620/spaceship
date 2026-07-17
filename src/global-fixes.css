@@ -84,25 +84,18 @@ body {
   max-width: 100vw;
 }
 
-/* Canvas: never blocks touch events */
+/* Canvas: always receives touches for horizontal swipe rotation */
 #sceneCanvas {
   position: absolute !important;
   top: 0; left: 0;
   width: 100% !important;
   height: 100% !important;
-  pointer-events: none !important;
-  touch-action: pan-y !important; /* allow vertical touch scroll to pass through */
+  pointer-events: auto !important;
+  touch-action: pan-y !important; /* allow vertical touch scroll natively, pass horizontal to JS */
   z-index: 1;
+  cursor: grab;
 }
-@media (hover: hover) and (pointer: fine) {
-  /* Desktop with mouse: re-enable canvas pointer events for OrbitControls */
-  #sceneCanvas {
-    pointer-events: auto !important;
-    touch-action: pan-y !important;
-    cursor: grab;
-  }
-  #sceneCanvas:active { cursor: grabbing; }
-}
+#sceneCanvas:active { cursor: grabbing; }
 
 /* Hero UI overlay: always on top, never clips */
 .hero-ui {
