@@ -196,6 +196,7 @@ export function ProblemsSection() {
                   <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
+            </div>
             );
           })}
         </div>
