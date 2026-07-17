@@ -131,6 +131,20 @@ export default function App() {
         console.warn('GSAP animation skipped:', e);
       }
 
+      // Lightweight CSS reveal logic for data-reveal elements
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      setTimeout(() => {
+        document.querySelectorAll('[data-reveal="true"]').forEach(el => observer.observe(el));
+      }, 100);
+
       // Refresh ScrollTrigger after a short delay to ensure layout has settled
       const refreshTimer = setTimeout(() => {
         ScrollTrigger.refresh();
