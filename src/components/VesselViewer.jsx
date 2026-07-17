@@ -422,7 +422,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     const hemiFill = new THREE.HemisphereLight(0x1a2f63, 0x020306, 0.10);
     scene.add(hemiFill);
 
-    const keyLight = new THREE.DirectionalLight(0xdbe9ff, 1.95);
+    const keyLight = new THREE.DirectionalLight(0xdbe9ff, isMobile ? 1.95 : 1.25);
     keyLight.position.copy(SUN_DIR).multiplyScalar(12);
     keyLight.castShadow = false;
     keyLight.shadow.mapSize.set(isMobile ? 512 : 1536, isMobile ? 512 : 1536);
@@ -434,9 +434,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     planetBounceLight.position.copy(EARTH_DIR).multiplyScalar(12);
     scene.add(planetBounceLight);
 
-    const rimLight = new THREE.DirectionalLight(0x00d9ff, 1.4);
-    rimLight.position.set(-4, 3, -8);
-    scene.add(rimLight);
+    // rimLight removed as requested
 
     // Visible sun core
     const sunCanvas = document.createElement('canvas');
