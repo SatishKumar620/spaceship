@@ -179,6 +179,39 @@
 /* ============================================================
    SPONSORS, PERKS & PACKAGES TIERS
    ============================================================ */
+
+/* =========================================
+   SPONSORS & PARTNERSHIPS
+   ========================================= */
+.sponsors-section {
+  padding: 100px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-earth-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  height: 1200px;
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+  animation: slowSpin 120s linear infinite;
+}
+
+@keyframes slowSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.sponsors-section .site-section-inner {
+  position: relative;
+  z-index: 1;
+}
+
 .sponsors-section {
   position: relative;
   background: radial-gradient(circle at 50% 10%, rgba(255, 33, 85, 0.03), transparent 60%),

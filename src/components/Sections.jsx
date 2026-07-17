@@ -402,6 +402,49 @@ const PACKAGES = [
 export function SponsorsSection() {
   return (
     <section className="site-section sponsors-section" id="sponsors">
+      
+      {/* Holographic Earth Background */}
+      <div className="holo-earth-bg">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="earthGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="rgba(0, 242, 254, 0.15)" />
+              <stop offset="70%" stopColor="rgba(0, 242, 254, 0.05)" />
+              <stop offset="100%" stopColor="rgba(0, 242, 254, 0)" />
+            </radialGradient>
+            <filter id="neonGlow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          
+          <circle cx="400" cy="400" r="300" fill="url(#earthGlow)" />
+          <circle cx="400" cy="400" r="300" fill="none" stroke="rgba(0, 242, 254, 0.3)" strokeWidth="2" filter="url(#neonGlow)" />
+          
+          {/* Lat/Lng Grid Lines */}
+          <ellipse cx="400" cy="400" rx="300" ry="100" fill="none" stroke="rgba(0, 242, 254, 0.2)" strokeWidth="1.5" />
+          <ellipse cx="400" cy="400" rx="300" ry="200" fill="none" stroke="rgba(0, 242, 254, 0.2)" strokeWidth="1.5" />
+          
+          <ellipse cx="400" cy="400" rx="100" ry="300" fill="none" stroke="rgba(0, 242, 254, 0.2)" strokeWidth="1.5" />
+          <ellipse cx="400" cy="400" rx="200" ry="300" fill="none" stroke="rgba(0, 242, 254, 0.2)" strokeWidth="1.5" />
+          
+          {/* Spreading connecting lines */}
+          <line x1="400" y1="100" x2="400" y2="-100" stroke="rgba(0, 242, 254, 0.3)" strokeWidth="2" strokeDasharray="5,5" />
+          <line x1="400" y1="700" x2="400" y2="900" stroke="rgba(0, 242, 254, 0.3)" strokeWidth="2" strokeDasharray="5,5" />
+          <line x1="100" y1="400" x2="-100" y2="400" stroke="rgba(0, 242, 254, 0.3)" strokeWidth="2" strokeDasharray="5,5" />
+          <line x1="700" y1="400" x2="900" y2="400" stroke="rgba(0, 242, 254, 0.3)" strokeWidth="2" strokeDasharray="5,5" />
+          
+          {/* Diagonal spreading lines */}
+          <line x1="187" y1="187" x2="50" y2="50" stroke="rgba(0, 242, 254, 0.2)" strokeWidth="1.5" strokeDasharray="4,4" />
+          <line x1="613" y1="187" x2="750" y2="50" stroke="rgba(0, 242, 254, 0.2)" strokeWidth="1.5" strokeDasharray="4,4" />
+          <line x1="187" y1="613" x2="50" y2="750" stroke="rgba(0, 242, 254, 0.2)" strokeWidth="1.5" strokeDasharray="4,4" />
+          <line x1="613" y1="613" x2="750" y2="750" stroke="rgba(0, 242, 254, 0.2)" strokeWidth="1.5" strokeDasharray="4,4" />
+        </svg>
+      </div>
+
       <div className="site-section-inner">
         {/* Section Header */}
         <div className="site-eyebrow" data-reveal="true">
