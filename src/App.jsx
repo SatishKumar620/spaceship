@@ -205,8 +205,8 @@ export default function App() {
           <div className="hero-copy" style={{ pointerEvents: 'none' }}>
             <div id="introEyebrow" className="eyebrow">SPACE SPRINT CHALLENGE</div>
             <h1 id="introHeading">
-              <span className="h1-line">LAUNCH YOUR</span>
-              <span className="h1-line h1-accent" data-text="INNOVATION">INNOVATION</span>
+              <span className="h1-line">HACKQUBIT</span>
+              <span className="h1-line h1-accent" data-text="2.O">2.O</span>
             </h1>
             <p id="introSub" className="sub">
               Join hundreds of creators for a 24-hour orbital build sprint at RVSCET. Prototype solutions in AI, FinTech, and healthcare to win massive rewards.
