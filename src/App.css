@@ -268,14 +268,14 @@
     flex-direction:column;
   }
   .h1-line{
-    background:linear-gradient(180deg, #ffffff 0%, #c9d4e0 100%);
+    background:linear-gradient(180deg, #ff3355 0%, #cc0022 100%);
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
   }
   .h1-accent{
     position:relative;
-    color:var(--off-white);
+    color:#ff1744;
     isolation:isolate;
   }
   .h1-accent::before,

@@ -51,7 +51,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     const smallPhysicalScreen = Math.min(window.screen.width, window.screen.height) < 900;
     const isMobile = (hasTouch && smallPhysicalScreen) || window.innerWidth < 820 || /Android|iPhone|iPad/i.test(navigator.userAgent);
     // Aggressively cap Pixel Ratio to 1.0 for maximum performance on Desktop and Mobile
-    const PIXEL_RATIO = Math.min(window.devicePixelRatio, 2.0);
+    const PIXEL_RATIO = isMobile ? Math.min(window.devicePixelRatio, 2.0) : 1.0;
 
     const initialWidth = heroEl.clientWidth || window.innerWidth || 800;
     const initialHeight = heroEl.clientHeight || window.innerHeight || 600;
