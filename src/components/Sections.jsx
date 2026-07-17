@@ -136,15 +136,47 @@ export function ProblemsSection() {
 
         {/* Tracks Grid Layout */}
         <div className="tracks-grid">
-          {filteredTracks.map((t, i) => (
-            <div
-              className={`track-card ${getCategoryClass(t.category)}`}
-              key={t.code}
-              data-reveal="true"
-              onClick={() => setSelectedTrack(t)}
-              style={{ transitionDelay: `${i * 35}ms` }}
-            >
-              <div className="track-card-header">
+          {filteredTracks.map((t, i) => {
+            const types = ['astronaut', 'spaceship', 'spacestation', 'meteor'];
+            const watermarkType = types[i % types.length];
+
+            return (
+              <div
+                className={`track-card ${getCategoryClass(t.category)}`}
+                key={t.code}
+                data-reveal="true"
+                onClick={() => setSelectedTrack(t)}
+                style={{ transitionDelay: `${i * 35}ms` }}
+              >
+                <div className="track-watermark">
+                  {watermarkType === 'astronaut' && (
+                    <svg viewBox="0 0 100 100" fill="currentColor">
+                      <path d="M50 10 C35 10, 25 25, 25 40 C25 50, 30 60, 35 70 L35 90 L65 90 L65 70 C70 60, 75 50, 75 40 C75 25, 65 10, 50 10 Z M50 20 C60 20, 65 30, 65 40 L35 40 C35 30, 40 20, 50 20 Z" />
+                      <circle cx="50" cy="40" r="15" fill="none" stroke="currentColor" strokeWidth="4"/>
+                    </svg>
+                  )}
+                  {watermarkType === 'spaceship' && (
+                    <svg viewBox="0 0 100 100" fill="currentColor">
+                      <path d="M50 10 L65 40 L70 70 L80 90 L50 80 L20 90 L30 70 L35 40 Z" />
+                      <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" strokeWidth="4"/>
+                    </svg>
+                  )}
+                  {watermarkType === 'spacestation' && (
+                    <svg viewBox="0 0 100 100" fill="currentColor">
+                      <rect x="20" y="40" width="60" height="20" />
+                      <rect x="10" y="20" width="20" height="60" />
+                      <rect x="70" y="20" width="20" height="60" />
+                      <circle cx="50" cy="50" r="8" fill="none" stroke="currentColor" strokeWidth="3"/>
+                    </svg>
+                  )}
+                  {watermarkType === 'meteor' && (
+                    <svg viewBox="0 0 100 100" fill="currentColor">
+                      <path d="M80 20 L60 30 L40 20 L20 40 L30 60 L20 80 L50 70 L70 90 L80 60 L100 50 Z" />
+                      <path d="M70 30 L90 10 M80 40 L100 20" stroke="currentColor" strokeWidth="4"/>
+                    </svg>
+                  )}
+                </div>
+                <div className="track-card-header">
                 <div className="track-code">{t.code}</div>
                 <div className="track-category">{t.category}</div>
               </div>
@@ -164,8 +196,8 @@ export function ProblemsSection() {
                   <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
