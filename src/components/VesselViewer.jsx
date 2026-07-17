@@ -424,7 +424,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
     const keyLight = new THREE.DirectionalLight(0xdbe9ff, 1.95);
     keyLight.position.copy(SUN_DIR).multiplyScalar(12);
-    keyLight.castShadow = !isMobile;
+    keyLight.castShadow = false;
     keyLight.shadow.mapSize.set(isMobile ? 512 : 1536, isMobile ? 512 : 1536);
     keyLight.shadow.bias = -0.0004;
     keyLight.shadow.normalBias = 0.02;
@@ -437,10 +437,6 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     const rimLight = new THREE.DirectionalLight(0x00d9ff, 1.4);
     rimLight.position.set(-4, 3, -8);
     scene.add(rimLight);
-
-    const engineGlowA = new THREE.PointLight(0xff1e3a, 1.0, 6, 2);
-    const engineGlowB = new THREE.PointLight(0x00d9ff, 0.7, 5, 2);
-    scene.add(engineGlowA, engineGlowB);
 
     // Visible sun core
     const sunCanvas = document.createElement('canvas');
@@ -606,7 +602,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         const name = (old.name || '').toLowerCase();
 
         if (name === 'shiphull') {
-          const baseColor = (old.color ? old.color.clone() : new THREE.Color(0xffffff)).lerp(new THREE.Color(0x9aa7b3), 0.55);
+          const baseColor = new THREE.Color(0xa1b4cc);
           return new THREE.MeshPhysicalMaterial({
             map: old.map || null,
             color: baseColor,
@@ -631,7 +627,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           return new THREE.MeshStandardMaterial({ color: 0x0c0e12, metalness: 0.5, roughness: 0.55, envMapIntensity: 1.0 });
         }
         if (name === 'plasma' || name === 'glow' || name === 'glow.001') {
-          const baseColor = old.color ? old.color.clone() : new THREE.Color(0x00d9ff);
+          const baseColor = new THREE.Color(0x00d9ff);
           const intensity = name === 'plasma' ? 2.4 : 1.5;
           const mat = new THREE.MeshStandardMaterial({
             color: baseColor, emissive: baseColor.clone(), emissiveIntensity: intensity,
@@ -640,14 +636,14 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           pulseMaterials.push({ material: mat, base: intensity, isPlasma: name === 'plasma' });
           return mat;
         }
-        const baseColor = (old.color ? old.color.clone() : new THREE.Color(0xffffff)).lerp(new THREE.Color(0x9aa7b3), 0.4);
+        const baseColor = new THREE.Color(0xdce7f2);
         return new THREE.MeshStandardMaterial({ color: baseColor, metalness: 0.8, roughness: 0.4, envMapIntensity: 0.95 });
       }
 
       model.traverse((child) => {
         if (child.isMesh) {
-          child.castShadow = !isMobile;
-          child.receiveShadow = !isMobile;
+          child.castShadow = false;
+          child.receiveShadow = false;
           if (child.material) {
             const key = (child.material.name || '').toLowerCase();
             if (CACHEABLE_MATERIAL_NAMES.has(key) && materialCache.has(key)) {
@@ -695,7 +691,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         if (/command/.test(n)) return CAT.COMMAND;
         if (/sensor|antenna|radar/.test(n)) return CAT.SENSOR;
         if (/weapon|turret|gun|cannon/.test(n)) return CAT.WEAPON;
-        if (/^cube$/.test(n) || /^text$/.test(n)) return CAT.HIDDEN;
+        if (/^cube$/.test(n) || /^text$/.test(n) || /boat/.test(n)) return CAT.HIDDEN;
         return null;
       }
 
@@ -852,9 +848,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       });
 
       const scaledBox = new THREE.Box3().setFromObject(model);
-      engineGlowA.position.set(0, scaledBox.min.y + 0.4, scaledBox.min.z + 0.4);
-      engineGlowB.position.set(0.6, scaledBox.min.y + 0.6, scaledBox.min.z + 0.8);
-
+      scene.updateMatrixWorld();
       const fogCanvas = document.createElement('canvas');
       fogCanvas.width = fogCanvas.height = 256;
       const fogCtx = fogCanvas.getContext('2d');
@@ -947,8 +941,8 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           station.traverse((child) => {
             if (child.isMesh) {
               meshCount++;
-              child.castShadow = true;
-              child.receiveShadow = true;
+              child.castShadow = false;
+              child.receiveShadow = false;
               child.frustumCulled = true;
 
               const mat = child.material;

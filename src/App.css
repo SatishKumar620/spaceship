@@ -190,13 +190,10 @@
     opacity: 0;
     touch-action: pan-y;
     cursor: grab;
-    pointer-events: none;
+    pointer-events: auto;
   }
   #sceneCanvas:active{ cursor:grabbing; }
-  /* Re-enable pointer-events on canvas only on desktop (where OrbitControls is active) */
-  @media (hover: hover) and (pointer: fine) {
-    #sceneCanvas { pointer-events: auto; }
-  }
+  /* Pointer events enabled globally */
 
   .hero-ui{
     position: absolute;
