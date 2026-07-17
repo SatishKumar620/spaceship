@@ -11,8 +11,6 @@
   padding:11vh 6vw;
   border-top:1px solid var(--sx-line);
   scroll-margin-top:90px;
-  content-visibility:auto;
-  contain-intrinsic-size:auto 800px;
 }
 
 .site-section-inner{
