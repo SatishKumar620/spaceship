@@ -1180,12 +1180,11 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     controls.enabled = true;
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
-    controls.enablePan = false;
-    controls.enableZoom = false; // fix: default true was capturing wheel/scroll over the full-viewport hero canvas
-    controls.minDistance = 3.2;
-    controls.maxDistance = 8;
-    controls.minPolarAngle = Math.PI * 0.16;
-    controls.maxPolarAngle = Math.PI * 0.78;
+    controls.enablePan = true;
+    controls.enableZoom = false; // Zoom is still disabled because it hijacks the page scroll wheel
+    controls.minDistance = 2.0;
+    controls.maxDistance = 15;
+    // Removed polar angle restrictions to allow viewing from any angle
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.5;
     controls.target.set(0, 0, 0);
