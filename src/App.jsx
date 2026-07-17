@@ -165,9 +165,13 @@ export default function App() {
             <div className="loader-scanner">
               <div className="scanner-circle"></div>
               <div className="scanner-line"></div>
+              <svg className="loading-spaceship" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 10 L65 40 L70 70 L80 90 L50 80 L20 90 L30 70 L35 40 Z" />
+                <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" strokeWidth="4"/>
+              </svg>
               <div className="scanner-pct">{loadingPercent}%</div>
             </div>
-            <h1 className="loading-logo glow-text">HACKQUBIT <span className="logo-v2">// V2</span></h1>
+            <h1 className="loading-logo glow-text">HACKQUBIT <span className="logo-v2">2.O</span></h1>
             <div className="loading-status-bar">
               <div className="loading-status-fill" style={{ width: `${loadingPercent}%` }}></div>
             </div>

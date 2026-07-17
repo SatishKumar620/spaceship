@@ -82,12 +82,29 @@
     box-shadow: 0 0 15px rgba(57, 168, 255, 0.2);
   }
 
+  .loading-spaceship {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    color: var(--cyan);
+    animation: floatShip 3s ease-in-out infinite;
+    z-index: 1;
+    opacity: 0.8;
+  }
+
+  @keyframes floatShip {
+    0%, 100% { transform: translateY(-5px); }
+    50% { transform: translateY(5px); }
+  }
+
   .scanner-pct {
-    font-size: 20px;
+    position: absolute;
+    bottom: -35px;
+    font-size: 16px;
     font-weight: 700;
-    color: #fff;
+    color: var(--cyan);
     text-shadow: 0 0 10px rgba(57, 168, 255, 0.4);
-    letter-spacing: -0.5px;
+    letter-spacing: 1px;
   }
 
   .loading-logo {
