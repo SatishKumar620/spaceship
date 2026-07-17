@@ -22,103 +22,92 @@ export default function VenueSection() {
           </p>
         </div>
 
-        {/* Telemetry Dashboard Grid */}
-        <div className="venue-dashboard">
+        {/* Monolithic Dashboard */}
+        <div className="venue-monolithic-dashboard">
           
-          {/* Left Panel: Telemetry HUD */}
-          <div className="telemetry-panel" data-reveal="true">
-            <div className="panel-header">
-              <div className="panel-dot"></div>
-              <h3>SYS_TELEMETRY_LOG</h3>
-              <div className="panel-code">ID: RVSCET-JSR</div>
+          <div className="dashboard-header-bar">
+            <div className="bar-dots">
+              <span className="dot red"></span>
+              <span className="dot yellow"></span>
+              <span className="dot green"></span>
             </div>
-            
-            <div className="telemetry-grid">
-              <div className="telemetry-item">
-                <div className="item-label">SECTOR / DESTINATION</div>
-                <div className="item-value">RVS College of Engineering & Technology</div>
-                <div className="item-sub">Jamshedpur, Jharkhand, India</div>
-              </div>
-
-              <div className="telemetry-item">
-                <div className="item-label">TEMPORAL WINDOW</div>
-                <div className="item-value">October 7 - 8, 2025</div>
-                <div className="item-sub">Sol 01 (09:00 AM) - Sol 02 (09:00 AM)</div>
-              </div>
-
-              <div className="telemetry-row-split">
-                <div className="telemetry-item">
-                  <div className="item-label">MISSION DURATION</div>
-                  <div className="item-value">24 Hours</div>
-                  <div className="item-sub">Non-stop sprint</div>
-                </div>
-
-                <div className="telemetry-item">
-                  <div className="item-label">CREW CAPACITY</div>
-                  <div className="item-value">200+ Hackers</div>
-                  <div className="item-sub">Teams of 2-4</div>
-                </div>
-              </div>
-
-              <div className="telemetry-row-split">
-                <div className="telemetry-item">
-                  <div className="item-label">LATITUDE</div>
-                  <div className="item-value">22.7844° N</div>
-                </div>
-                <div className="telemetry-item">
-                  <div className="item-label">LONGITUDE</div>
-                  <div className="item-value">86.2028° E</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="telemetry-footer">
-              <div className="status-indicator">
-                <span className="status-glow"></span>
-                <span>DOCKING AUTOLOCK: ENGAGED</span>
-              </div>
-            </div>
+            <div className="bar-title">RVSCET_ORBITAL_STATION // DOCKING_BAY_01</div>
+            <div className="bar-status">STATUS: ONLINE</div>
           </div>
 
-          {/* Right Panel: Radar/Map */}
-          <div className="radar-map-panel" data-reveal="true">
-            <div className="panel-header">
-              <div className="panel-dot yellow"></div>
-              <h3>COORDINATES_VISUALIZER</h3>
-              <div className="panel-code">MODE: ACTIVE_RADAR</div>
+          <div className="dashboard-grid">
+            
+            {/* Radar Panel */}
+            <div className="dashboard-map-panel">
+              <div className="map-wrapper">
+                <iframe
+                  title="RVSCET Jamshedpur Map"
+                  src="https://www.google.com/maps?q=RVS+College+of+Engineering+and+Technology+Jamshedpur&output=embed"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <div className="map-overlay-scanline" />
+                <div className="map-crosshair">
+                  <div className="crosshair-v"></div>
+                  <div className="crosshair-h"></div>
+                </div>
+              </div>
+              <div className="map-footer">
+                <span className="coord">LAT: 22.7844° N</span>
+                <span className="coord">LNG: 86.2028° E</span>
+              </div>
             </div>
 
-            <div className="map-wrapper">
-              <iframe
-                title="RVSCET Jamshedpur Map"
-                src="https://www.google.com/maps?q=RVS+College+of+Engineering+and+Technology+Jamshedpur&output=embed"
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-              <div className="map-overlay-scanline" />
-              <div className="map-hud-marker top-left"></div>
-              <div className="map-hud-marker top-right"></div>
-              <div className="map-hud-marker bottom-left"></div>
-              <div className="map-hud-marker bottom-right"></div>
-            </div>
+            {/* Telemetry Panel */}
+            <div className="dashboard-telemetry-panel">
+              
+              <div className="telemetry-block">
+                <div className="block-label">TARGET VECTOR</div>
+                <div className="block-value highlight">RVS College of Eng & Tech</div>
+                <div className="block-sub">Jamshedpur, Jharkhand, India</div>
+              </div>
 
-            <div className="map-actions">
+              <div className="telemetry-divider"></div>
+
+              <div className="telemetry-block">
+                <div className="block-label">TEMPORAL WINDOW</div>
+                <div className="block-value">Oct 7 - 8, 2025</div>
+                <div className="block-sub">09:00 AM (Sol 1) to 09:00 AM (Sol 2)</div>
+              </div>
+
+              <div className="telemetry-divider"></div>
+
+              <div className="telemetry-stats-row">
+                <div className="stat-box">
+                  <div className="stat-val">24H</div>
+                  <div className="stat-lbl">SPRINT</div>
+                </div>
+                <div className="stat-box">
+                  <div className="stat-val">200+</div>
+                  <div className="stat-lbl">CREW</div>
+                </div>
+                <div className="stat-box">
+                  <div className="stat-val">4</div>
+                  <div className="stat-lbl">DOMAINS</div>
+                </div>
+              </div>
+
               <a
                 href="https://maps.google.com/?q=RVS+College+of+Engineering+and+Technology+Jamshedpur"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="map-nav-btn"
+                className="dashboard-action-btn"
               >
-                <span>PLOT VECTOR IN GOOGLE MAPS</span>
+                <span>INITIALIZE NAV SYSTEM</span>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="12" cy="10" r="3" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </a>
-            </div>
-          </div>
 
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
