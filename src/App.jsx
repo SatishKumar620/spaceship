@@ -51,9 +51,9 @@ export default function App() {
             clearInterval(interval);
             return 99;
           }
-          return prev + Math.floor(Math.random() * 8) + 1;
+          return prev + Math.floor(Math.random() * 15) + 3;
         });
-      }, 150);
+      }, 30);
       return () => clearInterval(interval);
     } else {
       setLoadingPercent(100);

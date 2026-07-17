@@ -198,12 +198,12 @@
   opacity: 0.6;
   z-index: 0;
   pointer-events: none;
-  animation: holoSpinY 15s linear infinite, holoPulse 6s ease-in-out infinite;
+  animation: holoSpin2D 40s linear infinite, holoPulse 6s ease-in-out infinite;
 }
 
-@keyframes holoSpinY {
-  from { transform: perspective(1000px) rotateY(0deg); }
-  to { transform: perspective(1000px) rotateY(360deg); }
+@keyframes holoSpin2D {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes holoPulse {
