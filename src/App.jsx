@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -6,19 +6,21 @@ import './App.css';
 import VesselViewer from './components/VesselViewer';
 
 gsap.registerPlugin(ScrollTrigger);
-import AboutSection from './components/AboutSection';
 import Navbar from './components/Navbar';
-import GalacticRewards from "./components/GalacticRewards";
-import VenueSectionNew from "./components/VenueSection";
-import {
-  ProblemsSection,
-  EventsSection,
-  SponsorsSection,
-  FaqSection,
-} from "./components/Sections";
 
-import ScheduleSection from "./components/ScheduleSection";
-import Footer from './components/Footer';
+// Lazy-load all below-fold sections for faster initial page load
+const AboutSection = lazy(() => import('./components/AboutSection'));
+const VenueSectionNew = lazy(() => import('./components/VenueSection'));
+const GalacticRewards = lazy(() => import('./components/GalacticRewards'));
+const ScheduleSection = lazy(() => import('./components/ScheduleSection'));
+const Footer = lazy(() => import('./components/Footer'));
+
+// Sections.jsx exports multiple named exports — wrap each in a lazy loader
+const ProblemsSection = lazy(() => import('./components/Sections').then(m => ({ default: m.ProblemsSection })));
+const EventsSection = lazy(() => import('./components/Sections').then(m => ({ default: m.EventsSection })));
+const SponsorsSection = lazy(() => import('./components/Sections').then(m => ({ default: m.SponsorsSection })));
+const FaqSection = lazy(() => import('./components/Sections').then(m => ({ default: m.FaqSection })));
+
 
 export default function App() {
   const [isExploded, setIsExploded] = useState(false);
@@ -248,15 +250,18 @@ export default function App() {
       </section>
 
 
-      <AboutSection />
-      <VenueSectionNew />
-      <GalacticRewards />
-      <ScheduleSection />
-      <ProblemsSection />
-      <EventsSection />
-      <SponsorsSection />
-      <FaqSection />
-      <Footer />
+
+      <Suspense fallback={null}>
+        <AboutSection />
+        <VenueSectionNew />
+        <GalacticRewards />
+        <ScheduleSection />
+        <ProblemsSection />
+        <EventsSection />
+        <SponsorsSection />
+        <FaqSection />
+        <Footer />
+      </Suspense>
 
       {showRegModal && (
         <div className="modal-overlay" onClick={() => setShowRegModal(false)}>

@@ -68,7 +68,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.25;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.enabled = !isMobile;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.useLegacyLights = false;
 
@@ -277,7 +277,17 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
-      fragmentShader: `
+      fragmentShader: isMobile ? `
+        varying vec3 vDir;
+        void main(){
+          vec3 baseInd = vec3(0.02, 0.01, 0.07);
+          vec3 brightPurple = vec3(0.08, 0.01, 0.06);
+          vec3 brightCyan = vec3(0.01, 0.04, 0.08);
+          vec3 nebulaColor = mix(baseInd, brightPurple, vDir.y * 0.5 + 0.5);
+          nebulaColor = mix(nebulaColor, brightCyan, vDir.x * 0.5 + 0.5);
+          gl_FragColor = vec4(nebulaColor * 0.9, 0.28);
+        }
+      ` : `
         varying vec3 vDir;
         uniform float uTime;
 
@@ -332,7 +342,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
     // Background Earth-like planet
     function buildEarthTexture() {
-      const W = 1024, H = 512;
+      const W = isMobile ? 512 : 1024, H = isMobile ? 256 : 512;
       const c = document.createElement('canvas');
       c.width = W;
       c.height = H;
@@ -389,14 +399,14 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     const EARTH_DIR = new THREE.Vector3(-2.4, 2.0, 6.4).normalize();
     const earthTexture = buildEarthTexture();
     const earthMesh = new THREE.Mesh(
-      new THREE.SphereGeometry(22, 48, 48),
+      new THREE.SphereGeometry(22, isMobile ? 24 : 48, isMobile ? 24 : 48),
       new THREE.MeshStandardMaterial({ map: earthTexture, roughness: 0.85, metalness: 0.0 })
     );
     earthMesh.position.copy(EARTH_DIR).multiplyScalar(210);
     scene.add(earthMesh);
 
     const earthAtmo = new THREE.Mesh(
-      new THREE.SphereGeometry(22.9, 32, 32),
+      new THREE.SphereGeometry(22.9, isMobile ? 16 : 32, isMobile ? 16 : 32),
       new THREE.MeshBasicMaterial({ color: 0x6ec8ff, transparent: true, opacity: 0.18, side: THREE.BackSide, depthWrite: false })
     );
     earthAtmo.position.copy(earthMesh.position);
@@ -413,7 +423,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
     const keyLight = new THREE.DirectionalLight(0xdbe9ff, 1.95);
     keyLight.position.copy(SUN_DIR).multiplyScalar(12);
-    keyLight.castShadow = true;
+    keyLight.castShadow = !isMobile;
     keyLight.shadow.mapSize.set(isMobile ? 512 : 1536, isMobile ? 512 : 1536);
     keyLight.shadow.bias = -0.0004;
     keyLight.shadow.normalBias = 0.02;
@@ -635,8 +645,8 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
       model.traverse((child) => {
         if (child.isMesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
+          child.castShadow = !isMobile;
+          child.receiveShadow = !isMobile;
           if (child.material) {
             const key = (child.material.name || '').toLowerCase();
             if (CACHEABLE_MATERIAL_NAMES.has(key) && materialCache.has(key)) {
@@ -1073,13 +1083,14 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
       gsap.utils.toArray('[data-reveal]').forEach((el) => {
         gsap.from(el, {
-          y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 85%' }
+          y: 15, opacity: 0, duration: 0.45, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 95%' }
         });
       });
 
-      // Defer background station load by 400ms
-      setTimeout(loadSpaceStation, 400);
+      if (!isMobile) {
+        setTimeout(loadSpaceStation, 400);
+      }
     }
 
     /* ================================================================
@@ -1501,8 +1512,6 @@ sunCoreSprite.scale.setScalar(14 + Math.sin(t * 5.0) * 0.4);
       cinematicGradePass.uniforms.uTime.value = t;
 
       if (isMobile) {
-        const rotateSpeed = 0.0012;
-        camera.position.applyAxisAngle(new THREE.Vector3(0, 1, 0), rotateSpeed);
         camera.lookAt(0, 0, 0);
       } else {
         controls.enabled = flightProgressRef.current < 0.001;

@@ -21,6 +21,9 @@
   radial-gradient(circle at 20% 20%,rgba(61,200,255,.08),transparent 35%),
   radial-gradient(circle at 80% 80%,rgba(255,45,85,.08),transparent 35%),
   var(--bg);
+  content-visibility:auto;
+  contain-intrinsic-size:auto 1200px;
+  scroll-margin-top:90px;
 }
 
 .spaceBackground{

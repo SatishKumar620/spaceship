@@ -7,6 +7,8 @@
   overflow: hidden;
   background: var(--sx-void-2);
   isolation: isolate;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 /* Background Grids & overlays */
