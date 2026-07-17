@@ -196,15 +196,20 @@
   transform: translate(-50%, -50%);
   width: 1200px;
   height: 1200px;
-  opacity: 0.4;
+  opacity: 0.6;
   z-index: 0;
   pointer-events: none;
-  animation: slowSpin 120s linear infinite;
+  animation: slowSpin 120s linear infinite, holoPulse 6s ease-in-out infinite;
 }
 
 @keyframes slowSpin {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes holoPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.85; filter: brightness(1.2); }
 }
 
 .sponsors-section .site-section-inner {
