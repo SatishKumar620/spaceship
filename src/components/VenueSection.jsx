@@ -5,7 +5,8 @@ export default function VenueSection() {
   return (
     <section id="venue" className="venue-section">
       <div className="venue-bg-grid" />
-      <div className="venue-glow-overlay" />
+      <div className="venue-glow-overlay cyan" />
+      <div className="venue-glow-overlay magenta" />
 
       <div className="venue-inner">
         {/* Section Header */}
