@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Sections.css';
+import SpaceEventsScene from './SpaceEventsScene';
 
 /* ============================================================
    RICH TRACK DATASET WITH IDEAS AND TECH STACKS
@@ -287,6 +288,7 @@ const EVENTS = [
 export function EventsSection() {
   return (
     <section className="site-section events-section" id="events">
+      <SpaceEventsScene />
       <div className="site-section-inner">
         <div className="site-eyebrow" data-reveal="true">
           <span className="site-hud-line"></span> ALONGSIDE THE HACK <span className="site-hud-line"></span>
