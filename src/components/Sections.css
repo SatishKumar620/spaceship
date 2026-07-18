@@ -2971,3 +2971,96 @@ min-height:250px !important;
 
 }
 
+
+/* ===============================
+   FIX CARD VERTICAL LAYOUT
+   =============================== */
+
+.track-card,
+.premium-track{
+
+display:flex;
+flex-direction:column;
+
+min-height:280px !important;
+
+padding:18px !important;
+
+}
+
+/* Remove the huge empty top area */
+
+.track-glow,
+.track-shine,
+.particle-field,
+.orbit-system{
+
+top:-35px !important;
+opacity:.45;
+
+}
+
+/* Move content upward */
+
+.hud-header{
+
+margin-bottom:10px !important;
+
+}
+
+.track-card-header{
+
+margin-bottom:10px !important;
+
+}
+
+.track-title{
+
+margin-top:8px !important;
+margin-bottom:8px !important;
+
+font-size:20px !important;
+line-height:1.2;
+
+}
+
+.track-desc{
+
+margin-bottom:12px !important;
+
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden;
+
+}
+
+/* Keep footer at bottom */
+
+.track-tags{
+
+margin-bottom:auto;
+
+}
+
+.track-card-footer{
+
+padding-top:16px;
+
+border-top:1px solid rgba(255,50,80,.18);
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.track-card,
+.premium-track{
+
+min-height:260px !important;
+
+}
+
+}
+
