@@ -363,7 +363,7 @@ export const BeaconIcon = () => (
 
 <g>
 
-<!-- Signal waves -->
+{/* Signal waves */}
 
 <path
 d="M32 12 C45 18 45 46 32 52"
@@ -394,7 +394,7 @@ repeatCount="indefinite"/>
 </path>
 
 
-<!-- Beacon tower -->
+{/* Beacon tower */}
 
 <path
 d="M26 48 L32 14 L38 48 Z"
@@ -414,7 +414,7 @@ strokeWidth="2"
 />
 
 
-<!-- Energy core -->
+{/* Energy core */}
 
 <circle
 cx="32"
@@ -432,7 +432,7 @@ repeatCount="indefinite"/>
 </circle>
 
 
-<!-- Base -->
+{/* Base */}
 
 <path
 d="M20 50 H44"
