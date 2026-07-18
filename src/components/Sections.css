@@ -2093,3 +2093,739 @@ r:4;
 }
 }
 
+
+/* ==========================================================
+   PROBLEM TRACKS V2
+   ========================================================== */
+
+.tracks-grid{
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:22px;
+
+}
+
+.premium-track,
+.track-card{
+
+min-height:355px !important;
+
+height:auto;
+
+padding:22px 20px 18px;
+
+border-radius:18px;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+180deg,
+rgba(22,25,36,.94),
+rgba(10,12,20,.97));
+
+border:1px solid rgba(255,60,90,.12);
+
+box-shadow:
+0 12px 35px rgba(0,0,0,.45),
+0 0 0 1px rgba(255,60,90,.05) inset,
+0 0 60px rgba(255,40,70,.04);
+
+transition:
+transform .35s,
+box-shadow .35s,
+border-color .35s;
+
+}
+
+.premium-track:hover,
+.track-card:hover{
+
+transform:
+translateY(-8px);
+
+border-color:
+rgba(255,40,80,.45);
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.6),
+0 0 40px rgba(255,30,70,.18),
+0 0 0 1px rgba(255,70,110,.15) inset;
+
+}
+
+.track-title{
+
+margin-top:12px;
+
+font-size:26px;
+
+line-height:1.18;
+
+}
+
+.track-desc{
+
+margin-top:10px;
+
+font-size:14px;
+
+line-height:1.55;
+
+min-height:68px;
+
+}
+
+.track-tags{
+
+margin-top:18px;
+
+}
+
+.track-card-footer{
+
+margin-top:auto;
+
+padding-top:18px;
+
+}
+
+
+/* ==========================================================
+   RED PLANET
+   ========================================================== */
+
+.planet-bg{
+
+position:absolute;
+
+right:-180px;
+
+top:120px;
+
+width:650px;
+
+height:650px;
+
+pointer-events:none;
+
+z-index:0;
+
+opacity:.95;
+
+animation:
+planetFloat 18s ease-in-out infinite;
+
+}
+
+.planet-svg{
+
+width:100%;
+
+height:100%;
+
+filter:
+drop-shadow(0 0 120px rgba(255,30,60,.18));
+
+}
+
+@keyframes planetFloat{
+
+0%{
+
+transform:
+translateY(0)
+rotate(0deg);
+
+}
+
+50%{
+
+transform:
+translateY(-18px)
+rotate(2deg);
+
+}
+
+100%{
+
+transform:
+translateY(0)
+rotate(0deg);
+
+}
+
+}
+
+/* Push cards above the planet */
+
+.tracks-grid{
+
+position:relative;
+
+z-index:2;
+
+}
+
+
+/* ==========================================================
+   SPACESHIP HUD HEADER
+   ========================================================== */
+
+.hud-header{
+
+display:flex;
+align-items:center;
+margin-bottom:16px;
+
+}
+
+.hud-led{
+
+width:8px;
+height:8px;
+border-radius:50%;
+margin-right:8px;
+
+animation:hudPulse 3s infinite;
+
+}
+
+.hud-led.red{
+
+background:#ff244f;
+
+box-shadow:
+0 0 10px #ff244f;
+
+}
+
+.hud-led.amber{
+
+background:#ff9d2d;
+
+box-shadow:
+0 0 8px #ff9d2d;
+
+animation-delay:.8s;
+
+}
+
+.hud-led.green{
+
+background:#54ff8b;
+
+box-shadow:
+0 0 8px #54ff8b;
+
+animation-delay:1.6s;
+
+}
+
+.hud-divider{
+
+flex:1;
+
+height:1px;
+
+margin-left:12px;
+
+background:
+linear-gradient(
+90deg,
+rgba(255,40,80,.65),
+rgba(255,40,80,.05));
+
+}
+
+@keyframes hudPulse{
+
+0%,100%{
+
+opacity:.55;
+
+}
+
+50%{
+
+opacity:1;
+
+transform:scale(1.2);
+
+}
+
+}
+
+
+/* ==========================================================
+   GLASS REFLECTION
+   ========================================================== */
+
+.glass-shine{
+
+position:absolute;
+
+top:-45%;
+
+left:-70%;
+
+width:55%;
+
+height:220%;
+
+pointer-events:none;
+
+transform:
+rotate(-24deg);
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.10),
+rgba(255,255,255,.18),
+transparent);
+
+opacity:0;
+
+z-index:3;
+
+transition:
+opacity .35s;
+
+}
+
+.track-card:hover .glass-shine,
+.premium-track:hover .glass-shine{
+
+opacity:1;
+
+animation:
+glassSweep 1.2s ease;
+
+}
+
+@keyframes glassSweep{
+
+0%{
+
+left:-70%;
+
+}
+
+100%{
+
+left:145%;
+
+}
+
+}
+
+
+.track-card::after,
+.premium-track::after{
+
+content:"";
+
+position:absolute;
+
+left:50%;
+
+bottom:-38px;
+
+width:70%;
+
+height:70px;
+
+transform:translateX(-50%);
+
+background:
+radial-gradient(circle,
+rgba(255,35,70,.24),
+transparent 70%);
+
+filter:blur(22px);
+
+opacity:.45;
+
+pointer-events:none;
+
+z-index:-1;
+
+transition:.35s;
+
+}
+
+.track-card:hover::after,
+.premium-track:hover::after{
+
+opacity:.9;
+
+transform:
+translateX(-50%)
+scale(1.12);
+
+}
+
+
+/* ==========================================================
+   RED HOLOGRAPHIC GRID
+   ========================================================== */
+
+.holo-grid{
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
+opacity:.08;
+
+background:
+
+linear-gradient(rgba(255,45,70,.25) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,45,70,.25) 1px,transparent 1px);
+
+background-size:28px 28px;
+
+mask-image:linear-gradient(to bottom,
+rgba(0,0,0,.9),
+transparent);
+
+z-index:1;
+
+transition:.35s;
+
+}
+
+.track-card:hover .holo-grid,
+.premium-track:hover .holo-grid{
+
+opacity:.18;
+
+background-position:
+28px 28px;
+
+}
+
+
+/* ==========================================================
+   ENERGY SCAN
+   ========================================================== */
+
+.track-card::before,
+.premium-track::before{
+
+animation:
+energyScan 7s linear infinite;
+
+}
+
+@keyframes energyScan{
+
+0%{
+
+filter:
+brightness(1);
+
+}
+
+48%{
+
+filter:
+brightness(1);
+
+}
+
+50%{
+
+filter:
+brightness(1.45);
+
+}
+
+52%{
+
+filter:
+brightness(1);
+
+}
+
+100%{
+
+filter:
+brightness(1);
+
+}
+
+}
+
+
+.track-icon-bg{
+
+position:absolute;
+
+right:-35px;
+
+top:-35px;
+
+width:150px;
+
+height:150px;
+
+border-radius:50%;
+
+background:
+
+radial-gradient(circle,
+rgba(255,35,70,.18),
+rgba(255,35,70,.06),
+transparent 72%);
+
+filter:blur(6px);
+
+pointer-events:none;
+
+}
+
+.track-icon-bg::before{
+
+content:"";
+
+position:absolute;
+
+left:48px;
+top:48px;
+
+width:55px;
+height:55px;
+
+border-radius:50%;
+
+border:2px solid rgba(255,60,90,.45);
+
+box-shadow:
+0 0 25px rgba(255,40,70,.25);
+
+}
+
+
+.track-title{
+
+font-size:20px!important;
+
+margin:10px 0 8px;
+
+}
+
+.track-desc{
+
+font-size:13px;
+
+display:-webkit-box;
+
+-webkit-line-clamp:2;
+
+-webkit-box-orient:vertical;
+
+overflow:hidden;
+
+min-height:auto!important;
+
+margin-bottom:14px;
+
+}
+
+.track-tags{
+
+margin-top:10px!important;
+
+}
+
+.track-card-footer{
+
+margin-top:16px!important;
+
+}
+
+.track-card,
+.premium-track{
+
+min-height:320px!important;
+
+}
+
+
+/* ==========================================================
+   MISSION BADGE + CARD COMPACT
+   ========================================================== */
+
+.track-card,
+.premium-track{
+
+min-height:315px!important;
+padding:18px 18px 16px!important;
+
+}
+
+.track-title{
+
+font-size:20px!important;
+line-height:1.2;
+margin:10px 0 8px;
+
+}
+
+.track-desc{
+
+display:-webkit-box;
+-webkit-box-orient:vertical;
+-webkit-line-clamp:2;
+overflow:hidden;
+
+font-size:13px;
+line-height:1.55;
+
+min-height:auto!important;
+
+margin-bottom:14px;
+
+}
+
+.track-tags{
+
+margin-top:10px!important;
+
+}
+
+.track-card-footer{
+
+margin-top:auto;
+
+padding-top:14px;
+
+font-size:12px;
+letter-spacing:.12em;
+color:#ff5474;
+
+}
+
+/* ---------- Mission Badge ---------- */
+
+.mission-badge{
+
+position:absolute;
+
+right:18px;
+top:18px;
+
+width:58px;
+height:58px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+pointer-events:none;
+
+opacity:.9;
+
+z-index:6;
+
+}
+
+.mission-ring{
+
+position:absolute;
+
+width:58px;
+height:58px;
+
+border-radius:50%;
+
+border:2px solid rgba(255,50,80,.35);
+
+animation:ringSpin 12s linear infinite;
+
+}
+
+.mission-core{
+
+width:14px;
+height:14px;
+
+border-radius:50%;
+
+background:#ff3158;
+
+box-shadow:
+0 0 12px #ff3158,
+0 0 28px rgba(255,40,70,.6);
+
+animation:corePulse 2.8s ease-in-out infinite;
+
+}
+
+@keyframes ringSpin{
+
+from{
+transform:rotate(0deg);
+}
+
+to{
+transform:rotate(360deg);
+}
+
+}
+
+@keyframes corePulse{
+
+0%,100%{
+transform:scale(.9);
+opacity:.7;
+}
+
+50%{
+transform:scale(1.2);
+opacity:1;
+}
+
+}
+
+/* ---------- Cleaner Header ---------- */
+
+.track-card-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:10px;
+
+}
+
+.track-code{
+
+font-size:11px;
+
+letter-spacing:.18em;
+
+font-weight:700;
+
+color:#ff5474;
+
+}
+
+.track-category{
+
+font-size:11px;
+
+opacity:.7;
+
+}
+

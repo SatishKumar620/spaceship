@@ -2395,7 +2395,66 @@ className="radar-wave delay2"/>
 </svg>
 </div>
 
+
+<div className="planet-bg" aria-hidden="true">
+
+<svg viewBox="0 0 900 900" className="planet-svg">
+
+<defs>
+
+<radialGradient id="planetGrad">
+<stop offset="0%" stopColor="#ff6a6a"/>
+<stop offset="55%" stopColor="#ff2f55"/>
+<stop offset="100%" stopColor="#4b0013"/>
+</radialGradient>
+
+<filter id="planetBlur">
+<feGaussianBlur stdDeviation="35"/>
+</filter>
+
+</defs>
+
+<circle
+cx="450"
+cy="450"
+r="260"
+fill="url(#planetGrad)"
+opacity=".16"/>
+
+<ellipse
+cx="450"
+cy="450"
+rx="340"
+ry="72"
+fill="none"
+stroke="#ff3658"
+strokeWidth="6"
+opacity=".22"/>
+
+<ellipse
+cx="450"
+cy="450"
+rx="355"
+ry="80"
+fill="none"
+stroke="#ff3658"
+strokeWidth="2"
+opacity=".14"/>
+
+<circle
+cx="350"
+cy="320"
+r="80"
+fill="#fff"
+opacity=".05"
+filter="url(#planetBlur)"/>
+
+</svg>
+
+</div>
+
 <div className="tracks-grid">
+
 
 
           {filteredTracks.map((t, i) => {
@@ -2453,39 +2512,31 @@ className="radar-wave delay2"/>
 </div>
 
 
+
+
+<div className="holo-grid"></div>
+
+<div className="glass-shine"></div>
+
+
 <div className="track-glow"></div>
 
-<div className="track-shine"></div>
-<div className="track-watermark">
 
-                  {watermarkType === 'astronaut' && (
-                    <svg viewBox="0 0 100 100" width="100%" height="100%" fill="currentColor">
-                      <path d="M50 10 C35 10, 25 25, 25 40 C25 50, 30 60, 35 70 L35 90 L65 90 L65 70 C70 60, 75 50, 75 40 C75 25, 65 10, 50 10 Z M50 20 C60 20, 65 30, 65 40 L35 40 C35 30, 40 20, 50 20 Z" />
-                      <circle cx="50" cy="40" r="15" fill="none" stroke="currentColor" strokeWidth="4"/>
-                    </svg>
-                  )}
-                  {watermarkType === 'spaceship' && (
-                    <svg viewBox="0 0 100 100" width="100%" height="100%" fill="currentColor">
-                      <path d="M50 10 L65 40 L70 70 L80 90 L50 80 L20 90 L30 70 L35 40 Z" />
-                      <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" strokeWidth="4"/>
-                    </svg>
-                  )}
-                  {watermarkType === 'spacestation' && (
-                    <svg viewBox="0 0 100 100" width="100%" height="100%" fill="currentColor">
-                      <rect x="20" y="40" width="60" height="20" />
-                      <rect x="10" y="20" width="20" height="60" />
-                      <rect x="70" y="20" width="20" height="60" />
-                      <circle cx="50" cy="50" r="8" fill="none" stroke="currentColor" strokeWidth="3"/>
-                    </svg>
-                  )}
-                  {watermarkType === 'meteor' && (
-                    <svg viewBox="0 0 100 100" width="100%" height="100%" fill="currentColor">
-                      <path d="M80 20 L60 30 L40 20 L20 40 L30 60 L20 80 L50 70 L70 90 L80 60 L100 50 Z" />
-                      <path d="M70 30 L90 10 M80 40 L100 20" stroke="currentColor" strokeWidth="4"/>
-                    </svg>
-                  )}
-                </div>
-                <div className="track-card-header">
+<div className="track-shine"></div>
+<div className="track-icon-bg"></div>
+
+<div className="hud-header">
+
+<div className="hud-led red"></div>
+<div className="hud-led amber"></div>
+<div className="hud-led green"></div>
+
+<div className="hud-divider"></div>
+
+</div>
+
+<div className="track-card-header">
+
                 <div className="track-code">{t.code}</div>
                 <div className="track-category">{t.category}</div>
               </div>
@@ -2500,7 +2551,7 @@ className="radar-wave delay2"/>
               </div>
 
               <div className="track-card-footer">
-                <span>VIEW SPECIFICATIONS</span>
+                <span>VIEW MISSION →</span>
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
