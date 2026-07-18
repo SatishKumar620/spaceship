@@ -1162,3 +1162,51 @@ line-height:1.7;
 font-size:.95rem;
 }
 
+
+/* ===========================
+   Sponsor SVG Icons
+=========================== */
+
+.sponsor-svg{
+width:54px;
+height:54px;
+display:block;
+overflow:visible;
+}
+
+.orbitRing{
+transform-origin:32px 32px;
+animation:sponsorOrbitSpin 18s linear infinite;
+}
+
+.sponsor-svg rect,
+.sponsor-svg path,
+.sponsor-svg circle,
+.sponsor-svg line{
+transition:.35s;
+}
+
+.perk-card:hover .orbitRing{
+animation-duration:6s;
+}
+
+.perk-card:hover .sponsor-svg{
+transform:scale(1.08);
+}
+
+.perk-card:hover .sponsor-svg rect,
+.perk-card:hover .sponsor-svg path,
+.perk-card:hover .sponsor-svg line,
+.perk-card:hover .sponsor-svg circle{
+filter:drop-shadow(0 0 10px rgba(255,53,88,.9));
+}
+
+@keyframes sponsorOrbitSpin{
+from{
+transform:rotate(0deg);
+}
+to{
+transform:rotate(360deg);
+}
+}
+

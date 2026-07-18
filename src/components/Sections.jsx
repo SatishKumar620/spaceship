@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Sections.css';
+import { SatelliteIcon, DockIcon, RadarIcon, BeaconIcon } from './SponsorIcons';
 import SpaceEventsScene from './SpaceEventsScene';
 
 /* ============================================================
@@ -321,47 +322,24 @@ const SPONSOR_PERKS = [
   {
     title: 'Brand Visibility',
     desc: 'Features across digital banners, merchandise, shirts, and stage placement seen by hundreds of developers.',
-    icon: (
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
+    icon: <SatelliteIcon />
   },
   {
     title: 'Direct Engagement',
     desc: 'Host customized tech-talk sessions, workshops, API-specific tracks, or mentor desks on the hack floor.',
-    icon: (
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="9" cy="7" r="4" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
+    icon: <DockIcon />
   },
   {
     title: 'Talent Acquisition',
     desc: 'Access resumes database and run fast-tracked interviews to recruit elite engineering students.',
-    icon: (
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="9" cy="7" r="4" strokeLinecap="round" strokeLinejoin="round"/>
-        <line x1="19" y1="8" x2="19" y2="14" strokeLinecap="round" strokeLinejoin="round"/>
-        <line x1="22" y1="11" x2="16" y2="11" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
+    icon: <RadarIcon />
   },
   {
     title: 'Post-Event Marketing',
     desc: 'Post-hack summary articles, demo-day video showcases, and targeted sponsor newsletter dispatches.',
-    icon: (
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" strokeLinecap="round" strokeLinejoin="round"/>
-        <polyline points="22,6 12,13 2,6" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
+    icon: <BeaconIcon />
   }
-];
+];;
 
 const PACKAGES = [
   {
