@@ -3064,3 +3064,146 @@ min-height:260px !important;
 
 }
 
+
+/* =========================================
+   PREMIUM GLASS CARDS
+   ========================================= */
+
+.track-card,
+.premium-track{
+
+background:
+linear-gradient(
+180deg,
+rgba(18,22,35,.32),
+rgba(10,14,24,.22)
+) !important;
+
+backdrop-filter:blur(8px);
+-webkit-backdrop-filter:blur(8px);
+
+border:1px solid rgba(255,70,90,.16);
+
+box-shadow:
+0 12px 40px rgba(0,0,0,.22),
+inset 0 1px 0 rgba(255,255,255,.05);
+
+}
+
+/* Stronger transparency on hover */
+
+.track-card:hover,
+.premium-track:hover{
+
+background:
+linear-gradient(
+180deg,
+rgba(20,25,40,.22),
+rgba(10,14,24,.12)
+) !important;
+
+border-color:rgba(255,60,90,.45);
+
+box-shadow:
+0 18px 60px rgba(255,40,70,.18),
+0 0 25px rgba(255,40,70,.10);
+
+}
+
+/* Let glow effects show through */
+
+.track-glow{
+
+opacity:.18 !important;
+
+}
+
+.track-shine{
+
+opacity:.10 !important;
+
+}
+
+.particle-field{
+
+opacity:.30 !important;
+
+}
+
+.holo-grid{
+
+opacity:.06 !important;
+
+}
+
+
+
+/* =========================================
+   ULTRA GLASS PROBLEM CARDS
+   ========================================= */
+
+.track-card,
+.premium-track{
+
+background:
+linear-gradient(
+180deg,
+rgba(12,16,28,.16),
+rgba(8,10,18,.10)
+)!important;
+
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
+
+border:1px solid rgba(255,70,90,.18)!important;
+
+box-shadow:
+0 8px 30px rgba(0,0,0,.20),
+inset 0 1px 0 rgba(255,255,255,.05);
+
+}
+
+.track-card:hover,
+.premium-track:hover{
+
+background:
+linear-gradient(
+180deg,
+rgba(18,22,35,.10),
+rgba(8,10,18,.06)
+)!important;
+
+border-color:rgba(255,70,90,.55)!important;
+
+box-shadow:
+0 16px 50px rgba(255,40,70,.18),
+0 0 35px rgba(255,40,70,.10);
+
+}
+
+/* Reveal background animation */
+
+.track-glow{
+opacity:.15!important;
+}
+
+.track-shine{
+opacity:.08!important;
+}
+
+.particle-field{
+opacity:.25!important;
+}
+
+.orbit-system{
+opacity:.20!important;
+}
+
+.holo-grid{
+opacity:.05!important;
+}
+
+.glass-shine{
+opacity:.18!important;
+}
+
