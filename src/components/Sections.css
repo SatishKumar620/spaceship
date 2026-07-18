@@ -2829,3 +2829,145 @@ opacity:.7;
 
 }
 
+
+/* ==========================================================
+   PROBLEM TRACKS V3 - BETTER PROPORTIONS
+   ========================================================== */
+
+/* Compact cards */
+
+.track-card,
+.premium-track{
+
+min-height:285px !important;
+
+padding:14px 16px 16px !important;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:flex-start;
+
+overflow:hidden;
+
+}
+
+/* Remove huge empty space */
+
+.hud-header{
+
+margin-bottom:8px !important;
+
+}
+
+.track-card-header{
+
+margin-bottom:8px !important;
+
+}
+
+.track-title{
+
+font-size:19px !important;
+
+line-height:1.25;
+
+margin:6px 0 !important;
+
+}
+
+.track-desc{
+
+font-size:13px;
+
+line-height:1.55;
+
+margin-bottom:10px !important;
+
+display:-webkit-box;
+
+-webkit-box-orient:vertical;
+
+-webkit-line-clamp:2;
+
+overflow:hidden;
+
+}
+
+/* Tags closer */
+
+.track-tags{
+
+margin-top:6px !important;
+
+gap:6px;
+
+}
+
+/* Footer sticks to bottom */
+
+.track-card-footer{
+
+margin-top:auto;
+
+padding-top:12px;
+
+}
+
+/* Mission badge */
+
+.mission-badge{
+
+top:10px;
+
+right:10px;
+
+transform:scale(.9);
+
+}
+
+/* Better mobile layout */
+
+@media (max-width:768px){
+
+.tracks-grid{
+
+grid-template-columns:repeat(2,minmax(0,1fr));
+
+gap:14px;
+
+}
+
+.track-card,
+.premium-track{
+
+min-height:270px !important;
+
+}
+
+.track-title{
+
+font-size:18px !important;
+
+}
+
+}
+
+@media (max-width:480px){
+
+.tracks-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.track-card,
+.premium-track{
+
+min-height:250px !important;
+
+}
+
+}
+
