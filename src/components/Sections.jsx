@@ -2486,70 +2486,7 @@ filter="url(#planetBlur)"/>
               >
                 
 
-<div className="hud-corners">
-<span className="hud tl"></span>
-<span className="hud tr"></span>
-<span className="hud bl"></span>
-<span className="hud br"></span>
-</div>
 
-
-<div className="track-border"></div>
-
-
-<div className="particle-field">
-
-<span className="dust d1"></span>
-<span className="dust d2"></span>
-<span className="dust d3"></span>
-<span className="dust d4"></span>
-<span className="dust d5"></span>
-<span className="dust d6"></span>
-<span className="dust d7"></span>
-<span className="dust d8"></span>
-
-</div>
-
-<div className="orbit-system">
-
-  <span className="orbit orbit1">
-    <span className="satellite"></span>
-  </span>
-
-  <span className="orbit orbit2">
-    <span className="satellite pink"></span>
-  </span>
-</div>
-
-
-
-
-<div className="holo-grid"></div>
-
-<div className="glass-shine"></div>
-
-
-<div className="track-glow"></div>
-
-
-<div className="track-shine"></div>
-<div className="track-icon-bg"></div>
-
-
-
-
-
-<div className="hud-header">
-
-
-
-<div className="hud-led red"></div>
-<div className="hud-led amber"></div>
-<div className="hud-led green"></div>
-
-<div className="hud-divider"></div>
-
-</div>
 
 <div className="track-card-header">
 

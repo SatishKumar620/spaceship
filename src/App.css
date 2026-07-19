@@ -99,16 +99,19 @@
 
   .hud-outer-ring {
     transform-origin: 150px 150px;
+    transform-box: view-box;
     animation: rotateCW 20s linear infinite;
   }
 
   .hud-tick-ring {
     transform-origin: 150px 150px;
+    transform-box: view-box;
     animation: rotateCCW 8s linear infinite;
   }
 
   .hud-orbit-group {
     transform-origin: 150px 150px;
+    transform-box: view-box;
     animation: rotateCW 4.2s linear infinite;
   }
 
