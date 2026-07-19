@@ -2552,7 +2552,7 @@ filter="url(#planetBlur)"/>
 
 </defs>
 
-<!-- Head -->
+{/* Head */}
 
 <path
 d="M250 70
@@ -2565,7 +2565,7 @@ filter="url(#blur)"
 opacity=".95"
 />
 
-<!-- Shoulders -->
+{/* Shoulders */}
 
 <path
 d="M120 320
@@ -2577,7 +2577,7 @@ fill="url(#bodyFade)"
 opacity=".65"
 />
 
-<!-- Eyes -->
+{/* Eyes */}
 
 <ellipse cx="205" cy="205" rx="18" ry="8" fill="url(#eyeGlow)" className="alien-eye"/>
 

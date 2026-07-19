@@ -27,6 +27,7 @@ export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showRegModal, setShowRegModal] = useState(false);
   const [loadingPercent, setLoadingPercent] = useState(0);
+  const [isLoaderActive, setIsLoaderActive] = useState(true);
 
   // iOS scroll lock: overflow:hidden on html/body doesn't work on iOS Safari
   // Must use position:fixed with saved scroll position
@@ -118,17 +119,39 @@ export default function App() {
       // Then layer on the animation as a progressive enhancement
       try {
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        
+        // 1. Animate loading screen elements out
+        tl.to('#loadingScreen .loading-content', {
+          opacity: 0,
+          scale: 0.9,
+          duration: 0.4,
+          ease: 'power2.in'
+        });
+        
+        tl.to('#loadingScreen', {
+          opacity: 0,
+          scale: 1.12,
+          duration: 0.8,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            setIsLoaderActive(false);
+          }
+        }, '-=0.25');
+
+        // 2. Animate landing page hero elements in (overlapping with loading screen fade-out)
         gsap.set('#introEyebrow', { opacity: 0, y: 16 });
         gsap.set('#introHeading', { opacity: 0, y: 34 });
         gsap.set('#introSub', { opacity: 0, y: 20 });
         gsap.set('#introCta', { opacity: 0, y: 16 });
-        tl.to('#introEyebrow', { opacity: 1, y: 0, duration: 0.6, delay: 0.2 })
+        
+        tl.to('#introEyebrow', { opacity: 1, y: 0, duration: 0.6 }, '-=0.45')
           .to('#introHeading', { opacity: 1, y: 0, duration: 0.9 }, '-=0.45')
           .to('#introSub', { opacity: 1, y: 0, duration: 0.8 }, '-=0.55')
           .to('#introCta', { opacity: 1, y: 0, duration: 0.7 }, '-=0.5');
       } catch (e) {
-        // If GSAP fails for any reason, elements are already visible above
+        // If GSAP fails for any reason, ensure loader is deactivated and elements visible
         console.warn('GSAP animation skipped:', e);
+        setIsLoaderActive(false);
       }
 
       // Lightweight CSS reveal logic for data-reveal elements
@@ -173,16 +196,24 @@ export default function App() {
   return (
     <>
       {/* Loading screen overlay */}
-      {!isLoaded && (
+      {isLoaderActive && (
         <div id="loadingScreen" className="loading-screen">
           <div className="loading-content">
             <div className="loader-scanner">
               <div className="scanner-circle"></div>
-              <div className="scanner-line"></div>
-              <svg className="loading-spaceship" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M50 10 L65 40 L70 70 L80 90 L50 80 L20 90 L30 70 L35 40 Z" />
-                <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" strokeWidth="4"/>
+              <svg className="scanner-progress-svg" viewBox="0 0 100 100">
+                <circle className="progress-bg" cx="50" cy="50" r="45" />
+                <circle 
+                  className="progress-bar-glow" 
+                  cx="50" 
+                  cy="50" 
+                  r="45" 
+                  strokeDasharray="283" 
+                  strokeDashoffset={283 - (283 * loadingPercent) / 100}
+                />
               </svg>
+              <div className="scanner-ticks"></div>
+              <div className="quantum-core"></div>
               <div className="scanner-pct">{loadingPercent}%</div>
             </div>
             <h1 className="loading-logo glow-text">HACKQUBIT <span className="logo-v2">2.O</span></h1>
@@ -194,6 +225,11 @@ export default function App() {
               {loadingPercent >= 30 && loadingPercent < 60 && "STABILIZING WARP FOLD CORE..."}
               {loadingPercent >= 60 && loadingPercent < 90 && "SYNCING ORBITAL TELEMETRY..."}
               {loadingPercent >= 90 && "READY FOR DOCKING..."}
+            </div>
+            <div className="loading-telemetry">
+              <span>SYS.LOC: ORBIT_X5</span>
+              <span>VOLTS: {(4.1 + (loadingPercent / 100) * 8.4).toFixed(2)}V</span>
+              <span>SIG: {loadingPercent < 90 ? "ACQUIRING" : "SECURE"}</span>
             </div>
           </div>
         </div>
