@@ -361,15 +361,15 @@ export default function App() {
 
 
       <Suspense fallback={null}>
-        <AboutSection />
-        <VenueSectionNew />
-        <GalacticRewards />
-        <ScheduleSection />
-        <ProblemsSection />
-        <EventsSection />
-        <SponsorsSection />
-        <FaqSection />
-        <Footer />
+        <div className="lazy-render lazy-render-about"><AboutSection /></div>
+        <div className="lazy-render lazy-render-venue"><VenueSectionNew /></div>
+        <div className="lazy-render lazy-render-rewards"><GalacticRewards /></div>
+        <div className="lazy-render lazy-render-schedule"><ScheduleSection /></div>
+        <div className="lazy-render lazy-render-problems"><ProblemsSection /></div>
+        <div className="lazy-render lazy-render-events"><EventsSection /></div>
+        <div className="lazy-render lazy-render-sponsors"><SponsorsSection /></div>
+        <div className="lazy-render lazy-render-faq"><FaqSection /></div>
+        <div className="lazy-render lazy-render-footer"><Footer /></div>
       </Suspense>
 
       {showRegModal && (

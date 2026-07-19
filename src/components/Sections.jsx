@@ -2471,8 +2471,11 @@ filter="url(#planetBlur)"/>
                 className={`track-card premium-track ${catClass}`}
                 key={t.code}
                 data-reveal="true"
+                onMouseEnter={(e)=>{
+                  e.currentTarget.cardRect = e.currentTarget.getBoundingClientRect();
+                }}
                 onMouseMove={(e)=>{
-                  const r=e.currentTarget.getBoundingClientRect();
+                  const r = e.currentTarget.cardRect || e.currentTarget.getBoundingClientRect();
                   e.currentTarget.style.setProperty('--mx',(e.clientX-r.left)+'px');
                   e.currentTarget.style.setProperty('--my',(e.clientY-r.top)+'px');
                   e.currentTarget.style.setProperty('--rx',(((e.clientX-r.left)/r.width)-0.5)*12+'px');

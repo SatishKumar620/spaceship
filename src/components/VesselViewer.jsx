@@ -1363,7 +1363,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
     }
 
     const MAX_DPR = PIXEL_RATIO;
-    const MIN_DPR = isMobile ? 0.85 : 1.2;
+    const MIN_DPR = isMobile ? 0.75 : 0.85;
     let currentDPR = PIXEL_RATIO;
     let frameAccum = 0,
       frameCount = 0;

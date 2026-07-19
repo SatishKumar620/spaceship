@@ -679,3 +679,17 @@
     from { transform: translateY(20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
   }
+
+  /* Defer rendering of offscreen sections to improve scroll performance and initial LCP */
+  .lazy-render {
+    content-visibility: auto;
+  }
+  .lazy-render-about { contain-intrinsic-size: auto none auto 700px; }
+  .lazy-render-venue { contain-intrinsic-size: auto none auto 600px; }
+  .lazy-render-rewards { contain-intrinsic-size: auto none auto 750px; }
+  .lazy-render-schedule { contain-intrinsic-size: auto none auto 950px; }
+  .lazy-render-problems { contain-intrinsic-size: auto none auto 800px; }
+  .lazy-render-events { contain-intrinsic-size: auto none auto 700px; }
+  .lazy-render-sponsors { contain-intrinsic-size: auto none auto 850px; }
+  .lazy-render-faq { contain-intrinsic-size: auto none auto 600px; }
+  .lazy-render-footer { contain-intrinsic-size: auto none auto 350px; }
