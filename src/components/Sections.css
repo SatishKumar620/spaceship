@@ -755,9 +755,11 @@ min-height:unset;
 }
 
 .track-watermark {
-  position: absolute;
-  right: -25px;
-  bottom: -25px;
+  position: absolute !important;
+  top: auto !important;
+  left: auto !important;
+  right: -25px !important;
+  bottom: -25px !important;
   width: 170px;
   height: 170px;
   opacity: 0.18;
@@ -2126,6 +2128,7 @@ align-items:start;
 .premium-track,
 .track-card{
 
+position: relative !important;
 min-height:240px !important;
 
 height:auto;

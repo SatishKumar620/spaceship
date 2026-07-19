@@ -2531,30 +2531,30 @@ filter="url(#planetBlur)"/>
                 }}
               >
                 
-                {renderWatermark(watermarkType)}
-
+ 
 <div className="track-card-header">
-
-                <div className="track-code">{t.code}</div>
-                <div className="track-category">{t.category}</div>
-              </div>
-              <h3 className="track-title">{t.title}</h3>
-              <p className="track-desc">{t.desc}</p>
-              
-              <div className="track-tags">
-                {t.tags.slice(0, 3).map(tag => (
-                  <span key={tag} className="track-tag">{tag}</span>
-                ))}
-                {t.tags.length > 3 && <span className="track-tag-more">+{t.tags.length - 3}</span>}
-              </div>
-
-              <div className="track-card-footer">
-                <span>VIEW MISSION →</span>
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-            </div>
+ 
+                 <div className="track-code">{t.code}</div>
+                 <div className="track-category">{t.category}</div>
+               </div>
+               <h3 className="track-title">{t.title}</h3>
+               <p className="track-desc">{t.desc}</p>
+               
+               <div className="track-tags">
+                 {t.tags.slice(0, 3).map(tag => (
+                   <span key={tag} className="track-tag">{tag}</span>
+                 ))}
+                 {t.tags.length > 3 && <span className="track-tag-more">+{t.tags.length - 3}</span>}
+               </div>
+ 
+               <div className="track-card-footer">
+                 <span>VIEW MISSION →</span>
+                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                   <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+                 </svg>
+               </div>
+               {renderWatermark(watermarkType)}
+             </div>
             );
           })}
         </div>
