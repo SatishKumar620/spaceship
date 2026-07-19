@@ -2460,10 +2460,15 @@ filter="url(#planetBlur)"/>
           {filteredTracks.map((t, i) => {
             const types = ['astronaut', 'spaceship', 'spacestation', 'meteor'];
             const watermarkType = types[i % types.length];
+            const catClass = getCategoryClass(t.category);
+            let glowColor = '#ff2d55';
+            if (catClass === 'cat-ai') glowColor = '#00f0ff';
+            else if (catClass === 'cat-software') glowColor = '#ff9d00';
+            else if (catClass === 'cat-iot') glowColor = '#bd5eff';
 
             return (
               <div
-                className={`track-card premium-track ${getCategoryClass(t.category)}`}
+                className={`track-card premium-track ${catClass}`}
                 key={t.code}
                 data-reveal="true"
                 onMouseMove={(e)=>{
@@ -2474,7 +2479,10 @@ filter="url(#planetBlur)"/>
                   e.currentTarget.style.setProperty('--ry',(((e.clientY-r.top)/r.height)-0.5)*12+'px');
                 }}
                 onClick={() => setSelectedTrack(t)}
-                style={{ transitionDelay: `${i * 35}ms` }}
+                style={{ 
+                  transitionDelay: `${i * 35}ms`,
+                  '--track-glow': glowColor
+                }}
               >
                 
 
@@ -2535,18 +2543,19 @@ filter="url(#planetBlur)"/>
 
 <defs>
 
-<radialGradient id="eyeGlow" cx="50%" cy="50%" r="60%">
-<stop offset="0%" stopColor="#ff365c"/>
-<stop offset="35%" stopColor="#ff365c"/>
+<radialGradient id={`eyeGlow-${t.code}`} cx="50%" cy="50%" r="60%">
+<stop offset="0%" stopColor={glowColor}/>
+<stop offset="35%" stopColor={glowColor}/>
 <stop offset="100%" stopColor="transparent"/>
 </radialGradient>
 
-<linearGradient id="bodyFade" x1="0" y1="0" x2="0" y2="1">
-<stop offset="0%" stopColor="#000"/>
-<stop offset="100%" stopColor="rgba(0,0,0,0)"/>
-</linearGradient>
+<radialGradient id={`bodyFade-${t.code}`} cx="50%" cy="40%" r="60%">
+<stop offset="0%" stopColor={glowColor} stopOpacity="0.25"/>
+<stop offset="65%" stopColor={glowColor} stopOpacity="0.08"/>
+<stop offset="100%" stopColor={glowColor} stopOpacity="0"/>
+</radialGradient>
 
-<filter id="blur">
+<filter id={`blur-${t.code}`}>
 <feGaussianBlur stdDeviation="6"/>
 </filter>
 
@@ -2560,8 +2569,8 @@ C170 70 120 145 120 230
 C120 315 170 370 250 390
 C330 370 380 315 380 230
 C380 145 330 70 250 70Z"
-fill="url(#bodyFade)"
-filter="url(#blur)"
+fill={`url(#bodyFade-${t.code})`}
+filter={`url(#blur-${t.code})`}
 opacity=".95"
 />
 
@@ -2573,15 +2582,15 @@ C80 370 100 450 250 500
 C400 450 420 370 380 320
 C340 350 300 360 250 360
 C200 360 160 350 120 320Z"
-fill="url(#bodyFade)"
+fill={`url(#bodyFade-${t.code})`}
 opacity=".65"
 />
 
 {/* Eyes */}
 
-<ellipse cx="205" cy="205" rx="18" ry="8" fill="url(#eyeGlow)" className="alien-eye"/>
+<ellipse cx="205" cy="205" rx="18" ry="8" fill={`url(#eyeGlow-${t.code})`} className="alien-eye"/>
 
-<ellipse cx="295" cy="205" rx="18" ry="8" fill="url(#eyeGlow)" className="alien-eye"/>
+<ellipse cx="295" cy="205" rx="18" ry="8" fill={`url(#eyeGlow-${t.code})`} className="alien-eye"/>
 
 </svg>
 

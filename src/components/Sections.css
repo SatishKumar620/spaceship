@@ -3134,7 +3134,7 @@ top:-70px;
 
 left:50%;
 
-transform:translateX(-50%);
+transform:translateX(calc(-50% + var(--rx,0px))) translateY(var(--ry,0px)) scale(1);
 
 width:260px;
 
@@ -3142,7 +3142,7 @@ height:260px;
 
 z-index:1 !important;
 
-opacity:.09;
+opacity:.35;
 
 pointer-events:none;
 
@@ -3154,11 +3154,12 @@ mix-blend-mode:screen;
 .premium-track:hover .alien-shadow,
 .track-card:hover .alien-shadow{
 
-opacity:.16;
+opacity:.65;
 
 transform:
-translateX(-50%)
-scale(1.05);
+translateX(calc(-50% + var(--rx,0px)))
+translateY(var(--ry,0px))
+scale(1.06);
 
 }
 
@@ -3202,15 +3203,15 @@ background:
 linear-gradient(
 90deg,
 transparent,
-rgba(255,70,90,.9),
-rgba(255,170,180,.95),
-rgba(255,70,90,.9),
+var(--track-glow, rgba(255,70,90,.9)),
+rgba(255,255,255,.95),
+var(--track-glow, rgba(255,70,90,.9)),
 transparent
 );
 
 box-shadow:
-0 0 14px rgba(255,70,90,.9),
-0 0 28px rgba(255,70,90,.5);
+0 0 14px var(--track-glow, rgba(255,70,90,.9)),
+0 0 28px var(--track-glow, rgba(255,70,90,.4));
 
 animation:
 alienScanner 4.8s ease-in-out infinite;
@@ -3368,6 +3369,8 @@ opacity:.15;
 
 /* Digital glitch */
 
+/* Digital glitch */
+
 .alien-shadow::before{
 
 content:"";
@@ -3381,7 +3384,7 @@ repeating-linear-gradient(
 180deg,
 transparent 0px,
 transparent 4px,
-rgba(255,70,90,.04) 5px,
+var(--track-glow, rgba(255,70,90,.04)) 5px,
 transparent 6px
 );
 
@@ -3428,39 +3431,19 @@ opacity:.15;
 
 }
 
-.premium-track:hover .alien-shadow{
-
-opacity:.18;
-
-filter:
-drop-shadow(0 0 20px rgba(255,40,70,.18));
-
-}
-
 
 /* =========================================
-   PARALLAX SHADOW
+   PARALLAX SHADOW & GLOW
    ========================================= */
 
-.alien-shadow{
+.premium-track:hover .alien-shadow,
+.track-card:hover .alien-shadow{
 
-transform:
-translateX(calc(-50% + var(--rx,0px)))
-translateY(var(--ry,0px));
-
-transition:
-transform .45s cubic-bezier(.22,1,.36,1),
-opacity .35s;
-
-}
-
-.premium-track:hover .alien-shadow{
-
-opacity:.20;
+opacity:.75;
 
 filter:
 blur(1.5px)
-drop-shadow(0 0 28px rgba(255,40,70,.18));
+drop-shadow(0 0 28px var(--track-glow, rgba(255,40,70,.25)));
 
 }
 
