@@ -199,33 +199,88 @@ export default function App() {
       {isLoaderActive && (
         <div id="loadingScreen" className="loading-screen">
           <div className="loading-content">
-            <div className="loader-scanner">
-              <div className="scanner-circle"></div>
-              <svg className="scanner-progress-svg" viewBox="0 0 100 100">
-                <circle className="progress-bg" cx="50" cy="50" r="45" />
-                <circle 
-                  className="progress-bar-glow" 
-                  cx="50" 
-                  cy="50" 
-                  r="45" 
-                  strokeDasharray="283" 
-                  strokeDashoffset={283 - (283 * loadingPercent) / 100}
-                />
-              </svg>
-              <div className="scanner-ticks"></div>
-              <div className="quantum-core"></div>
-              <div className="scanner-pct">{loadingPercent}%</div>
-            </div>
-            <h1 className="loading-logo glow-text">HACKQUBIT <span className="logo-v2">2.O</span></h1>
-            <div className="loading-status-bar">
-              <div className="loading-status-fill" style={{ width: `${loadingPercent}%` }}></div>
-            </div>
+            <svg className="premium-loader-svg" viewBox="0 0 300 300">
+              <defs>
+                <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="rgba(57, 168, 255, 0.25)" />
+                  <stop offset="100%" stopColor="rgba(138, 43, 226, 0)" />
+                </radialGradient>
+                
+                <linearGradient id="progressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#39a8ff" />
+                  <stop offset="50%" stopColor="#8a2be2" />
+                  <stop offset="100%" stopColor="#ff2d3b" />
+                </linearGradient>
+
+                <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="6" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              {/* Glowing Background Center Orb */}
+              <circle cx="150" cy="150" r="85" fill="url(#centerGlow)" />
+
+              {/* Tech Reticle Target Lines */}
+              <line x1="150" y1="25" x2="150" y2="275" stroke="rgba(57, 168, 255, 0.15)" strokeWidth="1" strokeDasharray="3,3" />
+              <line x1="25" y1="150" x2="275" y2="150" stroke="rgba(57, 168, 255, 0.15)" strokeWidth="1" strokeDasharray="3,3" />
+
+              {/* Dynamic Telemetry Degrees */}
+              <circle cx="150" cy="150" r="130" fill="none" stroke="rgba(255, 255, 255, 0.02)" strokeWidth="1" />
+              
+              {/* Outer Dashed Rotating HUD Ring */}
+              <circle className="hud-outer-ring" cx="150" cy="150" r="115" fill="none" stroke="rgba(57, 168, 255, 0.2)" strokeWidth="1" strokeDasharray="4,6" />
+
+              {/* Middle Precision Tick Marks */}
+              <circle className="hud-tick-ring" cx="150" cy="150" r="100" fill="none" stroke="rgba(138, 43, 226, 0.3)" strokeWidth="1.5" strokeDasharray="2,8" />
+
+              {/* Orbiting telemetry dot */}
+              <g className="hud-orbit-group">
+                <circle cx="150" cy="50" r="3.5" fill="#ff2d3b" filter="url(#neonGlow)" />
+              </g>
+
+              {/* Main SVG Circular Progress Ring */}
+              <circle 
+                cx="150" 
+                cy="150" 
+                r="85" 
+                fill="none" 
+                stroke="rgba(255, 255, 255, 0.03)" 
+                strokeWidth="3.5" 
+              />
+              <circle 
+                className="hud-progress-arc"
+                cx="150" 
+                cy="150" 
+                r="85" 
+                fill="none" 
+                stroke="url(#progressGrad)" 
+                strokeWidth="3.5" 
+                strokeLinecap="round"
+                strokeDasharray="534" 
+                strokeDashoffset={534 - (534 * loadingPercent) / 100}
+                filter="url(#neonGlow)"
+              />
+
+              {/* Integrated Typography */}
+              <text x="150" y="125" className="svg-text-small" textAnchor="middle">INITIALIZING SYSTEM</text>
+              
+              <text x="150" y="152" className="svg-text-logo" textAnchor="middle">HACKQUBIT</text>
+              <text x="150" y="176" className="svg-text-version" textAnchor="middle">2.O</text>
+              
+              <text x="150" y="210" className="svg-text-percent" textAnchor="middle">{loadingPercent}%</text>
+            </svg>
+
             <div className="loading-log">
               {loadingPercent < 30 && "INITIALIZING QUANTUM ENGINES..."}
               {loadingPercent >= 30 && loadingPercent < 60 && "STABILIZING WARP FOLD CORE..."}
               {loadingPercent >= 60 && loadingPercent < 90 && "SYNCING ORBITAL TELEMETRY..."}
               {loadingPercent >= 90 && "READY FOR DOCKING..."}
             </div>
+
             <div className="loading-telemetry">
               <span>SYS.LOC: ORBIT_X5</span>
               <span>VOLTS: {(4.1 + (loadingPercent / 100) * 8.4).toFixed(2)}V</span>

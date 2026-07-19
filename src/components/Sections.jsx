@@ -2537,64 +2537,7 @@ filter="url(#planetBlur)"/>
 
 
 
-<div className="alien-shadow">
 
-<svg viewBox="0 0 500 500" aria-hidden="true">
-
-<defs>
-
-<radialGradient id={`eyeGlow-${t.code}`} cx="50%" cy="50%" r="60%">
-<stop offset="0%" stopColor={glowColor}/>
-<stop offset="35%" stopColor={glowColor}/>
-<stop offset="100%" stopColor="transparent"/>
-</radialGradient>
-
-<radialGradient id={`bodyFade-${t.code}`} cx="50%" cy="40%" r="60%">
-<stop offset="0%" stopColor={glowColor} stopOpacity="0.25"/>
-<stop offset="65%" stopColor={glowColor} stopOpacity="0.08"/>
-<stop offset="100%" stopColor={glowColor} stopOpacity="0"/>
-</radialGradient>
-
-<filter id={`blur-${t.code}`}>
-<feGaussianBlur stdDeviation="6"/>
-</filter>
-
-</defs>
-
-{/* Head */}
-
-<path
-d="M250 70
-C170 70 120 145 120 230
-C120 315 170 370 250 390
-C330 370 380 315 380 230
-C380 145 330 70 250 70Z"
-fill={`url(#bodyFade-${t.code})`}
-filter={`url(#blur-${t.code})`}
-opacity=".95"
-/>
-
-{/* Shoulders */}
-
-<path
-d="M120 320
-C80 370 100 450 250 500
-C400 450 420 370 380 320
-C340 350 300 360 250 360
-C200 360 160 350 120 320Z"
-fill={`url(#bodyFade-${t.code})`}
-opacity=".65"
-/>
-
-{/* Eyes */}
-
-<ellipse cx="205" cy="205" rx="18" ry="8" fill={`url(#eyeGlow-${t.code})`} className="alien-eye"/>
-
-<ellipse cx="295" cy="205" rx="18" ry="8" fill={`url(#eyeGlow-${t.code})`} className="alien-eye"/>
-
-</svg>
-
-</div>
 
 <div className="hud-header">
 
