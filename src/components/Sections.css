@@ -1095,7 +1095,6 @@ z-index:10;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 align-items:start;
-grid-auto-rows:300px;
 gap:28px;
 margin-top:48px;
 }
@@ -2104,7 +2103,6 @@ r:4;
 
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 align-items:start;
-grid-auto-rows:300px;
 
 gap:22px;
 
