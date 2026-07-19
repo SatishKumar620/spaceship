@@ -194,7 +194,7 @@ style={{ transitionDelay: `${i * 100}ms` }}
 
 <div className="particles">
 
-{Array.from({length:45}).map((_,i)=>(
+{Array.from({length:15}).map((_,i)=>(
 
 <span
 key={i}

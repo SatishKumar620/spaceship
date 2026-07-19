@@ -202,45 +202,44 @@ export default function App() {
             <svg className="premium-loader-svg" viewBox="0 0 300 300">
               <defs>
                 <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="rgba(57, 168, 255, 0.25)" />
-                  <stop offset="100%" stopColor="rgba(138, 43, 226, 0)" />
+                  <stop offset="0%" stopColor="rgba(230, 0, 38, 0.2)" />
+                  <stop offset="100%" stopColor="rgba(230, 0, 38, 0)" />
                 </radialGradient>
                 
                 <linearGradient id="progressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#39a8ff" />
-                  <stop offset="50%" stopColor="#8a2be2" />
-                  <stop offset="100%" stopColor="#ff2d3b" />
+                  <stop offset="0%" stopColor="#e60026" />
+                  <stop offset="100%" stopColor="#ff5c75" />
                 </linearGradient>
-
-                <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-
-              {/* Glowing Background Center Orb */}
-              <circle cx="150" cy="150" r="85" fill="url(#centerGlow)" />
-
-              {/* Tech Reticle Target Lines */}
-              <line x1="150" y1="25" x2="150" y2="275" stroke="rgba(57, 168, 255, 0.15)" strokeWidth="1" strokeDasharray="3,3" />
-              <line x1="25" y1="150" x2="275" y2="150" stroke="rgba(57, 168, 255, 0.15)" strokeWidth="1" strokeDasharray="3,3" />
-
-              {/* Dynamic Telemetry Degrees */}
-              <circle cx="150" cy="150" r="130" fill="none" stroke="rgba(255, 255, 255, 0.02)" strokeWidth="1" />
-              
-              {/* Outer Dashed Rotating HUD Ring */}
-              <circle className="hud-outer-ring" cx="150" cy="150" r="115" fill="none" stroke="rgba(57, 168, 255, 0.2)" strokeWidth="1" strokeDasharray="4,6" />
-
-              {/* Middle Precision Tick Marks */}
-              <circle className="hud-tick-ring" cx="150" cy="150" r="100" fill="none" stroke="rgba(138, 43, 226, 0.3)" strokeWidth="1.5" strokeDasharray="2,8" />
-
-              {/* Orbiting telemetry dot */}
-              <g className="hud-orbit-group">
-                <circle cx="150" cy="50" r="3.5" fill="#ff2d3b" filter="url(#neonGlow)" />
-              </g>
+ 
+                 <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+                   <feGaussianBlur stdDeviation="6" result="blur" />
+                   <feMerge>
+                     <feMergeNode in="blur" />
+                     <feMergeNode in="SourceGraphic" />
+                   </feMerge>
+                 </filter>
+               </defs>
+ 
+               {/* Glowing Background Center Orb */}
+               <circle cx="150" cy="150" r="85" fill="url(#centerGlow)" />
+ 
+               {/* Tech Reticle Target Lines */}
+               <line x1="150" y1="25" x2="150" y2="275" stroke="rgba(230, 0, 38, 0.15)" strokeWidth="1" strokeDasharray="3,3" />
+               <line x1="25" y1="150" x2="275" y2="150" stroke="rgba(230, 0, 38, 0.15)" strokeWidth="1" strokeDasharray="3,3" />
+ 
+               {/* Dynamic Telemetry Degrees */}
+               <circle cx="150" cy="150" r="130" fill="none" stroke="rgba(255, 255, 255, 0.02)" strokeWidth="1" />
+               
+               {/* Outer Dashed Rotating HUD Ring */}
+               <circle className="hud-outer-ring" cx="150" cy="150" r="115" fill="none" stroke="rgba(230, 0, 38, 0.25)" strokeWidth="1" strokeDasharray="4,6" />
+ 
+               {/* Middle Precision Tick Marks */}
+               <circle className="hud-tick-ring" cx="150" cy="150" r="100" fill="none" stroke="rgba(230, 0, 38, 0.4)" strokeWidth="1.5" strokeDasharray="2,8" />
+ 
+               {/* Orbiting telemetry dot */}
+               <g className="hud-orbit-group">
+                 <circle cx="150" cy="50" r="3.5" fill="#e60026" filter="url(#neonGlow)" />
+               </g>
 
               {/* Main SVG Circular Progress Ring */}
               <circle 

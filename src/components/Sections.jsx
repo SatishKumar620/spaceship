@@ -3,6 +3,49 @@ import './Sections.css';
 import { SatelliteIcon, DockIcon, RadarIcon, BeaconIcon } from './SponsorIcons';
 import SpaceEventsScene from './SpaceEventsScene';
 
+const renderWatermark = (type) => {
+  switch (type) {
+    case 'astronaut':
+      return (
+        <svg className="track-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M6 14c0-4 3-7 6-7s6 3 6 7M4 14.5c0-4.5 3.5-8 8-8s8 3.5 8 8-3 6.5-8 6.5-8-2-8-6.5Z" />
+          <rect x="7" y="11" width="10" height="5" rx="2" fill="currentColor" fillOpacity="0.05" />
+          <path d="M12 2v2M5 6l1.5 1.5M19 6l-1.5 1.5M8 21v-1a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1" />
+        </svg>
+      );
+    case 'spaceship':
+      return (
+        <svg className="track-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2v22M12 2C9 6 6 12 6 17c0 2 1.5 3 6 5 4.5-2 6-3 6-5 0-5-3-11-6-15Z" />
+          <path d="M6 17H3l-1 2h4M18 17h3l1 2h-4" />
+          <circle cx="12" cy="11" r="2" fill="currentColor" fillOpacity="0.05" />
+        </svg>
+      );
+    case 'spacestation':
+      return (
+        <svg className="track-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="4" fill="currentColor" fillOpacity="0.05" />
+          <path d="M2 12h20M12 2v20M5 7h14M5 17h14" />
+          <rect x="5" y="5" width="2" height="4" />
+          <rect x="17" y="5" width="2" height="4" />
+          <rect x="5" y="15" width="2" height="4" />
+          <rect x="17" y="15" width="2" height="4" />
+        </svg>
+      );
+    case 'meteor':
+      return (
+        <svg className="track-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="16" cy="8" r="4" fill="currentColor" fillOpacity="0.05" />
+          <path d="M13.5 10.5C9 13 4 15 2 22c7-2 9-7 11.5-11.5Z" />
+          <path d="M16 4C11 7 8 11 5 18c6-3 9-6 11-14Z" />
+          <path d="M20 8c-3 5-6 8-14 11 3-6 6-9 14-11Z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+};
+
 /* ============================================================
    RICH TRACK DATASET WITH IDEAS AND TECH STACKS
    ============================================================ */
@@ -2488,8 +2531,7 @@ filter="url(#planetBlur)"/>
                 }}
               >
                 
-
-
+                {renderWatermark(watermarkType)}
 
 <div className="track-card-header">
 

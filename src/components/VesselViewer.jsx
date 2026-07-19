@@ -182,7 +182,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
       const distantCount = isMobile ? 600 : 3000;
       const medCount = isMobile ? 400 : 1600;
       const brightLayers = [
-        { color: new THREE.Color(0x00d9ff), count: isMobile ? 20 : 80 },
+        { color: new THREE.Color(0xe60026), count: isMobile ? 20 : 80 },
         { color: new THREE.Color(0xffd18a), count: isMobile ? 20 : 80 },
         { color: new THREE.Color(0xffffff), count: isMobile ? 20 : 80 },
         { color: new THREE.Color(0xcbe5ff), count: isMobile ? 20 : 80 },
@@ -283,7 +283,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
         void main(){
           vec3 baseInd = vec3(0.02, 0.01, 0.07);
           vec3 brightPurple = vec3(0.08, 0.01, 0.06);
-          vec3 brightCyan = vec3(0.01, 0.04, 0.08);
+          vec3 brightCyan = vec3(0.12, 0.01, 0.02);
           vec3 nebulaColor = mix(baseInd, brightPurple, vDir.y * 0.5 + 0.5);
           nebulaColor = mix(nebulaColor, brightCyan, vDir.x * 0.5 + 0.5);
           gl_FragColor = vec4(nebulaColor * 0.9, 0.28);
@@ -327,7 +327,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
 
           vec3 baseInd = vec3(0.03, 0.01, 0.09);
           vec3 brightPurple = vec3(0.35, 0.05, 0.25);
-          vec3 brightCyan = vec3(0.04, 0.22, 0.35);
+          vec3 brightCyan = vec3(0.42, 0.02, 0.08);
 
           vec3 nebulaColor = mix(baseInd, brightPurple, vDir.y * 0.5 + 0.5);
           float gasPattern = n; // reuse base sample instead of a second full fbm() call
@@ -625,7 +625,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           return new THREE.MeshStandardMaterial({ color: 0x0c0e12, metalness: 0.5, roughness: 0.55, envMapIntensity: 1.0 });
         }
         if (name === 'plasma' || name === 'glow' || name === 'glow.001') {
-          const baseColor = new THREE.Color(0x00d9ff);
+          const baseColor = new THREE.Color(0xe60026);
           const intensity = name === 'plasma' ? 2.4 : 1.5;
           const mat = new THREE.MeshStandardMaterial({
             color: baseColor, emissive: baseColor.clone(), emissiveIntensity: intensity,
@@ -958,7 +958,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
                 const matName = (mat.name || '').toLowerCase();
                 if (matName.includes('light') || matName.includes('window') || matName.includes('glow') || matName.includes('emissive')) {
                   if (!mat.emissiveMap) {
-                    mat.emissive.setHex(0xffaa44);
+                    mat.emissive.setHex(0xe60026);
                     mat.emissiveIntensity = 3.5;
                   }
                 }
@@ -996,7 +996,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           stationSun.castShadow = false; // saved: avoid a second full shadow map alongside keyLight
           scene.add(stationSun);
 
-          const stationFill = new THREE.DirectionalLight(0x00d9ff, 1.8);
+          const stationFill = new THREE.DirectionalLight(0xe60026, 1.8);
           stationFill.position.set(CAMERA_HOME.x + 4, CAMERA_HOME.y + 3, CAMERA_HOME.z + 2);
           stationFill.target = stationSunTarget;
           scene.add(stationFill);
@@ -1026,7 +1026,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           createBeacon(-15, 0, 0, 0x3bff3b, 5.0, true);
           if (!isMobile) {
             createBeacon(4, 2, -4, 0xffaa00, 3.8, false);
-            createBeacon(-4, -2, 4, 0x00e1ff, 3.8, false);
+            createBeacon(-4, -2, 4, 0xe60026, 3.8, false);
           }
 
           scene.add(stationGroup);
@@ -1232,7 +1232,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
                 intensity: c.material.emissiveIntensity ?? 1,
               });
             }
-            c.material.emissive.lerp(new THREE.Color(0x00d9ff), 0.35);
+            c.material.emissive.lerp(new THREE.Color(0xe60026), 0.35);
             c.material.emissiveIntensity = Math.max(c.material.emissiveIntensity ?? 0, 0.6);
           }
         });
