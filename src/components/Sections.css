@@ -157,8 +157,26 @@
   font-size:10.5px; color:var(--sx-red-2);
   letter-spacing:0.14em; margin-bottom:10px;
 }
-.track-title{ font-size:17px; font-weight:600; color:#eef2f6; margin-bottom:8px; }
-.track-desc{ font-size:13px; color:var(--sx-fog); line-height:1.6; }
+.track-title{
+
+margin:10px 0 8px;
+
+font-size:20px;
+
+line-height:1.25;
+
+}
+.track-desc{
+
+margin:0 0 12px;
+
+font-size:13px;
+
+line-height:1.45;
+
+min-height:unset;
+
+}
 
 .events-grid{
   display:grid;
@@ -2101,21 +2119,25 @@ r:4;
 
 .tracks-grid{
 
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-align-items:start;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 
-gap:22px;
+gap:26px;
+
+align-items:start;
 
 }
 
 .premium-track,
 .track-card{
 
-min-height:300px !important;
+min-height:240px !important;
 
 height:auto;
 
-padding:18px;
+display:flex;
+flex-direction:column;
+
+padding:16px 16px 14px;
 
 border-radius:18px;
 
@@ -2181,7 +2203,7 @@ min-height:68px;
 
 .track-tags{
 
-margin-top:18px;
+margin:0 0 12px;
 
 }
 
@@ -2189,7 +2211,7 @@ margin-top:18px;
 
 margin-top:auto;
 
-padding-top:18px;
+padding-top:12px;
 
 }
 
