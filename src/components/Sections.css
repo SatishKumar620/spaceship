@@ -351,7 +351,7 @@
   font-size: 32px;
   font-weight: 800;
   color: #fff;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 .package-benefits {
@@ -814,15 +814,15 @@
   font-size: 14px;
   line-height: 1.6;
   color: var(--sx-fog);
-  margin-bottom: 24px;
-  flex-grow: 1;
+  margin-bottom: 14px;
+  
 }
 
 .track-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 .track-tag {
@@ -945,7 +945,7 @@
 .drawer-body {
   padding: 40px;
   overflow-y: auto;
-  flex-grow: 1;
+  
 }
 
 .drawer-title {
@@ -1094,6 +1094,8 @@ position:relative;
 z-index:10;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+align-items:start;
+grid-auto-rows:300px;
 gap:28px;
 margin-top:48px;
 }
@@ -1110,7 +1112,7 @@ rgba(255,255,255,.06),
 rgba(255,255,255,.025)
 );
 border:1px solid rgba(255,60,90,.18);
-backdrop-filter:blur(18px);
+backdrop-filter:blur(10px);
 transition:
 transform .35s ease,
 box-shadow .35s ease,
@@ -1348,7 +1350,7 @@ linear-gradient(180deg,
 rgba(255,255,255,.05),
 rgba(255,255,255,.02));
 
-backdrop-filter:blur(18px);
+backdrop-filter:blur(10px);
 
 border:1px solid rgba(255,255,255,.08);
 
@@ -2101,6 +2103,8 @@ r:4;
 .tracks-grid{
 
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+align-items:start;
+grid-auto-rows:300px;
 
 gap:22px;
 
@@ -2109,11 +2113,11 @@ gap:22px;
 .premium-track,
 .track-card{
 
-min-height:355px !important;
+min-height:300px !important;
 
 height:auto;
 
-padding:22px 20px 18px;
+padding:18px;
 
 border-radius:18px;
 
@@ -2970,240 +2974,3 @@ min-height:250px !important;
 }
 
 }
-
-
-/* ===============================
-   FIX CARD VERTICAL LAYOUT
-   =============================== */
-
-.track-card,
-.premium-track{
-
-display:flex;
-flex-direction:column;
-
-min-height:280px !important;
-
-padding:18px !important;
-
-}
-
-/* Remove the huge empty top area */
-
-.track-glow,
-.track-shine,
-.particle-field,
-.orbit-system{
-
-top:-35px !important;
-opacity:.45;
-
-}
-
-/* Move content upward */
-
-.hud-header{
-
-margin-bottom:10px !important;
-
-}
-
-.track-card-header{
-
-margin-bottom:10px !important;
-
-}
-
-.track-title{
-
-margin-top:8px !important;
-margin-bottom:8px !important;
-
-font-size:20px !important;
-line-height:1.2;
-
-}
-
-.track-desc{
-
-margin-bottom:12px !important;
-
-display:-webkit-box;
--webkit-line-clamp:2;
--webkit-box-orient:vertical;
-overflow:hidden;
-
-}
-
-/* Keep footer at bottom */
-
-.track-tags{
-
-margin-bottom:auto;
-
-}
-
-.track-card-footer{
-
-padding-top:16px;
-
-border-top:1px solid rgba(255,50,80,.18);
-
-}
-
-/* Mobile */
-
-@media(max-width:768px){
-
-.track-card,
-.premium-track{
-
-min-height:260px !important;
-
-}
-
-}
-
-
-/* =========================================
-   PREMIUM GLASS CARDS
-   ========================================= */
-
-.track-card,
-.premium-track{
-
-background:
-linear-gradient(
-180deg,
-rgba(18,22,35,.32),
-rgba(10,14,24,.22)
-) !important;
-
-backdrop-filter:blur(8px);
--webkit-backdrop-filter:blur(8px);
-
-border:1px solid rgba(255,70,90,.16);
-
-box-shadow:
-0 12px 40px rgba(0,0,0,.22),
-inset 0 1px 0 rgba(255,255,255,.05);
-
-}
-
-/* Stronger transparency on hover */
-
-.track-card:hover,
-.premium-track:hover{
-
-background:
-linear-gradient(
-180deg,
-rgba(20,25,40,.22),
-rgba(10,14,24,.12)
-) !important;
-
-border-color:rgba(255,60,90,.45);
-
-box-shadow:
-0 18px 60px rgba(255,40,70,.18),
-0 0 25px rgba(255,40,70,.10);
-
-}
-
-/* Let glow effects show through */
-
-.track-glow{
-
-opacity:.18 !important;
-
-}
-
-.track-shine{
-
-opacity:.10 !important;
-
-}
-
-.particle-field{
-
-opacity:.30 !important;
-
-}
-
-.holo-grid{
-
-opacity:.06 !important;
-
-}
-
-
-
-/* =========================================
-   ULTRA GLASS PROBLEM CARDS
-   ========================================= */
-
-.track-card,
-.premium-track{
-
-background:
-linear-gradient(
-180deg,
-rgba(12,16,28,.16),
-rgba(8,10,18,.10)
-)!important;
-
-backdrop-filter:blur(10px);
--webkit-backdrop-filter:blur(10px);
-
-border:1px solid rgba(255,70,90,.18)!important;
-
-box-shadow:
-0 8px 30px rgba(0,0,0,.20),
-inset 0 1px 0 rgba(255,255,255,.05);
-
-}
-
-.track-card:hover,
-.premium-track:hover{
-
-background:
-linear-gradient(
-180deg,
-rgba(18,22,35,.10),
-rgba(8,10,18,.06)
-)!important;
-
-border-color:rgba(255,70,90,.55)!important;
-
-box-shadow:
-0 16px 50px rgba(255,40,70,.18),
-0 0 35px rgba(255,40,70,.10);
-
-}
-
-/* Reveal background animation */
-
-.track-glow{
-opacity:.15!important;
-}
-
-.track-shine{
-opacity:.08!important;
-}
-
-.particle-field{
-opacity:.25!important;
-}
-
-.orbit-system{
-opacity:.20!important;
-}
-
-.holo-grid{
-opacity:.05!important;
-}
-
-.glass-shine{
-opacity:.18!important;
-}
-
