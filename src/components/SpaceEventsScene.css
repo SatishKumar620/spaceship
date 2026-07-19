@@ -15,7 +15,7 @@ background:radial-gradient(circle at center,#120008 0%,#070707 55%,#000 100%);
 position:absolute;
 border-radius:50%;
 filter:blur(90px);
-animation:nebulaFloat 45s ease-in-out infinite alternate;
+animation:nebulaFloat 18s ease-in-out infinite alternate;
 mix-blend-mode:screen;
 }
 
@@ -59,8 +59,9 @@ radial-gradient(circle at 35% 35%,
 #ff2748 40%,
 #6f0017 100%);
 box-shadow:
-0 0 45px rgba(255,50,80,0.35);
-animation:planetPulse 12s ease-in-out infinite;
+0 0 60px rgba(255,50,80,.45),
+0 0 120px rgba(255,50,80,.22);
+animation:planetPulse 6s ease-in-out infinite;
 }
 
 .planet-glow{
@@ -71,7 +72,7 @@ background:radial-gradient(circle,
 rgba(255,60,90,.18),
 transparent 72%);
 filter:blur(30px);
-animation:glowPulse 10s infinite;
+animation:glowPulse 5s infinite;
 }
 
 /* ========================= */
@@ -139,15 +140,15 @@ box-shadow:
 }
 
 .orbit-a{
-animation:orbitA 35s linear infinite;
+animation:orbitA 14s linear infinite;
 }
 
 .orbit-b{
-animation:orbitB 45s linear infinite reverse;
+animation:orbitB 21s linear infinite reverse;
 }
 
 .orbit-c{
-animation:orbitC 65s linear infinite;
+animation:orbitC 30s linear infinite;
 }
 
 /* ========================= */
@@ -160,7 +161,10 @@ width:2px;
 height:2px;
 border-radius:50%;
 background:#fff;
-opacity: 0.65;
+box-shadow:
+0 0 6px rgba(255,255,255,.8),
+0 0 12px rgba(255,60,90,.45);
+animation:twinkle infinite ease-in-out;
 }
 
 /* ========================= */
@@ -235,7 +239,7 @@ transparent 0deg,
 rgba(255,70,90,.22) 18deg,
 transparent 28deg
 );
-animation:radarSpin 75s linear infinite;
+animation:radarSpin 8s linear infinite;
 mask:radial-gradient(circle,
 transparent 0 120px,
 #000 122px);
@@ -252,7 +256,7 @@ margin-left:-60px;
 margin-top:-60px;
 border:1px solid rgba(255,70,90,.4);
 border-radius:50%;
-animation:energyPulse 10s ease-out infinite;
+animation:energyPulse 5s ease-out infinite;
 }
 
 

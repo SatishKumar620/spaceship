@@ -12,6 +12,49 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="footer-glow" />
+      
+      {/* Centered Alien Creature Multiverse God Watermark */}
+      <div className="footer-alien-watermark">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round">
+          {/* Horns / Crown */}
+          <path d="M50 5 L30 25 L38 32 L50 16 L62 32 L70 25 Z" fill="currentColor" fillOpacity="0.05" />
+          <path d="M50 11 L16 31 L28 39 L50 23 L72 39 L84 31 Z" />
+          
+          {/* Head Shape */}
+          <path d="M50 23 C28 23 23 48 26 63 C30 78 38 83 50 83 C62 83 70 78 74 63 C77 48 72 23 50 23 Z" fill="currentColor" fillOpacity="0.02" />
+          
+          {/* Multiverse Eyes */}
+          {/* Primary Eye */}
+          <path d="M42 46 C42 46 46 42 50 42 C54 42 58 46 58 46 C58 46 54 50 50 50 C46 50 42 46 42 46 Z" fill="currentColor" fillOpacity="0.1" />
+          <circle cx="50" cy="46" r="2" fill="currentColor" />
+          
+          {/* Upper Left Eye */}
+          <path d="M34 36 C34 36 37 33 40 33 C43 33 46 36 46 36 C46 36 43 39 40 39 C37 39 34 36 34 36 Z" />
+          <circle cx="40" cy="36" r="1.3" fill="currentColor" />
+          
+          {/* Upper Right Eye */}
+          <path d="M54 36 C54 36 57 33 60 33 C63 33 66 36 66 36 C66 36 63 39 60 39 C57 39 54 36 54 36 Z" />
+          <circle cx="60" cy="36" r="1.3" fill="currentColor" />
+          
+          {/* Lower Left Eye */}
+          <path d="M35 53 C35 53 38 50 41 50 C44 50 47 53 47 53 C47 53 44 56 41 56 C38 56 35 53 35 53 Z" />
+          <circle cx="41" cy="53" r="1.3" fill="currentColor" />
+          
+          {/* Lower Right Eye */}
+          <path d="M53 53 C53 53 56 50 59 50 C62 50 65 53 65 53 C65 53 62 56 59 56 C56 56 53 53 53 53 Z" />
+          <circle cx="59" cy="53" r="1.3" fill="currentColor" />
+
+          {/* Fangs & Mandibles */}
+          <path d="M43 63 L46 70 L50 65 L54 70 L57 63" />
+          <path d="M37 62 C34 66 37 76 41 78 C39 74 38 68 40 63" />
+          <path d="M63 62 C66 66 63 76 59 78 C61 74 62 68 60 63" />
+          
+          {/* Tentacles / Tendrils */}
+          <path d="M45 83 C42 88 35 91 25 92 M55 83 C58 88 65 91 75 92" />
+          <path d="M48 83v9M52 83v9" />
+        </svg>
+      </div>
+
       <div className="footer-inner">
         
         {/* Top Row: Links and Branding */}

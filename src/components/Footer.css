@@ -176,3 +176,23 @@
     gap: 16px;
   }
 }
+
+/* Center-placed multiverse alien god watermark shadow */
+.footer-alien-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  opacity: 0.045; /* subtle white shadow */
+  color: #ffffff;
+  pointer-events: none;
+  z-index: 1; /* above background glow, below footer-inner which has z-index 2 */
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-footer:hover .footer-alien-watermark {
+  opacity: 0.08;
+  transform: translate(-50%, -52%) scale(1.04);
+}
