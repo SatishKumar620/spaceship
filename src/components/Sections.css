@@ -756,20 +756,20 @@ min-height:unset;
 
 .track-watermark {
   position: absolute;
-  right: -20px;
-  bottom: -20px;
-  width: 160px;
-  height: 160px;
-  opacity: 0.1;
-  color: rgba(255, 255, 255, 0.5);
+  right: -25px;
+  bottom: -25px;
+  width: 170px;
+  height: 170px;
+  opacity: 0.18;
+  color: rgba(255, 60, 90, 0.38);
   pointer-events: none;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 0;
 }
 
 .track-card:hover .track-watermark {
-  opacity: 0.25;
-  transform: scale(1.1) rotate(-8deg);
+  opacity: 0.35;
+  transform: scale(1.08) rotate(-10deg);
 }
 
 /* Hover glow borders based on category */
@@ -1473,17 +1473,13 @@ left:170%;
 }
 
 .track-watermark{
-
-opacity:.06;
+opacity:.18;
 transition:.4s;
-
 }
 
 .premium-track:hover .track-watermark{
-
-opacity:.12;
-transform:scale(1.06);
-
+opacity:.35;
+transform:scale(1.08) rotate(-10deg);
 }
 
 
@@ -3121,8 +3117,8 @@ overflow:hidden;
 }
 
 /* Keep content above the shadow */
-.track-card > *,
-.premium-track > *{
+.track-card > *:not(.track-watermark),
+.premium-track > *:not(.track-watermark){
 position:relative;
 z-index:2;
 }

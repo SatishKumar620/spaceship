@@ -625,7 +625,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
           return new THREE.MeshStandardMaterial({ color: 0x0c0e12, metalness: 0.5, roughness: 0.55, envMapIntensity: 1.0 });
         }
         if (name === 'plasma' || name === 'glow' || name === 'glow.001') {
-          const baseColor = new THREE.Color(0xe60026);
+          const baseColor = new THREE.Color(0x00d9ff);
           const intensity = name === 'plasma' ? 2.4 : 1.5;
           const mat = new THREE.MeshStandardMaterial({
             color: baseColor, emissive: baseColor.clone(), emissiveIntensity: intensity,
@@ -1232,7 +1232,7 @@ export default function VesselViewer({ isExploded, setIsExploded, onLoaded }) {
                 intensity: c.material.emissiveIntensity ?? 1,
               });
             }
-            c.material.emissive.lerp(new THREE.Color(0xe60026), 0.35);
+            c.material.emissive.lerp(new THREE.Color(0x00d9ff), 0.35);
             c.material.emissiveIntensity = Math.max(c.material.emissiveIntensity ?? 0, 0.6);
           }
         });
