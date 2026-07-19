@@ -625,3 +625,59 @@ body.scroll-locked {
     height: 100dvh !important;
   }
 }
+
+/* ---------------------------------------------------------------
+   16. MOBILE PERFORMANCE OVERRIDES — Disable heavy animations
+   --------------------------------------------------------------- */
+@media (max-width: 820px) {
+  /* Disable rising background particles and dust */
+  .particles span,
+  .spaceDust,
+  .dust,
+  .particle-field span {
+    animation: none !important;
+    display: none !important;
+  }
+
+  /* Disable expensive meteor/shooting star sweeps */
+  .meteor,
+  .meteor::after,
+  .shootingStarA,
+  .shootingStarB {
+    animation: none !important;
+    display: none !important;
+  }
+
+  /* Disable background grid movements and scanlines */
+  .bgGrid,
+  .holo-grid,
+  .scanLines,
+  .scanDown,
+  .hud-sweep,
+  .telemetrySweep {
+    animation: none !important;
+  }
+
+  /* Disable heavy conic sweeps and radial pulses */
+  .radar,
+  .pulse,
+  .about-orbit-core,
+  .energyRing {
+    animation: none !important;
+  }
+
+  /* Disable rotating orbits and drone overlays */
+  .orbit,
+  .orbit-system,
+  .drone,
+  .satellite {
+    animation: none !important;
+  }
+
+  /* Disable card shimmer effects */
+  .rewardCard::after,
+  .track-card::after {
+    animation: none !important;
+    display: none !important;
+  }
+}
