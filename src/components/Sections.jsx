@@ -2470,6 +2470,8 @@ filter="url(#planetBlur)"/>
                   const r=e.currentTarget.getBoundingClientRect();
                   e.currentTarget.style.setProperty('--mx',(e.clientX-r.left)+'px');
                   e.currentTarget.style.setProperty('--my',(e.clientY-r.top)+'px');
+                  e.currentTarget.style.setProperty('--rx',(((e.clientX-r.left)/r.width)-0.5)*12+'px');
+                  e.currentTarget.style.setProperty('--ry',(((e.clientY-r.top)/r.height)-0.5)*12+'px');
                 }}
                 onClick={() => setSelectedTrack(t)}
                 style={{ transitionDelay: `${i * 35}ms` }}
@@ -2525,7 +2527,69 @@ filter="url(#planetBlur)"/>
 <div className="track-shine"></div>
 <div className="track-icon-bg"></div>
 
+
+
+<div className="alien-shadow">
+
+<svg viewBox="0 0 500 500" aria-hidden="true">
+
+<defs>
+
+<radialGradient id="eyeGlow" cx="50%" cy="50%" r="60%">
+<stop offset="0%" stopColor="#ff365c"/>
+<stop offset="35%" stopColor="#ff365c"/>
+<stop offset="100%" stopColor="transparent"/>
+</radialGradient>
+
+<linearGradient id="bodyFade" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stopColor="#000"/>
+<stop offset="100%" stopColor="rgba(0,0,0,0)"/>
+</linearGradient>
+
+<filter id="blur">
+<feGaussianBlur stdDeviation="6"/>
+</filter>
+
+</defs>
+
+<!-- Head -->
+
+<path
+d="M250 70
+C170 70 120 145 120 230
+C120 315 170 370 250 390
+C330 370 380 315 380 230
+C380 145 330 70 250 70Z"
+fill="url(#bodyFade)"
+filter="url(#blur)"
+opacity=".95"
+/>
+
+<!-- Shoulders -->
+
+<path
+d="M120 320
+C80 370 100 450 250 500
+C400 450 420 370 380 320
+C340 350 300 360 250 360
+C200 360 160 350 120 320Z"
+fill="url(#bodyFade)"
+opacity=".65"
+/>
+
+<!-- Eyes -->
+
+<ellipse cx="205" cy="205" rx="18" ry="8" fill="url(#eyeGlow)" className="alien-eye"/>
+
+<ellipse cx="295" cy="205" rx="18" ry="8" fill="url(#eyeGlow)" className="alien-eye"/>
+
+</svg>
+
+</div>
+
 <div className="hud-header">
+
+
 
 <div className="hud-led red"></div>
 <div className="hud-led amber"></div>

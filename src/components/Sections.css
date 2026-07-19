@@ -2994,3 +2994,591 @@ min-height:250px !important;
 }
 
 }
+
+/* =========================================
+   ALIEN SHADOW BACKGROUND
+   ========================================= */
+
+.alien-shadow{
+
+position:absolute;
+
+top:-35px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:180px;
+
+height:180px;
+
+pointer-events:none;
+
+opacity:.07;
+
+z-index:0;
+
+filter:blur(1px);
+
+animation:
+alienFloat 7s ease-in-out infinite,
+alienFlicker 6s linear infinite;
+
+}
+
+.alien-shadow svg{
+
+width:100%;
+
+height:100%;
+
+overflow:visible;
+
+}
+
+.alien-eye{
+
+animation:alienEyes 3.8s ease-in-out infinite;
+
+}
+
+.premium-track:hover .alien-shadow{
+
+opacity:.13;
+
+transform:translateX(-50%) scale(1.04);
+
+transition:.35s;
+
+}
+
+@keyframes alienFloat{
+
+0%,100%{
+
+transform:translateX(-50%) translateY(0);
+
+}
+
+50%{
+
+transform:translateX(-50%) translateY(-8px);
+
+}
+
+}
+
+@keyframes alienEyes{
+
+0%,85%,100%{
+
+opacity:.15;
+
+}
+
+88%{
+
+opacity:1;
+
+}
+
+92%{
+
+opacity:.25;
+
+}
+
+}
+
+@keyframes alienFlicker{
+
+0%,100%{
+
+filter:blur(1px);
+
+}
+
+50%{
+
+filter:blur(2px);
+
+}
+
+}
+
+
+/* ===============================
+   FIX ALIEN SHADOW LAYERING
+   =============================== */
+
+.track-card,
+.premium-track{
+position:relative;
+overflow:hidden;
+}
+
+/* Keep content above the shadow */
+.track-card > *,
+.premium-track > *{
+position:relative;
+z-index:2;
+}
+
+/* Shadow between background and content */
+.alien-shadow{
+
+position:absolute;
+
+top:-70px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:260px;
+
+height:260px;
+
+z-index:1 !important;
+
+opacity:.09;
+
+pointer-events:none;
+
+mix-blend-mode:screen;
+
+}
+
+/* Hover effect */
+.premium-track:hover .alien-shadow,
+.track-card:hover .alien-shadow{
+
+opacity:.16;
+
+transform:
+translateX(-50%)
+scale(1.05);
+
+}
+
+/* Decorative effects above the shadow */
+.track-glow,
+.track-shine,
+.particle-field,
+.orbit-system,
+.holo-grid{
+
+z-index:1;
+
+}
+
+
+/* =====================================
+   ALIEN LIFEFORM SCANNER
+   ===================================== */
+
+.alien-shadow{
+
+overflow:hidden;
+
+}
+
+.alien-shadow::after{
+
+content:"";
+
+position:absolute;
+
+left:-20%;
+
+top:0;
+
+width:140%;
+
+height:2px;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,70,90,.9),
+rgba(255,170,180,.95),
+rgba(255,70,90,.9),
+transparent
+);
+
+box-shadow:
+0 0 14px rgba(255,70,90,.9),
+0 0 28px rgba(255,70,90,.5);
+
+animation:
+alienScanner 4.8s ease-in-out infinite;
+
+}
+
+@keyframes alienScanner{
+
+0%{
+
+transform:
+translateY(-40px);
+
+opacity:0;
+
+}
+
+15%{
+
+opacity:1;
+
+}
+
+50%{
+
+transform:
+translateY(260px);
+
+opacity:1;
+
+}
+
+65%{
+
+opacity:0;
+
+}
+
+100%{
+
+transform:
+translateY(260px);
+
+opacity:0;
+
+}
+
+}
+
+/* Subtle digital flicker */
+
+.alien-shadow svg{
+
+animation:
+alienNoise 7s linear infinite;
+
+}
+
+@keyframes alienNoise{
+
+0%,100%{
+
+opacity:.95;
+
+}
+
+2%{
+
+opacity:.82;
+
+}
+
+3%{
+
+opacity:.96;
+
+}
+
+45%{
+
+opacity:.90;
+
+}
+
+46%{
+
+opacity:1;
+
+}
+
+}
+
+
+/* =====================================
+   COSMIC ENTITY ANIMATIONS
+   ===================================== */
+
+.alien-shadow{
+transform-origin:center;
+animation:
+alienFloat 9s ease-in-out infinite,
+alienBreath 6s ease-in-out infinite;
+}
+
+@keyframes alienBreath{
+
+0%,100%{
+transform:
+translateX(-50%)
+scale(1);
+filter:blur(1px);
+}
+
+50%{
+transform:
+translateX(-50%)
+scale(1.03);
+filter:blur(1.8px);
+}
+
+}
+
+.alien-eye{
+
+transform-origin:center;
+
+animation:
+alienEyePulse 5s infinite;
+
+}
+
+@keyframes alienEyePulse{
+
+0%,82%,100%{
+opacity:.12;
+}
+
+84%{
+opacity:.8;
+}
+
+86%{
+opacity:.18;
+}
+
+88%{
+opacity:1;
+}
+
+90%{
+opacity:.15;
+}
+
+}
+
+/* Digital glitch */
+
+.alien-shadow::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+repeating-linear-gradient(
+180deg,
+transparent 0px,
+transparent 4px,
+rgba(255,70,90,.04) 5px,
+transparent 6px
+);
+
+mix-blend-mode:screen;
+
+opacity:.35;
+
+animation:
+alienGlitch 8s linear infinite;
+
+}
+
+@keyframes alienGlitch{
+
+0%,100%{
+transform:translateX(0);
+opacity:.2;
+}
+
+2%{
+transform:translateX(2px);
+opacity:.45;
+}
+
+3%{
+transform:translateX(-2px);
+}
+
+4%{
+transform:translateX(0);
+}
+
+65%{
+opacity:.15;
+}
+
+68%{
+opacity:.35;
+}
+
+70%{
+opacity:.15;
+}
+
+}
+
+.premium-track:hover .alien-shadow{
+
+opacity:.18;
+
+filter:
+drop-shadow(0 0 20px rgba(255,40,70,.18));
+
+}
+
+
+/* =========================================
+   PARALLAX SHADOW
+   ========================================= */
+
+.alien-shadow{
+
+transform:
+translateX(calc(-50% + var(--rx,0px)))
+translateY(var(--ry,0px));
+
+transition:
+transform .45s cubic-bezier(.22,1,.36,1),
+opacity .35s;
+
+}
+
+.premium-track:hover .alien-shadow{
+
+opacity:.20;
+
+filter:
+blur(1.5px)
+drop-shadow(0 0 28px rgba(255,40,70,.18));
+
+}
+
+
+/* ==========================================
+   ENTITY AWAKENING
+   ========================================== */
+
+.premium-track::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+radial-gradient(circle at center,
+rgba(255,40,70,.05),
+transparent 70%);
+
+opacity:0;
+
+pointer-events:none;
+
+transition:.45s;
+
+z-index:1;
+
+}
+
+.premium-track:hover::before{
+
+opacity:1;
+
+animation:
+entityPulse 2.5s ease-in-out infinite;
+
+}
+
+@keyframes entityPulse{
+
+0%,100%{
+
+opacity:.18;
+
+}
+
+50%{
+
+opacity:.38;
+
+}
+
+}
+
+.premium-track:hover .alien-eye{
+
+filter:
+drop-shadow(0 0 10px #ff3d5d)
+drop-shadow(0 0 22px #ff3d5d);
+
+animation:
+entityEyes .9s ease-out forwards;
+
+}
+
+@keyframes entityEyes{
+
+0%{
+
+transform:scaleX(.2);
+
+opacity:.05;
+
+}
+
+50%{
+
+transform:scaleX(1.15);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scaleX(1);
+
+opacity:.75;
+
+}
+
+}
+
+.premium-track:hover{
+
+animation:
+cardThreat 1.8s ease-in-out infinite;
+
+}
+
+@keyframes cardThreat{
+
+0%,100%{
+
+border-color:rgba(255,60,90,.28);
+
+}
+
+50%{
+
+border-color:#ff355d;
+
+box-shadow:
+0 0 24px rgba(255,53,93,.22);
+
+}
+
+}
+
